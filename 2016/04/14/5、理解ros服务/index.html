@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          5、理解ros服务 - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2016/04/14/5、理解ros服务/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#ros" title="ros">ros</a>
+                        
+                          <a class="tag" href="/tags/#c++" title="c++">c++</a>
+                        
+                    </div>
+                    <h1>5、理解ros服务</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2016-04-14
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="一、ros服务"><a href="#一、ros服务" class="headerlink" title="一、ros服务"></a>一、ros服务</h1><p>ros服务（service）是节点间交流的另外一种方式，服务类似于web中的服务端与客户端的概念，节点类似一个客户端，可以发出一个请求（request），然后接受一个响应（response）。</p>
+<h1 id="二、使用rosservice命令"><a href="#二、使用rosservice命令" class="headerlink" title="二、使用rosservice命令"></a>二、使用rosservice命令</h1><p>此命令的用法如下：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">rosservice list         <span class="builtin-name">print</span> information about active services</span><br><span class="line">rosservice call         call the<span class="built_in"> service </span>with the provided args</span><br><span class="line">rosservice<span class="built_in"> type </span>        <span class="builtin-name">print</span><span class="built_in"> service </span>type</span><br><span class="line">rosservice <span class="builtin-name">find</span>         <span class="builtin-name">find</span> services by<span class="built_in"> service </span>type</span><br><span class="line">rosservice uri          <span class="builtin-name">print</span><span class="built_in"> service </span>ROSRPC uri</span><br></pre></td></tr></table></figure></p>
+<h2 id="1、rosservice-list"><a href="#1、rosservice-list" class="headerlink" title="1、rosservice list"></a>1、rosservice list</h2><p>首先启动一个小海龟：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">roscore</span></span><br></pre></td></tr></table></figure></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rosrun</span> turtlesim turtle_teleop_key</span><br></pre></td></tr></table></figure>
+<p>然后使用<code>rosservice list</code>命令，我们将得到：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/clear</span></span><br><span class="line"><span class="string">/kill</span></span><br><span class="line"><span class="string">/reset</span></span><br><span class="line"><span class="string">/rosout/get_loggers</span></span><br><span class="line"><span class="string">/rosout/set_logger_level</span></span><br><span class="line"><span class="string">/spawn</span></span><br><span class="line"><span class="string">/turtle1/set_pen</span></span><br><span class="line"><span class="string">/turtle1/teleport_absolute</span></span><br><span class="line"><span class="string">/turtle1/teleport_relative</span></span><br><span class="line"><span class="string">/turtlesim/get_loggers</span></span><br><span class="line"><span class="string">/turtlesim/set_logger_level</span></span><br></pre></td></tr></table></figure>
+<p>这条命令说明我们小海龟节点提供如上9种服务。<br>可以进一步使用<code>rosservice type</code>查看服务的详细信息。</p>
+<h2 id="2、rosservice-type"><a href="#2、rosservice-type" class="headerlink" title="2、rosservice type"></a>2、rosservice type</h2><p>用法：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosservice<span class="built_in"> type </span>[service]</span><br></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosservice<span class="built_in"> type </span>clear</span><br></pre></td></tr></table></figure></p>
+<p>得到：</p>
+<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">std_srvs/<span class="keyword">Empty</span></span><br></pre></td></tr></table></figure>
+<p>服务为空，这表明在调用这个服务的时候不需要任何参数（它在生成请求时不发送任何数据和接受响应的时候也不接收任何数据）。<br>我们可以使用<code>rosservice call</code>来调用服务。</p>
+<h2 id="3、rosservice-call"><a href="#3、rosservice-call" class="headerlink" title="3、rosservice call"></a>3、rosservice call</h2><p>用法：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosservice call <span class="string">[service]</span> <span class="string">[args]</span></span><br></pre></td></tr></table></figure></p>
+<p>示例：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosservice <span class="keyword">call</span> /<span class="keyword">clear</span></span><br></pre></td></tr></table></figure></p>
+<p>调用此服务会清除小海龟的轨迹线条。</p>
+<p>接下来我们通过spawn服务认识一下有参数的服务：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosservice<span class="built_in"> type </span>spawn| rossrv show</span><br></pre></td></tr></table></figure></p>
+<p>会得到：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">float32 x</span><br><span class="line">float32 y</span><br><span class="line">float32 theta</span><br><span class="line">string name</span><br><span class="line">---</span><br><span class="line">string name</span><br></pre></td></tr></table></figure>
+<p>使用这个服务，给定位置参数和角度参数我们可以创建一个新海龟，其中name参数是可选的，现在我们就利用此命令创建一个新海龟：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosservice call spawn <span class="number">2</span> <span class="number">2</span> <span class="number">0.2</span> <span class="string">""</span></span><br></pre></td></tr></table></figure></p>
+<p>它将返回新海龟的名字：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">name</span>: turtle2</span><br></pre></td></tr></table></figure></p>
+<p>同时我们也可以看到在海龟窗口中多了一只不同颜色的海龟。</p>
+<h1 id="三、使用rosparam命令"><a href="#三、使用rosparam命令" class="headerlink" title="三、使用rosparam命令"></a>三、使用rosparam命令</h1><p>使用<code>rosparam</code>命令可以在ROS的 Parameter Server上存储和操作数据。Parameter Server可以存储<code>integers, floats, boolean, dictionaries, and lists</code>类型的数据。而<code>rosparam</code>命令使用YAML的语法，YAML的语法非常简单，但是要求比较严格，就不细讲了。<code>rosparam</code>命令的用法如下：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">rosparam <span class="keyword">set</span>            <span class="keyword">set</span> parameter</span><br><span class="line">rosparam <span class="keyword">get</span>            <span class="keyword">get</span> parameter</span><br><span class="line">rosparam <span class="keyword">load</span>           <span class="keyword">load</span> <span class="keyword">parameters</span> <span class="keyword">from</span> <span class="keyword">file</span></span><br><span class="line">rosparam dump           dump <span class="keyword">parameters</span> <span class="keyword">to</span> <span class="keyword">file</span></span><br><span class="line">rosparam <span class="keyword">delete</span>         <span class="keyword">delete</span> parameter</span><br><span class="line">rosparam <span class="keyword">list</span>           <span class="keyword">list</span> parameter <span class="keyword">names</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="1、rosparam-list命令"><a href="#1、rosparam-list命令" class="headerlink" title="1、rosparam list命令"></a>1、rosparam list命令</h2><p>终端下调用此命令：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosparam <span class="built_in">list</span></span><br></pre></td></tr></table></figure></p>
+<p>得到：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">/background_b</span></span><br><span class="line"><span class="string">/background_g</span></span><br><span class="line"><span class="string">/background_r</span></span><br><span class="line"><span class="string">/rosdistro</span></span><br><span class="line"><span class="string">/roslaunch/uris/host_192_168_31_101__46779</span></span><br><span class="line"><span class="string">/rosversion</span></span><br><span class="line"><span class="string">/run_id</span></span><br></pre></td></tr></table></figure>
+<p>让我们尝试用<code>rosparam set</code>命令改变参数的值：</p>
+<h2 id="2、rosparam-set和rosparam-get命令"><a href="#2、rosparam-set和rosparam-get命令" class="headerlink" title="2、rosparam set和rosparam get命令"></a>2、rosparam set和rosparam get命令</h2><p>用法：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rosparam <span class="builtin-name">set</span> [param_name]</span><br><span class="line">rosparam <span class="builtin-name">get</span> [param_name]</span><br></pre></td></tr></table></figure></p>
+<p>例如我们可以改变一下小海龟窗口的背景色——<br>首先设定参数：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosparam <span class="keyword">set</span> background_r <span class="comment">150</span></span><br></pre></td></tr></table></figure></p>
+<p>然后需要调用clear服务才可以使参数生效：<br><figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosservice <span class="keyword">call</span> <span class="keyword">clear</span></span><br></pre></td></tr></table></figure></p>
+<p>执行完这一步，发现海龟窗口的背景色变紫了。</p>
+<p>然后我们可以查看一下在参数服务器上的其他参数，例如背景色绿通道的值：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosparam <span class="builtin-name">get</span> background_g</span><br></pre></td></tr></table></figure></p>
+<p>会得到：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">86</span></span><br></pre></td></tr></table></figure></p>
+<p>使用<code>/</code>获取参数服务器上的所有内容：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosparam <span class="builtin-name">get</span> /</span><br></pre></td></tr></table></figure></p>
+<p>输出类似于：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">background_b</span>: <span class="number">255</span></span><br><span class="line"><span class="attribute">background_g</span>: <span class="number">86</span></span><br><span class="line"><span class="attribute">background_r</span>: <span class="number">150</span></span><br><span class="line"><span class="attribute">rosdistro</span>: 'jade</span><br><span class="line"></span><br><span class="line">  '</span><br><span class="line"><span class="attribute">roslaunch</span>:</span><br><span class="line">  <span class="attribute">uris</span>: &#123;<span class="attribute">host_192_168_31_101__46779</span>: <span class="string">'http://192.168.31.101:46779/'</span>&#125;</span><br><span class="line"><span class="attribute">rosversion</span>: '<span class="number">1.11</span>.<span class="number">16</span></span><br><span class="line"></span><br><span class="line">  '</span><br><span class="line"><span class="attribute">run_id</span>: bd3a4832-<span class="number">0230</span>-<span class="number">11</span>e6-<span class="number">80</span>ee-c0188582eefb</span><br></pre></td></tr></table></figure></p>
+<p>你可以把这些参数存储到文件里以方便再次使用：</p>
+<h2 id="3、rosparam-dump和rosparam-load命令"><a href="#3、rosparam-dump和rosparam-load命令" class="headerlink" title="3、rosparam dump和rosparam load命令"></a>3、rosparam dump和rosparam load命令</h2><p>用法：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rosparam dump <span class="string">[file_name]</span> <span class="string">[namespace]</span></span><br><span class="line">rosparam load <span class="string">[file_name]</span> <span class="string">[namespace]</span></span><br></pre></td></tr></table></figure></p>
+<p>现在我们把参数服务器的内容存到<code>params.yaml</code>中：<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rosparam dump <span class="keyword">params</span>.yaml</span><br></pre></td></tr></table></figure></p>
+<p>你可以将这个yaml文件加载到新的命名空间里，例如<code>&#39;copy&#39;</code>：<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rosparam <span class="built_in">load</span> params.yaml <span class="built_in">copy</span></span><br><span class="line">rosparam <span class="built_in">get</span> <span class="built_in">copy</span>/background_b</span><br></pre></td></tr></table></figure></p>
+<p>得到：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">255</span></span><br></pre></td></tr></table></figure></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/14/6、rqt_console和roslaunch/" data-toggle="tooltip" data-placement="top" title="6、rqt_console和roslaunch">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/14/4、理解ros话题/" data-toggle="tooltip" data-placement="top" title="4、理解ros话题">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ros" title="ros">ros</a>
+                        
+                          <a class="tag" href="/tags/#c++" title="c++">c++</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2016/04/14/5、理解ros服务/";
+    var disqus_url = "https://pzque.github.io/2016/04/14/5、理解ros服务/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

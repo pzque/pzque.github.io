@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          6、rqt_console和roslaunch - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2016/04/14/6、rqt_console和roslaunch/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#ros" title="ros">ros</a>
+                        
+                          <a class="tag" href="/tags/#c++" title="c++">c++</a>
+                        
+                    </div>
+                    <h1>6、rqt_console和roslaunch</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2016-04-14
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="一、准备"><a href="#一、准备" class="headerlink" title="一、准备"></a>一、准备</h1><p>确保你已经安装了rqt和turtlesim包，没有的话，使用以下命令安装：<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-<span class="built_in">get</span> install ros-<span class="symbol">&lt;distro&gt;</span>-rqt ros-<span class="symbol">&lt;distro&gt;</span>-rqt-common-plugins ros-<span class="symbol">&lt;distro&gt;</span>-turtlesim</span><br></pre></td></tr></table></figure></p>
+<p>请用你所使用的版本（比如indigo、jade）代替<code>&lt;distro&gt;</code>。</p>
+<h1 id="二、使用rqt-console-and-rqt-logger-level命令"><a href="#二、使用rqt-console-and-rqt-logger-level命令" class="headerlink" title="二、使用rqt_console and rqt_logger_level命令"></a>二、使用rqt_console and rqt_logger_level命令</h1><p><code>rqt_console</code>连接着ROS的日志框架，可以查看节点的输出 <code>rqt_logger_level</code> 则可以调整节点输出信息的详细级别(DEBUG, WARN, INFO, and ERROR)。</p>
+<p>现在我们使用<code>rqt_console</code>查看小海龟节点的日志输出，使用<code>rqt_logger_level</code>调整日志输出级别。</p>
+<p>在启动小海龟之前，先在<strong>两个终端</strong>分别启用两条命令：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rosrun</span> rqt_console rqt_console</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rosrun</span> rqt_logger_level rqt_logger_level</span><br></pre></td></tr></table></figure>
+<p>你将看到：</p>
+<p><img src="http://img.blog.csdn.net/20160414201515213" alt="rqt_console"></p>
+<p>和：</p>
+<p><img src="http://img.blog.csdn.net/20160414201603839" alt="rqt_logger_level"></p>
+<p>然后我们启动小海龟：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rosrun</span> turtlesim turtlesim_node</span><br></pre></td></tr></table></figure></p>
+<p>图形界面的操作很简单，不再细说，放个链接：<a href="http://wiki.ros.org/ROS/Tutorials/UsingRqtconsoleRoslaunch" target="_blank" rel="noopener">ROS wiki</a>。</p>
+<h2 id="1、信息优先级"><a href="#1、信息优先级" class="headerlink" title="1、信息优先级"></a>1、信息优先级</h2><p>各种级别的优先级由上到下越来越低：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Fatal</span><br><span class="line">Error</span><br><span class="line">Warn</span><br><span class="line">Info</span><br><span class="line">Debug</span><br></pre></td></tr></table></figure></p>
+<p>现在我们可以按<code>Ctrl-C</code>退出小海龟了，</p>
+<h2 id="2、使用roslaunch"><a href="#2、使用roslaunch" class="headerlink" title="2、使用roslaunch"></a>2、使用roslaunch</h2><p><code>roslaunch</code>可以启动launch文件内定义的所有节点，用法：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roslaunch <span class="string">[package]</span> <span class="string">[filename.launch]</span></span><br></pre></td></tr></table></figure></p>
+<p>首先进入我们前一步创建的beginner_tutorials包：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">roscd</span> beginner_tutorials</span><br></pre></td></tr></table></figure></p>
+<p>如果你已经把它删除而且忘记怎么创建包的话，请参阅本系列的最前面两篇文章。</p>
+<p>然后创建并进入<code>launch</code>文件夹：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir <span class="built_in">launch</span></span><br><span class="line">cd <span class="built_in">launch</span></span><br></pre></td></tr></table></figure>
+<h2 id="3、launch文件"><a href="#3、launch文件" class="headerlink" title="3、launch文件"></a>3、launch文件</h2><p>创建一个<code>turtlemimic.launch</code>文件：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;launch&gt;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="built_in">group</span> ns=<span class="string">"turtlesim1"</span>&gt;</span><br><span class="line">    &lt;node pkg=<span class="string">"turtlesim"</span> <span class="built_in">name</span>=<span class="string">"sim"</span> <span class="built_in">type</span>=<span class="string">"turtlesim_node"</span>/&gt;</span><br><span class="line">  &lt;/<span class="built_in">group</span>&gt;</span><br><span class="line"></span><br><span class="line">  &lt;<span class="built_in">group</span> ns=<span class="string">"turtlesim2"</span>&gt;</span><br><span class="line">    &lt;node pkg=<span class="string">"turtlesim"</span> <span class="built_in">name</span>=<span class="string">"sim"</span> <span class="built_in">type</span>=<span class="string">"turtlesim_node"</span>/&gt;</span><br><span class="line">  &lt;/<span class="built_in">group</span>&gt;</span><br><span class="line"></span><br><span class="line">  &lt;node pkg=<span class="string">"turtlesim"</span> <span class="built_in">name</span>=<span class="string">"mimic"</span> <span class="built_in">type</span>=<span class="string">"mimic"</span>&gt;</span><br><span class="line">    &lt;remap <span class="keyword">from</span>=<span class="string">"input"</span> <span class="keyword">to</span>=<span class="string">"turtlesim1/turtle1"</span>/&gt;</span><br><span class="line">    &lt;remap <span class="keyword">from</span>=<span class="string">"output"</span> <span class="keyword">to</span>=<span class="string">"turtlesim2/turtle1"</span>/&gt;</span><br><span class="line">  &lt;/node&gt;</span><br><span class="line"></span><br><span class="line">&lt;/launch&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="4、launch文件解释"><a href="#4、launch文件解释" class="headerlink" title="4、launch文件解释"></a>4、launch文件解释</h2><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;launch&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这是一个xml文件，它首先以一个<code>launch</code>标签开头，以表明它是一个launch文件。<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="built_in">group</span> ns=<span class="string">"turtlesim1"</span>&gt;</span><br><span class="line">   &lt;node pkg=<span class="string">"turtlesim"</span> <span class="built_in">name</span>=<span class="string">"sim"</span> <span class="built_in">type</span>=<span class="string">"turtlesim_node"</span>/&gt;</span><br><span class="line"> &lt;/<span class="built_in">group</span>&gt;</span><br><span class="line"></span><br><span class="line"> &lt;<span class="built_in">group</span> ns=<span class="string">"turtlesim2"</span>&gt;</span><br><span class="line">   &lt;node pkg=<span class="string">"turtlesim"</span> <span class="built_in">name</span>=<span class="string">"sim"</span> <span class="built_in">type</span>=<span class="string">"turtlesim_node"</span>/&gt;</span><br><span class="line"> &lt;/<span class="built_in">group</span>&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后使用命名空间<code>ns</code>标签创建了两个组，分别命名为<code>turtlesim1</code> 和 <code>turtlesim2</code>，命名空间内都只有一个名为<code>sim</code>的海龟节点。而两个节点位于不同的命名空间从而避免了命名冲突。<br><figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;node pkg=<span class="string">"turtlesim"</span> <span class="built_in">name</span>=<span class="string">"mimic"</span> <span class="built_in">type</span>=<span class="string">"mimic"</span>&gt;</span><br><span class="line">   &lt;remap <span class="keyword">from</span>=<span class="string">"input"</span> <span class="keyword">to</span>=<span class="string">"turtlesim1/turtle1"</span>/&gt;</span><br><span class="line">   &lt;remap <span class="keyword">from</span>=<span class="string">"output"</span> <span class="keyword">to</span>=<span class="string">"turtlesim2/turtle1"</span>/&gt;</span><br><span class="line"> &lt;/node&gt;</span><br></pre></td></tr></table></figure></p>
+<p>然后我们启动了<code>mimic</code>节点，它的topic输入输出分别被重命名为<code>turtlesim1</code>和<code>turtlesim2</code>。以这种方式可以令<code>turtlesim2</code>模仿<code>turtlesim1</code>。<br><figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;/launch&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>最后是<code>launch</code>文件的结束标签。</p>
+<h2 id="5、roslaunching"><a href="#5、roslaunching" class="headerlink" title="5、roslaunching"></a>5、roslaunching</h2><p>现在我们可以使用<code>roslaunch</code>命令启动这个<code>launch</code>文件了：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">roslaunch beginner_tutorials turtlemimic.<span class="built_in">launch</span></span><br></pre></td></tr></table></figure>
+<p>可以看到两只龟已经启动起来了。</p>
+<p>在一个新终端里，我们向<code>turtlesim1</code>发送信息：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rostopic pub /turtlesim1/turtle1/cmd_vel geometry_msgs/Twist -r <span class="number">1</span> -- '[<span class="number">2.0</span>, <span class="number">0.0</span>, <span class="number">0.0</span>]' '[<span class="number">0.0</span>, <span class="number">0.0</span>, <span class="number">-1.8</span>]'</span><br></pre></td></tr></table></figure></p>
+<p>然后就可以看到海龟2模仿海龟1开始转圈。</p>
+<p>我们可以使用<code>rqt_graph</code>命令查看节点关系图来更好地理解两个节点的关系：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rqt_graph</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20160414205449433" alt="rqt_graph"></p>
+<p> 可以看到<code>micmic</code>节点起到一个中继的作用，它将<code>turtlsim1</code>发布的信息发布给<code>turtlesim2</code>，从而使<code>turtlesim2</code>模仿<code>turtlesim1</code>的运动轨迹。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/19/7、创建ROS msg和srv/" data-toggle="tooltip" data-placement="top" title="7、创建ROS msg和srv">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/14/5、理解ros服务/" data-toggle="tooltip" data-placement="top" title="5、理解ros服务">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ros" title="ros">ros</a>
+                        
+                          <a class="tag" href="/tags/#c++" title="c++">c++</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2016/04/14/6、rqt_console和roslaunch/";
+    var disqus_url = "https://pzque.github.io/2016/04/14/6、rqt_console和roslaunch/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

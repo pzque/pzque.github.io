@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          8、ROS使用C++编写一个简单的Publisher和Subscriber - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#ros" title="ros">ros</a>
+                        
+                          <a class="tag" href="/tags/#c++" title="c++">c++</a>
+                        
+                    </div>
+                    <h1>8、ROS使用C++编写一个简单的Publisher和Subscriber</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2016-04-19
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="一、Publisher节点"><a href="#一、Publisher节点" class="headerlink" title="一、Publisher节点"></a>一、Publisher节点</h1><p>“节点” 是一个连接着ROS框架的可执行文件，这里我们用C++写一个publisher节点 (命名为”talker”) ，不断地发布一条信息。</p>
+<p>首先进入包目录的src文件夹：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">roscd</span> <span class="keyword">beginner_tutorials</span></span><br><span class="line"><span class="keyword">cd </span>src</span><br></pre></td></tr></table></figure>
+<p>然后创建一个名为<code>&#39;talker.cpp&#39;</code>的文件，内容为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">"ros/ros.h"里面包含了ROS系统内最常用的一些头文件，包含此文件，便可以使用ROS的核心功能。</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"ros/ros.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">"std_msgs/String"是由std_msgs包自动生成的头文件，定义了String信息类型，包含此文件，我们就可以使用String类型</span></span><br><span class="line"><span class="comment">*/</span> </span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"std_msgs/String.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;sstream&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * This tutorial demonstrates simple sending of messages over the ROS system.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">  * ros::init()函数需要两个系统命令行参数argc和argv，</span></span><br><span class="line"><span class="comment">  * 由此可以执行命令行传来的任何ROS参数和节点的重命名</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  * 第三个参数是节点的名字，</span></span><br><span class="line"><span class="comment">  * 注意这里只能使用基本命名，</span></span><br><span class="line"><span class="comment">  * 即名字里不能含有'/'</span></span><br><span class="line"><span class="comment">  </span></span><br><span class="line"><span class="comment">  * 在使用ROS的其他部分之前，你必须调用ros::init()</span></span><br><span class="line"><span class="comment">  **/</span></span><br><span class="line">  ros::init(argc, argv, <span class="string">"talker"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * NodeHandle 是节点同ROS系统交流的主要接口</span></span><br><span class="line"><span class="comment">   * NodeHandle 在构造的时候会完整地初始化本节点 </span></span><br><span class="line"><span class="comment">   * NodeHandle 析构的时候会关闭此节点</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  ros::NodeHandle n;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 我们通过advertise() 函数指定我们如何在给定的topic上发布信息</span></span><br><span class="line"><span class="comment">   * 它会触发对ROS master的调用，master会记录话题发布者和订阅者</span></span><br><span class="line"><span class="comment">   * 在advertise()函数执行之后，master会通知每一个订阅此话题的节点</span></span><br><span class="line"><span class="comment">   * 两节点间由此可以建立直接的联系</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   * advertise()会返回一个Publisher对象，使用这个对象的publish方法我们就可以在此话题上发布信息</span></span><br><span class="line"><span class="comment">   * 当返回的Publisher对象的所有引用都被销毁的时候，本节点将不再是该话题的发布者</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   * 此函数是一个带模板的函数，需要传入具体的类型进行实例化</span></span><br><span class="line"><span class="comment">   * 传入的类型就是要发布的信息的类型，在这里是String</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   * 第一个参数是话题名称</span></span><br><span class="line"><span class="comment">   </span></span><br><span class="line"><span class="comment">   * 第二个参数是信息队列的长度，相当于信息的一个缓冲区</span></span><br><span class="line"><span class="comment">   * 在我们发布信息的速度大于处理信息的速度时</span></span><br><span class="line"><span class="comment">   * 信息会被缓存在先进先出的信息队列里</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  ros::Publisher chatter_pub = n.advertise&lt;std_msgs::String&gt;(<span class="string">"chatter"</span>, <span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * Rate loop_rate()构造了一个Rate类的对象</span></span><br><span class="line"><span class="comment">   * 用来指定我们发布信息的频率，单位为hz，即每秒多少次</span></span><br><span class="line"><span class="comment">   * 在我们调用Rate对象的sleep（）方法之前，信息发布的频率不会发生变化</span></span><br><span class="line"><span class="comment">  **/</span></span><br><span class="line">  ros::<span class="function">Rate <span class="title">loop_rate</span><span class="params">(<span class="number">10</span>)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 一个记录我们发布的信息数量的计数器</span></span><br><span class="line"><span class="comment">   * 它用来为每条信息产生不一样的字符串</span></span><br><span class="line"><span class="comment">   * 如'1 message','2 message'这样</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  <span class="keyword">int</span> count = <span class="number">0</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * roscpp默认会构造一个咱SIGINT的处理器来处理系统信号</span></span><br><span class="line"><span class="comment">   * 当出现以下情况之一的时候ros:ok()会返回false：</span></span><br><span class="line"><span class="comment">   *   1.接受到了一个SIGINT信号(Ctrl-C)</span></span><br><span class="line"><span class="comment">   *   2.在程序中调用了ros::shutdown()</span></span><br><span class="line"><span class="comment">   *   3.所有的ros::NodeHandle对象及引用都被销毁</span></span><br><span class="line"><span class="comment">  **/</span></span><br><span class="line">  <span class="keyword">while</span> (ros::ok())</span><br><span class="line">  &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 这是一个message对象，我们向其中填入数据，然后可以发布它</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    std_msgs::String msg;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 我们发布的信息的格式为"hello world 1/2/3..."</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">stringstream</span> ss;</span><br><span class="line">    ss &lt;&lt; <span class="string">"hello world "</span> &lt;&lt; count;</span><br><span class="line">    msg.data = ss.str();</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * ROS_INFO是对ROS系统对printf/cout的替代</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ROS_INFO(<span class="string">"%s"</span>, msg.data.c_str());</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * publish()函数用来发布信息</span></span><br><span class="line"><span class="comment">     * 信息类型必须为前一步实例化advertised()时使用的模板参数的类型</span></span><br><span class="line"><span class="comment">     * 这里为String</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    chatter_pub.publish(msg);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 在这个简单的应用中，我们没有使用任何回调函数</span></span><br><span class="line"><span class="comment">     * 所以ros::spinOnce()的调用不是必须的</span></span><br><span class="line"><span class="comment">     * 但是一直在代码里调用ros::spinOnce()是个好习惯</span></span><br><span class="line"><span class="comment">     * 它可以保证你指定的回调函数会被调用</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ros::spinOnce();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调用Rate对象的sleep方法来使我们前面指定的信息发布频率10Hz生效</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    loop_rate.sleep();</span><br><span class="line">    ++count;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>各语句的功能如注释所示，不再讲解。</p>
+<h1 id="二、Subscriber节点"><a href="#二、Subscriber节点" class="headerlink" title="二、Subscriber节点"></a>二、Subscriber节点</h1><p>Publisher节点写完，我们有了信息的发布者，接下来我们写一个Subcriber节点来接收信息。</p>
+<p>同样在beginner_tutorials包目录的src文件夹下，建立一个名为<code>&#39;listener.cpp</code>的文件，内容为：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"ros/ros.h"</span></span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">"std_msgs/String.h"</span></span></span><br><span class="line"> </span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 传给NodeHandle.subscribe()的回调函数</span></span><br><span class="line"><span class="comment"> * 它的参数是一个share_ptr类型的只能指针，功能这里不细讲</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">chatterCallback</span><span class="params">(<span class="keyword">const</span> std_msgs::String::ConstPtr&amp; msg)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  ROS_INFO(<span class="string">"I heard: [%s]"</span>, msg-&gt;data.c_str());</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">int</span> argc, <span class="keyword">char</span> **argv)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  ros::init(argc, argv, <span class="string">"listener"</span>);</span><br><span class="line"></span><br><span class="line">  ros::NodeHandle n;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 参数1：话题名称</span></span><br><span class="line"><span class="comment">   * 参数2：信息队列长度</span></span><br><span class="line"><span class="comment">   * 参数3：回调函数，每当一个信息到来的时候，这个函数会被调用</span></span><br><span class="line"><span class="comment">   * 返回一个ros::Subscriber类的对象，当此对象的所有引用都被销毁是，本节点将不再是该话题的订阅者</span></span><br><span class="line"><span class="comment">   */</span></span><br><span class="line">  ros::Subscriber sub = n.subscribe(<span class="string">"chatter"</span>, <span class="number">1000</span>, chatterCallback);</span><br><span class="line">  <span class="comment">/**</span></span><br><span class="line"><span class="comment">   * 调用ros::spin()函数，进入一个循环</span></span><br><span class="line"><span class="comment">   * 不断地接受信息，然后执行回调函数，知道ros::ok()返回false</span></span><br><span class="line"><span class="comment">   */</span> </span><br><span class="line">  ros::spin();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>代码比较简单，功能如注释所示。</p>
+<h1 id="三、构建项目"><a href="#三、构建项目" class="headerlink" title="三、构建项目"></a>三、构建项目</h1><h2 id="1、修改CMakeList-txt"><a href="#1、修改CMakeList-txt" class="headerlink" title="1、修改CMakeList.txt"></a>1、修改CMakeList.txt</h2><p>继续使用我们上一节使用的自己创建的beginner_tutorial包。</p>
+<p>此包的CMakeLists.txt文件应该如下所示（移除不必要的注释之后）：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(<span class="name">VERSION</span> <span class="number">2.8</span>.<span class="number">3</span>)</span><br><span class="line">project(<span class="name">beginner_tutorials</span>)</span><br><span class="line"></span><br><span class="line">##  Find catkin and any catkin packages</span><br><span class="line">find_package(<span class="name">catkin</span> REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)</span><br><span class="line"></span><br><span class="line">##  Declare ROS messages and services</span><br><span class="line">add_message_files(<span class="name">DIRECTORY</span> msg FILES Num.msg)</span><br><span class="line">add_service_files(<span class="name">DIRECTORY</span> srv FILES AddTwoInts.srv)</span><br><span class="line"></span><br><span class="line">##  Generate added messages and services</span><br><span class="line">generate_messages(<span class="name">DEPENDENCIES</span> std_msgs)</span><br><span class="line"></span><br><span class="line">##  Declare a catkin package</span><br><span class="line">catkin_package()</span><br></pre></td></tr></table></figure>
+<p>我们需要添加以下内容：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">include_directories</span><span class="params">(include $&#123;catkin_INCLUDE_DIRS&#125;)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">add_executable</span><span class="params">(talker src/talker.cpp)</span></span></span><br><span class="line"><span class="function"><span class="title">target_link_libraries</span><span class="params">(talker $&#123;catkin_LIBRARIES&#125;)</span></span></span><br><span class="line"><span class="function"><span class="title">add_dependencies</span><span class="params">(talker beginner_tutorials_generate_messages_cpp)</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="title">add_executable</span><span class="params">(listener src/listener.cpp)</span></span></span><br><span class="line"><span class="function"><span class="title">target_link_libraries</span><span class="params">(listener $&#123;catkin_LIBRARIES&#125;)</span></span></span><br><span class="line"><span class="function"><span class="title">add_dependencies</span><span class="params">(listener beginner_tutorials_generate_messages_cpp)</span></span></span><br></pre></td></tr></table></figure>
+<p>最终的CMakeLists.txt应该像这样：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(<span class="name">VERSION</span> <span class="number">2.8</span>.<span class="number">3</span>)</span><br><span class="line">project(<span class="name">beginner_tutorials</span>)</span><br><span class="line"></span><br><span class="line">##  Find catkin and any catkin packages</span><br><span class="line">find_package(<span class="name">catkin</span> REQUIRED COMPONENTS roscpp rospy std_msgs genmsg)</span><br><span class="line"></span><br><span class="line">##  Declare ROS messages and services</span><br><span class="line">add_message_files(<span class="name">FILES</span> Num.msg)</span><br><span class="line">add_service_files(<span class="name">FILES</span> AddTwoInts.srv)</span><br><span class="line"></span><br><span class="line">##  Generate added messages and services</span><br><span class="line">generate_messages(<span class="name">DEPENDENCIES</span> std_msgs)</span><br><span class="line"></span><br><span class="line">##  Declare a catkin package</span><br><span class="line">catkin_package()</span><br><span class="line"></span><br><span class="line">##  Build talker and listener</span><br><span class="line">include_directories(<span class="name">include</span> $&#123;catkin_INCLUDE_DIRS&#125;)</span><br><span class="line"></span><br><span class="line">add_executable(<span class="name">talker</span> src/talker.cpp)</span><br><span class="line">target_link_libraries(<span class="name">talker</span> $&#123;catkin_LIBRARIES&#125;)</span><br><span class="line">add_dependencies(<span class="name">talker</span> beginner_tutorials_generate_messages_cpp)</span><br><span class="line"></span><br><span class="line">add_executable(<span class="name">listener</span> src/listener.cpp)</span><br><span class="line">target_link_libraries(<span class="name">listener</span> $&#123;catkin_LIBRARIES&#125;)</span><br><span class="line">add_dependencies(<span class="name">listener</span> beginner_tutorials_generate_messages_cpp)</span><br></pre></td></tr></table></figure>
+<p>这将创建两个可执行文件<code>talker</code>和<code>listenner</code>，默认存放于<code>~/catkin_ws/devel/lib/&lt;package name&gt;</code>。</p>
+<h2 id="2、解释"><a href="#2、解释" class="headerlink" title="2、解释"></a>2、解释</h2><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_dependencies(talker</span></span><br><span class="line"><span class="keyword">beginner_tutorials_generate_messages_cpp</span></span><br><span class="line"><span class="keyword">)</span></span><br></pre></td></tr></table></figure>
+<p>add_dependencies声明某CMake target对另外的CMake target的依赖。</p>
+<p>这确保了在我们使用某个包里定义的信息类型之前生成它们的头文件。在我们使用其他包的信息类型的时候，也要添加类似这样的依赖。例如再添加一条：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">add_dependencies(talker</span></span><br><span class="line"><span class="keyword"> </span> <span class="keyword">beginner_tutorials_generate_messages_cpp</span></span><br><span class="line"><span class="keyword"> </span> roscpp_generate_messages_cpp</span><br><span class="line">  )</span><br></pre></td></tr></table></figure>
+<h2 id="3、构建"><a href="#3、构建" class="headerlink" title="3、构建"></a>3、构建</h2><p>进入我们工作空间的顶层目录执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">catkin_make</span><br></pre></td></tr></table></figure>
+<p>等待一会儿项目即可构建成功。</p>
+<h1 id="四、运行节点"><a href="#四、运行节点" class="headerlink" title="四、运行节点"></a>四、运行节点</h1><p>首先要启动ROS：<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">roscore</span></span><br></pre></td></tr></table></figure></p>
+<p>然后进入工作目录将包导出到全局：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~<span class="string">/catkin_ws</span></span><br><span class="line">source <span class="string">./devel/setup.bash</span></span><br></pre></td></tr></table></figure>
+<p>运行talker节点：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">rosrun</span> <span class="keyword">beginner_tutorials </span>talker</span><br></pre></td></tr></table></figure>
+<p>将看到类似于：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049103.046522470]</span>: hello world <span class="number">0</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049103.146694944]</span>: hello world <span class="number">1</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049103.246582083]</span>: hello world <span class="number">2</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049103.346603146]</span>: hello world <span class="number">3</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049103.446525742]</span>: hello world <span class="number">4</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049103.546518768]</span>: hello world <span class="number">5</span></span><br></pre></td></tr></table></figure>
+<p>运行listener节点：</p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">rosrun</span> <span class="keyword">beginner_tutorials </span>listener</span><br></pre></td></tr></table></figure>
+<p>将看到类似于：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049221.914537834]</span>: I heard: <span class="string">[hello world 3]</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049222.014228659]</span>: I heard: <span class="string">[hello world 4]</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049222.114193464]</span>: I heard: <span class="string">[hello world 5]</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049222.214291045]</span>: I heard: <span class="string">[hello world 6]</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049222.314210593]</span>: I heard: <span class="string">[hello world 7]</span></span><br><span class="line"><span class="string">[ INFO]</span> <span class="string">[1461049222.414272158]</span>: I heard: <span class="string">[hello world 8]</span></span><br></pre></td></tr></table></figure>
+<p>节点运行成功。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/19/9、ROS使用C++编写一个简单的Service和Client/" data-toggle="tooltip" data-placement="top" title="9、ROS使用C++编写一个简单的Service和Client">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/19/7、创建ROS msg和srv/" data-toggle="tooltip" data-placement="top" title="7、创建ROS msg和srv">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#ros" title="ros">ros</a>
+                        
+                          <a class="tag" href="/tags/#c++" title="c++">c++</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/";
+    var disqus_url = "https://pzque.github.io/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
