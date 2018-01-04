@@ -3,7 +3,7 @@
 
 <!-- Head tag -->
 <head>
-    <meta charset="utf-8">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,14 +49,14 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script>
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
 <!-- hack iOS CSS :active style -->
 <body ontouchstart="">
 
-    <!-- Navigation -->
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
 <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -184,6 +184,27 @@
 
 <div class="post-preview">
 
+    <a href="/2018/01/04/scala-implicit/">
+        <h2 class="post-title">
+            scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)一、Overviewimplicit是scala中的一个关键字，关于它有着丰富的用法，使得scala更灵活和容易扩展。截止目前，scala已经来到了2.12.3版本，本篇文章把目前scala支持的implicit用法作了较为全面的整理，以方便在阅读scala源码的时候稍作参考。文中全部的代码和测试结果均以scal......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by pzque on
+        2018-01-04
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/04/19/11、初步使用roswtf/">
         <h2 class="post-title">
             11、初步使用roswtf
@@ -233,6 +254,31 @@
 
 <div class="post-preview">
 
+    <a href="/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/">
+        <h2 class="post-title">
+            8、ROS使用C++编写一个简单的Publisher和Subscriber
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、Publisher节点“节点” 是一个连接着ROS框架的可执行文件，这里我们用C++写一个publisher节点 (命名为”talker”) ，不断地发布一条信息。
+首先进入包目录的src文件夹：
+12roscd beginner_tutorialscd src
+然后创建一个名为&#39;talker.cpp&#39;的文件，内容为：
+12345678910111213141516171......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by  on
+        2016-04-19
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/04/19/9、ROS使用C++编写一个简单的Service和Client/">
         <h2 class="post-title">
             9、ROS使用C++编写一个简单的Service和Client
@@ -248,31 +294,6 @@
 
 如果没有满足以上条件的话，请重新阅读本系列的第7、8篇文章。
 一、Service节点在包内的src下创建add_two_ints_server.cpp，粘贴以下内容：123456789101112......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by  on
-        2016-04-19
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/">
-        <h2 class="post-title">
-            8、ROS使用C++编写一个简单的Publisher和Subscriber
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、Publisher节点“节点” 是一个连接着ROS框架的可执行文件，这里我们用C++写一个publisher节点 (命名为”talker”) ，不断地发布一条信息。
-首先进入包目录的src文件夹：
-12roscd beginner_tutorialscd src
-然后创建一个名为&#39;talker.cpp&#39;的文件，内容为：
-12345678910111213141516171......
         </div>
     </a>
     <p class="post-meta">
@@ -399,34 +420,6 @@ msg文件和srv文件分别存储在包的msg目录和srv目录下。
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/04/14/4、理解ros话题/">
-        <h2 class="post-title">
-            4、理解ros话题
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、准备工作1.roscore首先启动ros：
-1roscore
-已经启动过则无需此步。
-2.turtlesim启动一个小海龟1rosrun turtlesim turtlesim_node
-3.远程操控小海龟再一个新终端里运行：
-1rosrun turtlesim turtle_teleop_key
-得到：
-123Reading from keyboard-----------------......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by  on
-        2016-04-14
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -483,6 +476,8 @@ msg文件和srv文件分别存储在包的msg目录和srv目录下。
                         
                             
                             <a href="/tags/#spacemacs" title="spacemacs" rel="2">spacemacs</a>
+                            
+                        
                             
                         
                     </div>
@@ -742,7 +737,24 @@ msg文件和srv文件分别存储在包的msg目录和srv目录下。
 
 <!-- Image to hack wechat -->
 <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
-<!-- Migrate from head to bottom, no longer block render and still work -->
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 </body>
 
