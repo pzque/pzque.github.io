@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          Spark job执行流程 - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2017/12/20/Sparkj job执行流程/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#scala" title="scala">scala</a>
+                        
+                          <a class="tag" href="/tags/#bigdata" title="bigdata">bigdata</a>
+                        
+                          <a class="tag" href="/tags/#spark" title="spark">spark</a>
+                        
+                    </div>
+                    <h1>Spark job执行流程</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by pzque on
+                        2017-12-20
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>最近讨论spark，发现我对spark的了解仅限于原理层面，对stage划分、job执行的细节理解不够充分。</p>
+<p>所以就翻开spark2.2.0的源码，梳理一下一个任务从提交到执行的流程。</p>
+<p>以经典的wordcount代码为例：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> org.apache.spark.examples</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.apache.spark.&#123;<span class="type">SparkConf</span>, <span class="type">SparkContext</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">SparkTestTrace</span> </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">main</span></span>(args: <span class="type">Array</span>[<span class="type">String</span>]) &#123;</span><br><span class="line">    <span class="keyword">val</span> conf = <span class="keyword">new</span> <span class="type">SparkConf</span>()</span><br><span class="line">      .setMaster(<span class="string">"local[4]"</span>)</span><br><span class="line">      .setAppName(<span class="string">"Spark Pi"</span>)</span><br><span class="line">      .set(<span class="string">"spark.executor.memory"</span>, <span class="string">"1g"</span>)</span><br><span class="line">    <span class="keyword">val</span> sc = <span class="keyword">new</span> <span class="type">SparkContext</span>(conf)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">val</span> src = sc.textFile(<span class="string">"/Users/pcz/people.json"</span>)</span><br><span class="line">    <span class="keyword">val</span> result = src</span><br><span class="line">      .flatMap(line =&gt; line.split(<span class="string">" "</span>))</span><br><span class="line">      .groupBy(identity)</span><br><span class="line">      .count()</span><br><span class="line"></span><br><span class="line">    println(result)</span><br><span class="line"></span><br><span class="line">    sc.stop()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="调用链"><a href="#调用链" class="headerlink" title="调用链"></a>调用链</h2><p>spark的任务就是由RDD串联成的DAG图，你在调用RDD.map等这些transform时只是在构建这个DAG而已，任务的真正触发是从一个action开始。我们这里的action就是count，调用它开始执行runJob，它的源码:</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Return the number of elements in the RDD.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">def</span> <span class="keyword">count</span>(): <span class="keyword">Long</span> = sc.runJob(<span class="keyword">this</span>, Utils.getIteratorSize _).sum</span><br></pre></td></tr></table></figure>
+<p>这是RDD的一个方法, 以自己为参数, 执行SparkContext的runJob方法.</p>
+<p>SparkContext的runJob有多种重载, 其最终层层调用后都会调用这一个:</p>
+<figure class="highlight vbscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * Run a <span class="keyword">function</span> <span class="keyword">on</span> a given <span class="keyword">set</span> of partitions <span class="keyword">in</span> an RDD <span class="keyword">and</span> pass the results <span class="keyword">to</span> the given</span><br><span class="line"> * handler <span class="keyword">function</span>. This <span class="keyword">is</span> the main entry point <span class="keyword">for</span> all actions <span class="keyword">in</span> Spark.</span><br><span class="line"> *</span><br><span class="line"> * @param rdd target RDD <span class="keyword">to</span> run tasks <span class="keyword">on</span></span><br><span class="line"> * @param func a <span class="keyword">function</span> <span class="keyword">to</span> run <span class="keyword">on</span> <span class="keyword">each</span> partition of the RDD</span><br><span class="line"> * @param partitions <span class="keyword">set</span> of partitions <span class="keyword">to</span> run <span class="keyword">on</span>; some jobs may <span class="keyword">not</span> want <span class="keyword">to</span> compute <span class="keyword">on</span> all</span><br><span class="line"> * partitions of the target RDD, e.g. <span class="keyword">for</span> operations like `first()`</span><br><span class="line"> * @param resultHandler callback <span class="keyword">to</span> pass <span class="keyword">each</span> result <span class="keyword">to</span></span><br><span class="line"> */</span><br><span class="line">def runJob[T, U: ClassTag](</span><br><span class="line">    rdd: RDD[T],</span><br><span class="line">    func: (TaskContext, Iterator[T]) =&gt; U,</span><br><span class="line">    partitions: Seq[<span class="built_in">Int</span>],</span><br><span class="line">    resultHandler: (<span class="built_in">Int</span>, U) =&gt; Unit): Unit = &#123;</span><br><span class="line">  <span class="keyword">if</span> (stopped.<span class="keyword">get</span>()) &#123;</span><br><span class="line">    throw <span class="keyword">new</span> IllegalStateException(<span class="string">"SparkContext has been shutdown"</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  val callSite = getCallSite</span><br><span class="line">  val cleanedFunc = clean(func)</span><br><span class="line">  logInfo(<span class="string">"Starting job: "</span> + callSite.shortForm)</span><br><span class="line">  <span class="keyword">if</span> (conf.getBoolean(<span class="string">"spark.logLineage"</span>, <span class="literal">false</span>)) &#123;</span><br><span class="line">    logInfo(<span class="string">"RDD's recursive dependencies:\n"</span> + rdd.toDebugString)</span><br><span class="line">  &#125;</span><br><span class="line">  dagScheduler.runJob(rdd, cleanedFunc, partitions, callSite, resultHandler, localProperties.<span class="keyword">get</span>)</span><br><span class="line">  progressBar.foreach(_.finishAll())</span><br><span class="line">  rdd.doCheckpoint()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中callSite是用户的代码的调用堆栈, 调试和打印信息用的, 不太重要.</p>
+<p>观察这里又调用了dagScheduler的runJob方法, 继续跟踪, 这是DAGScheduler类的runJob代码:</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Run an action job on the given RDD and pass all the results to the resultHandler function as</span></span><br><span class="line"><span class="comment"> * they arrive.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> rdd target RDD to run tasks on</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> func a function to run on each partition of the RDD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> partitions set of partitions to run on; some jobs may not want to compute on all</span></span><br><span class="line"><span class="comment"> *   partitions of the target RDD, e.g. for operations like first()</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> callSite where in the user program this job was called</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> resultHandler callback to pass each result to</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> properties scheduler properties to attach to this job, e.g. fair scheduler pool name</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@note</span> Throws `Exception` when the job fails</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">def runJob[T, U](</span><br><span class="line">    rdd: RDD[T],</span><br><span class="line">    func: (TaskContext, Iterator[T]) =&gt; U,</span><br><span class="line">    partitions: Seq[<span class="keyword">Int</span>],</span><br><span class="line">    callSite: CallSite,</span><br><span class="line">    resultHandler: (<span class="keyword">Int</span>, U) =&gt; Unit,</span><br><span class="line">    properties: Properties): Unit = &#123;</span><br><span class="line">  val start = System.nanoTime</span><br><span class="line">  val waiter = submitJob(rdd, func, partitions, callSite, resultHandler, properties)</span><br><span class="line">  ThreadUtils.awaitReady(waiter.completionFuture, Duration.Inf)</span><br><span class="line">  waiter.completionFuture.value.get match &#123;</span><br><span class="line">    <span class="keyword">case</span> scala.util.Success(_) =&gt;</span><br><span class="line">      logInfo(<span class="string">"Job %d finished: %s, took %f s"</span>.format</span><br><span class="line">        (waiter.jobId, callSite.shortForm, (System.nanoTime - start) / <span class="number">1e9</span>))</span><br><span class="line">    <span class="keyword">case</span> scala.util.Failure(<span class="keyword">exception</span>) =&gt;</span><br><span class="line">      logInfo(<span class="string">"Job %d failed: %s, took %f s"</span>.format</span><br><span class="line">        (waiter.jobId, callSite.shortForm, (System.nanoTime - start) / <span class="number">1e9</span>))</span><br><span class="line">      <span class="comment">// SPARK-8644: Include user stack trace in exceptions coming from DAGScheduler.</span></span><br><span class="line">      val callerStackTrace = Thread.currentThread().getStackTrace.tail</span><br><span class="line">      <span class="keyword">exception</span>.setStackTrace(<span class="keyword">exception</span>.getStackTrace ++ callerStackTrace)</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">exception</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里又调用了DAGScheduler类的submitJob方法：</p>
+<figure class="highlight zephir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Submit an action job to the scheduler.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> rdd target RDD to run tasks on</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> func a function to run on each partition of the RDD</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> partitions set of partitions to run on; some jobs may not want to compute on all</span></span><br><span class="line"><span class="comment"> *   partitions of the target RDD, e.g. for operations like first()</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> callSite where in the user program this job was called</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> resultHandler callback to pass each result to</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> properties scheduler properties to attach to this job, e.g. fair scheduler pool name</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> a JobWaiter object that can be used to block until the job finishes executing</span></span><br><span class="line"><span class="comment"> *         or can be used to cancel the job.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> IllegalArgumentException when partitions ids are illegal</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line">def submitJob[T, U](</span><br><span class="line">    rdd: RDD[T],</span><br><span class="line">    func: (TaskContext, Iterator[T]) =&gt; U,</span><br><span class="line">    partitions: Seq[<span class="keyword">Int</span>],</span><br><span class="line">    callSite: CallSite,</span><br><span class="line">    resultHandler: (<span class="keyword">Int</span>, U) =&gt; Unit,</span><br><span class="line">    properties: Properties): JobWaiter[U] = &#123;</span><br><span class="line">  <span class="comment">// Check to make sure we are not launching a task on a partition that does not exist.</span></span><br><span class="line">  val maxPartitions = rdd.partitions.length</span><br><span class="line">  partitions.find(p =&gt; p &gt;= maxPartitions || p &lt; <span class="number">0</span>).<span class="keyword">foreach</span> &#123; p =&gt;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(</span><br><span class="line">      <span class="string">"Attempting to access a non-existent partition: "</span> + p + <span class="string">". "</span> +</span><br><span class="line">        <span class="string">"Total number of partitions: "</span> + maxPartitions)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  val jobId = nextJobId.getAndIncrement()</span><br><span class="line">  <span class="keyword">if</span> (partitions.size == <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="comment">// Return immediately if the job is running 0 tasks</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> JobWaiter[U](this, jobId, <span class="number">0</span>, resultHandler)</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  assert(partitions.size &gt; <span class="number">0</span>)</span><br><span class="line">  val func2 = func.asInstanceOf[(TaskContext, Iterator[_]) =&gt; _]</span><br><span class="line">  val waiter = <span class="keyword">new</span> JobWaiter(this, jobId, partitions.size, resultHandler)</span><br><span class="line">  eventProcessLoop.post(JobSubmitted(</span><br><span class="line">    jobId, rdd, func2, partitions.toArray, callSite, waiter,</span><br><span class="line">    SerializationUtils.<span class="keyword">clone</span>(properties)))</span><br><span class="line">  waiter</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法的主要内容是调用eventProcessLoop.post把任务提交到事件队列中去。DAGScheduler构造时，会初始化一个eventProcessLoop实例，并调用其eventProcessLoop.start()方法，启动一个多线程，然后把各种event都提交到eventProcessLoop中。这个类的代码很简单：</p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">private[scheduler] <span class="class"><span class="keyword">class</span> <span class="title">DAGSchedulerEventProcessLoop</span>(<span class="title">dagScheduler</span>: <span class="title">DAGScheduler</span>)</span></span><br><span class="line"><span class="class">  <span class="keyword">extends</span> <span class="title">EventLoop</span>[<span class="title">DAGSchedulerEvent</span>]("<span class="title">dag</span>-<span class="title">scheduler</span>-<span class="title">event</span>-<span class="title">loop</span>") <span class="title">with</span> <span class="title">Logging</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  private[<span class="keyword">this</span>] val timer = dagScheduler.metricsSource.messageProcessingTimer</span><br><span class="line"></span><br><span class="line">  <span class="comment"><span class="markdown">/**</span></span></span><br><span class="line"><span class="comment"><span class="markdown">   * The main event loop of </span>the<span class="markdown"> DAG scheduler.</span></span></span><br><span class="line"><span class="comment"><span class="markdown">   */</span></span></span><br><span class="line">  override def onReceive(event: DAGSchedulerEvent): Unit = &#123;</span><br><span class="line">    val timerContext = timer.time()</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">      doOnReceive(event)</span><br><span class="line">    &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">      timerContext.stop()</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  private def doOnReceive(event: DAGSchedulerEvent): Unit = event match &#123;</span><br><span class="line">    <span class="keyword">case</span> JobSubmitted(jobId, rdd, func, partitions, callSite, listener, properties) =&gt;</span><br><span class="line">      dagScheduler.handleJobSubmitted(jobId, rdd, func, partitions, callSite, listener, properties)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> MapStageSubmitted(jobId, dependency, callSite, listener, properties) =&gt;</span><br><span class="line">      dagScheduler.handleMapStageSubmitted(jobId, dependency, callSite, listener, properties)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> StageCancelled(stageId, reason) =&gt;</span><br><span class="line">      dagScheduler.handleStageCancellation(stageId, reason)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> JobCancelled(jobId, reason) =&gt;</span><br><span class="line">      dagScheduler.handleJobCancellation(jobId, reason)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> JobGroupCancelled(groupId) =&gt;</span><br><span class="line">      dagScheduler.handleJobGroupCancelled(groupId)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> AllJobsCancelled =&gt;</span><br><span class="line">      dagScheduler.doCancelAllJobs()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> ExecutorAdded(execId, host) =&gt;</span><br><span class="line">      dagScheduler.handleExecutorAdded(execId, host)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> ExecutorLost(execId, reason) =&gt;</span><br><span class="line">      val filesLost = reason match &#123;</span><br><span class="line">        <span class="keyword">case</span> SlaveLost(_, <span class="keyword">true</span>) =&gt; <span class="keyword">true</span></span><br><span class="line">        <span class="keyword">case</span> _ =&gt; <span class="keyword">false</span></span><br><span class="line">      &#125;</span><br><span class="line">      dagScheduler.handleExecutorLost(execId, filesLost)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> BeginEvent(task, taskInfo) =&gt;</span><br><span class="line">      dagScheduler.handleBeginEvent(task, taskInfo)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> GettingResultEvent(taskInfo) =&gt;</span><br><span class="line">      dagScheduler.handleGetTaskResult(taskInfo)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> completion: CompletionEvent =&gt;</span><br><span class="line">      dagScheduler.handleTaskCompletion(completion)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> TaskSetFailed(taskSet, reason, exception) =&gt;</span><br><span class="line">      dagScheduler.handleTaskSetFailed(taskSet, reason, exception)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">case</span> ResubmitFailedStages =&gt;</span><br><span class="line">      dagScheduler.resubmitFailedStages()</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>它会在各类事件提交之后调用相应的处理函数，如在这里提交的是一个<code>JobSubmitted</code>事件，其会调用<code>dagScheduler.handleJobSubmitted</code>方法进行相应处理。为什么不直接调用这个方法呢？因为这是一个异步的设计，是非阻塞的。</p>
+<p>废话了这么多，终于来到核心了：stage划分。</p>
+<h2 id="stage划分"><a href="#stage划分" class="headerlink" title="stage划分"></a>stage划分</h2><p>刚刚讲到job提交调用到<code>dagScheduler.handleJobSubmitted</code>方法：</p>
+<figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>[scheduler] def handleJobSubmitted(jobId: <span class="type">Int</span>,</span><br><span class="line">    finalRDD: <span class="type">RDD</span>[<span class="literal">_</span>],</span><br><span class="line">    func: <span class="type"></span>(TaskContext, Iterator[<span class="literal">_</span>]) =&gt; <span class="literal">_</span>,</span><br><span class="line">    partitions: <span class="type">Array</span>[<span class="keyword">Int</span>],</span><br><span class="line">    callSite: <span class="type">CallSite</span>,</span><br><span class="line">    listener: <span class="type">JobListener</span>,</span><br><span class="line">    properties: <span class="type">Properties</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> finalStage: <span class="type">ResultStage </span>= <span class="literal">null</span></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// New stage creation may throw an exception if, for example, jobs are run on a</span></span><br><span class="line">    <span class="comment">// HadoopRDD whose underlying HDFS files have been deleted.</span></span><br><span class="line">    finalStage = createResultStage(finalRDD, func, partitions, jobId, callSite)</span><br><span class="line">  &#125; <span class="keyword">catch</span> &#123;</span><br><span class="line">    <span class="keyword">case</span> e: <span class="type">Exception </span>=&gt;</span><br><span class="line">      logWarning(<span class="string">"Creating new stage failed due to exception - job: "</span> + jobId, e)</span><br><span class="line">      listener.jobFailed(e)</span><br><span class="line">      <span class="keyword">return</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  val job = <span class="keyword">new</span> <span class="type">ActiveJob</span>(jobId, finalStage, callSite, listener, properties)</span><br><span class="line">  clearCacheLocs()</span><br><span class="line">  logInfo(<span class="string">"Got job %s (%s) with %d output partitions"</span>.format(</span><br><span class="line">    job.jobId, callSite.shortForm, partitions.length))</span><br><span class="line">  logInfo(<span class="string">"Final stage: "</span> + finalStage + <span class="string">" ("</span> + finalStage.name + <span class="string">")"</span>)</span><br><span class="line">  logInfo(<span class="string">"Parents of final stage: "</span> + finalStage.parents)</span><br><span class="line">  logInfo(<span class="string">"Missing parents: "</span> + getMissingParentStages(finalStage))</span><br><span class="line"></span><br><span class="line">  val jobSubmissionTime = clock.getTimeMillis()</span><br><span class="line">  jobIdToActiveJob(jobId) = job</span><br><span class="line">  activeJobs += job</span><br><span class="line">  finalStage.setActiveJob(job)</span><br><span class="line">  val stageIds = jobIdToStageIds(jobId).toArray</span><br><span class="line">  val stageInfos = stageIds.flatMap(id =&gt; stageIdToStage.<span class="keyword">get</span>(id).map(<span class="literal">_</span>.latestInfo))</span><br><span class="line">  listenerBus.post(</span><br><span class="line">    SparkListenerJobStart(job.jobId, jobSubmissionTime, stageInfos, properties))</span><br><span class="line">  submitStage(finalStage)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这一步创建了finalStage，它的类型是ResultStage，表示一个job最终的结果。而其他的stage类型全部为ShuffleMapStage.</p>
+<p>然后调用submitStage提交：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Submits stage, but first recursively submits any missing parents. */</span></span><br><span class="line"><span class="keyword">private</span> <span class="function"><span class="keyword">def</span> <span class="title">submitStage</span></span>(stage: <span class="type">Stage</span>) &#123;</span><br><span class="line">  <span class="keyword">val</span> jobId = activeJobForStage(stage)</span><br><span class="line">  <span class="keyword">if</span> (jobId.isDefined) &#123;</span><br><span class="line">    logDebug(<span class="string">"submitStage("</span> + stage + <span class="string">")"</span>)</span><br><span class="line">    <span class="keyword">if</span> (!waitingStages(stage) &amp;&amp; !runningStages(stage) &amp;&amp; !failedStages(stage)) &#123;</span><br><span class="line">      <span class="keyword">val</span> missing = getMissingParentStages(stage).sortBy(_.id)</span><br><span class="line">      logDebug(<span class="string">"missing: "</span> + missing)</span><br><span class="line">      <span class="keyword">if</span> (missing.isEmpty) &#123;</span><br><span class="line">        logInfo(<span class="string">"Submitting "</span> + stage + <span class="string">" ("</span> + stage.rdd + <span class="string">"), which has no missing parents"</span>)</span><br><span class="line">        submitMissingTasks(stage, jobId.get)</span><br><span class="line">      &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">for</span> (parent &lt;- missing) &#123;</span><br><span class="line">          submitStage(parent)</span><br><span class="line">        &#125;</span><br><span class="line">        waitingStages += stage</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    abortStage(stage, <span class="string">"No active job for stage "</span> + stage.id, <span class="type">None</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Spark Scheduler模块源码分析之DAGScheduler: <a href="http://blog.csdn.net/dabokele/article/details/51902617" target="_blank" rel="noopener">http://blog.csdn.net/dabokele/article/details/51902617</a></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/09/19/scala-implicit/" data-toggle="tooltip" data-placement="top" title="scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#scala" title="scala">scala</a>
+                        
+                          <a class="tag" href="/tags/#bigdata" title="bigdata">bigdata</a>
+                        
+                          <a class="tag" href="/tags/#spark" title="spark">spark</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://www.tiaotiaolong.net/" target="_blank">tiaotiaolong</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "pzque-blog";
+    var disqus_identifier = "https://pzque.github.io/2017/12/20/Sparkj job执行流程/";
+    var disqus_url = "https://pzque.github.io/2017/12/20/Sparkj job执行流程/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+</body>
+
+</html>
