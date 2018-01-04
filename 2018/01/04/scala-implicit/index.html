@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -155,40 +155,29 @@
 <!-- Post Header -->
 <style type="text/css">
     header.intro-header{
-        /*background-image: url('{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}')*/
-        height: 500px;
-        overflow: hidden;
-    }
-    header iframe{
-        width: 100%;
-        height: 100%;
-        border: 0;
+        background-image: url('/img/home-bg.jpg')
     }
 </style>
 <header class="intro-header" >
-    <iframe src="undefined"/>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                    <div class="post-heading">
-                        <div class="tags">
-                            
-                              <a class="tag" href="/tags/scala/" title="scala">scala</a>
-                            
-                        </div>
-
-                        <h1>scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)</h1>
-                        <h2 class="subheading">undefined</h2>
-                        <span class="meta">
-                            Posted by pzque on
-                            2018-01-04
-                        </span>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#scala" title="scala">scala</a>
                         
                     </div>
+                    <h1>scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by pzque on
+                        2018-01-04
+                    </span>
                 </div>
             </div>
         </div>
-    </iframe>
+    </div>
 </header>
 
 <!-- Post Content -->
@@ -202,7 +191,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1 id="scala-implicit关键字详解-隐式转换函数、隐式类、隐式参数、隐式值"><a href="#scala-implicit关键字详解-隐式转换函数、隐式类、隐式参数、隐式值" class="headerlink" title="scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)"></a>scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)</h1><h2 id="一、Overview"><a href="#一、Overview" class="headerlink" title="一、Overview"></a>一、Overview</h2><p><code>implicit</code>是scala中的一个关键字，关于它有着丰富的用法，使得scala更灵活和容易扩展。截止目前，scala已经来到了2.12.3版本，本篇文章把目前scala支持的<code>implicit</code>用法作了较为全面的整理，以方便在阅读scala源码的时候稍作参考。文中全部的代码和测试结果均以scala2.12.3为准。</p>
+                <h2 id="一、Overview"><a href="#一、Overview" class="headerlink" title="一、Overview"></a>一、Overview</h2><p><code>implicit</code>是scala中的一个关键字，关于它有着丰富的用法，使得scala更灵活和容易扩展。截止目前，scala已经来到了2.12.3版本，本篇文章把目前scala支持的<code>implicit</code>用法作了较为全面的整理，以方便在阅读scala源码的时候稍作参考。文中全部的代码和测试结果均以scala2.12.3为准。</p>
 <p>闲话不多讲，目前可以见到的<code>implict</code>用法有如下几种：</p>
 <ol>
 <li><p>隐式转换函数</p>
@@ -310,7 +299,7 @@
                     
                     
                         <li class="next">
-                            <a href="/" data-toggle="tooltip" data-placement="top" title="11、初步使用roswtf">Next Post &rarr;</a>
+                            <a href="/2016/04/19/11、初步使用roswtf/" data-toggle="tooltip" data-placement="top" title="11、初步使用roswtf">Next Post &rarr;</a>
                         </li>
                     
                 </ul>
@@ -326,6 +315,22 @@
                 
 
             </div>
+    <!-- Side Catalog Container -->
+        
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+        
 
     <!-- Sidebar Container -->
 
@@ -340,7 +345,9 @@
                     <!-- no hr -->
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
-                        <a class="tag-link" href="/tags/IDF实验室/">IDF实验室</a><a class="tag-link" href="/tags/c/">c++</a><a class="tag-link" href="/tags/ctf/">ctf</a><a class="tag-link" href="/tags/emacs/">emacs</a><a class="tag-link" href="/tags/ros/">ros</a><a class="tag-link" href="/tags/scala/">scala</a><a class="tag-link" href="/tags/spacemacs/">spacemacs</a>
+                       
+                          <a class="tag" href="/tags/#scala" title="scala">scala</a>
+                        
                     </div>
                 </section>
                 
@@ -352,9 +359,9 @@
                 <ul class="list-inline">
 
                     
-                        <li><a href="http://www.tiaotiaolong.net/">tiaotiaolong</a></li>
+                        <li><a href="http://www.tiaotiaolong.net/" target="_blank">tiaotiaolong</a></li>
                     
-                        <li><a href="#">It helps SEO</a></li>
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
                     
                 </ul>
                 
@@ -590,6 +597,50 @@
 
 
 <!-- Side Catalog -->
+
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;    
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
 
 
 
