@@ -192,7 +192,10 @@
             
         </h3>
         <div class="post-content-preview">
-            调用链1234567891011121314151617181920212223package org.apache.spark.examplesimport org.apache.spark.&#123;SparkConf, SparkContext&#125;object SparkTestTrace &#123;  def main(args: Array[String]) &#123......
+            最近讨论spark，发现我对spark的了解仅限于原理层面，对stage划分、job执行的细节理解不够充分。
+所以就翻开spark2.2.0的源码，梳理一下一个任务从提交到执行的流程。
+以经典的wordcount代码为例：
+1234567891011121314151617181920212223package org.apache.spark.examplesimport org.apac......
         </div>
     </a>
     <p class="post-meta">
@@ -277,31 +280,6 @@
 
 <div class="post-preview">
 
-    <a href="/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/">
-        <h2 class="post-title">
-            8、ROS使用C++编写一个简单的Publisher和Subscriber
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、Publisher节点“节点” 是一个连接着ROS框架的可执行文件，这里我们用C++写一个publisher节点 (命名为”talker”) ，不断地发布一条信息。
-首先进入包目录的src文件夹：
-12roscd beginner_tutorialscd src
-然后创建一个名为&#39;talker.cpp&#39;的文件，内容为：
-12345678910111213141516171......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by  on
-        2016-04-19
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2016/04/19/9、ROS使用C++编写一个简单的Service和Client/">
         <h2 class="post-title">
             9、ROS使用C++编写一个简单的Service和Client
@@ -317,6 +295,31 @@
 
 如果没有满足以上条件的话，请重新阅读本系列的第7、8篇文章。
 一、Service节点在包内的src下创建add_two_ints_server.cpp，粘贴以下内容：123456789101112......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by  on
+        2016-04-19
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/">
+        <h2 class="post-title">
+            8、ROS使用C++编写一个简单的Publisher和Subscriber
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、Publisher节点“节点” 是一个连接着ROS框架的可执行文件，这里我们用C++写一个publisher节点 (命名为”talker”) ，不断地发布一条信息。
+首先进入包目录的src文件夹：
+12roscd beginner_tutorialscd src
+然后创建一个名为&#39;talker.cpp&#39;的文件，内容为：
+12345678910111213141516171......
         </div>
     </a>
     <p class="post-meta">
