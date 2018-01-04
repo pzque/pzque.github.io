@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -181,6 +181,28 @@
             
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/04/14/5、理解ros服务/">
+        <h2 class="post-title">
+            5、理解ros服务
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、ros服务ros服务（service）是节点间交流的另外一种方式，服务类似于web中的服务端与客户端的概念，节点类似一个客户端，可以发出一个请求（request），然后接受一个响应（response）。
+二、使用rosservice命令此命令的用法如下：12345rosservice list         print information about active services......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by  on
+        2016-04-14
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -282,45 +304,23 @@ catkin_ws的目录结构如下：123├── build├── devel└── src
 
 <div class="post-preview">
 
-    <a href="/2015/05/05/IDF实验室-伟人的名字/">
+    <a href="/2015/05/05/IDF实验室-图片里的英语/">
         <h2 class="post-title">
-            IDF实验室-伟人的名字
+            IDF实验室-图片里的英语
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            一、原题[原题链接]从前有个很厉害的人物演讲了一堆很厉害的东西，可是我读书少，认识人不多，你知道这个人叫啥不。。
-答案格式wctf{名字}  
-友情提示1、外国人，只要名字就可以了，就别要姓了，首字母大写。 
-友情提示2、说过我读书少，外国人的名字和姓我是分不清的，反正答案就是大家最常叫的那个。。
-以下就是这个人讲话的节选：
-
-EB BMQF KYJRD, IM ICHZZZ YWELXAB......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by  on
-        2015-05-05
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2015/05/05/IDF实验室-简单的js解密/">
-        <h2 class="post-title">
-            IDF实验室-简单的js解密
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            原题：[简单的js解密]
-
-
-writeup：直接看代码，页面内有一段script：12345678910111213141516171819202122232425262728293031323334353637383940/** * Pseudo md5 hash function * @param &#123;string&#125; string * @param &#123;str......
+            原题：一恒河沙中有三千世界，一张图里也可以有很多东西。
+不多说了，答案是这个图片包含的那句英文的所有单词的首字母。
+首字母中的首字母要大写，答案格式是wctf{一坨首字母}
+加油吧少年！看好你哦~
+writeup：又是图片题，话不多说
+1.图片查看器打开亮度饱和度曝光各种调，无果。
+2.二进制打开用vim打开：
+1vim -b problem.png
+在vim调整为16进制显示：1:%!xx......
         </div>
     </a>
     <p class="post-meta">
@@ -491,13 +491,19 @@ PS：flag写错了，太麻烦也懒得改了，格式还是wctf{…}，大家�
                             
                         
                             
+                            <a href="/tags/#scala" title="scala" rel="2">scala</a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
                             <a href="/tags/#emacs" title="emacs" rel="2">emacs</a>
                             
                         
                             
                             <a href="/tags/#spacemacs" title="spacemacs" rel="2">spacemacs</a>
-                            
-                        
                             
                         
                     </div>
