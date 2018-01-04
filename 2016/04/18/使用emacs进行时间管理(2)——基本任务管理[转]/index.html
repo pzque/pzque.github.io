@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          使用emacs进行时间管理(2)——基本任务管理[转] - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2016/04/18/使用emacs进行时间管理(2)——基本任务管理[转]/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#emacs" title="emacs">emacs</a>
+                        
+                          <a class="tag" href="/tags/#spacemacs" title="spacemacs">spacemacs</a>
+                        
+                    </div>
+                    <h1>使用emacs进行时间管理(2)——基本任务管理[转]</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2016-04-18
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>原文链接：<a href="http://www.cnblogs.com/holbrook/archive/2012/04/14/2447754.html" target="_blank" rel="noopener">Org-mode,最强的任务管理利器，没有之一</a></p>
+<h1 id="一、任务和子任务"><a href="#一、任务和子任务" class="headerlink" title="一、任务和子任务"></a>一、任务和子任务</h1><p>Org-mode认为，每一个任务通常会需要附带一些文字说明。所以Org-mode将标题作为任务的载体。通过在标题上增加状态标记，来定义任务。 由于大纲是分级的，所以将标题定义为任务天然支持了子任务：可以在子标题上标记子任务。</p>
+<p>使用<code>C-c C-t</code>或者<code>S-LEFT/RIGTH</code>可以为标题增加或改变任务标记。</p>
+<h1 id="二、定义任务状态"><a href="#二、定义任务状态" class="headerlink" title="二、定义任务状态"></a>二、定义任务状态</h1><p>Org-mode内置的任务状态只有两种：TODO和DONE。如果需要更多的状态，需要自己定义。</p>
+<p>可以在文件内部定义任务状态： 关键字应该各不相同，这样对于一个选项 Org 才知道该用哪个状态序列（集合）。例子中也给出了快速使用一个关键字的方法，就是在关键字后面括号中给出快捷字母——当用 C-c C-t时，会询问，让你输入一个字母。</p>
+<p>要自定义任务状态，可以使用文档元数据“# +SEQTODO：”，可以在文档的任何地方定义，但是建议统一定义在文档头部：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># +<span class="selector-tag">SEQ_TODO</span>: <span class="selector-tag">REPORT</span>(r) <span class="selector-tag">BUG</span>(b) <span class="selector-tag">KNOWNCAUSE</span>(k) | <span class="selector-tag">FIXED</span>(f) </span><br><span class="line"># +<span class="selector-tag">SEQ_TODO</span>: <span class="selector-tag">TODO</span>(T!) | <span class="selector-tag">DONE</span>(D@)  <span class="selector-tag">CANCELED</span>(C@/!)</span><br></pre></td></tr></table></figure>
+<p>要注意的是<code>#</code>的后面不要有空格。</p>
+<p>将光标放在这些内容上，输入 C-c C-c 可以直接生效。此时再用C-c C-t设定任务时，会打开一个新的缓冲区：</p>
+<p>  <img src="http://img.blog.csdn.net/20160418200630238" alt="这里写图片描述"></p>
+<p>对照前面的定义不难发现：</p>
+<ol>
+<li>可以定义多组状态序列，每个“# +SEQ_TODO”行定义一组<br>状态之间用空格分隔  </li>
+<li>可以在（）中定义附加选项，包括：  <ul>
+<li>字符：该状态的快捷键  </li>
+<li>！：切换到该状态时会自动增加时间戳  </li>
+<li>@ ：切换到该状态时要求输入文字说明  </li>
+<li>如果同时设定@和！，使用“@/!”  </li>
+</ul>
+</li>
+<li>用“|”分隔未完成状态和已完成状态。未完成状态在查询待办事项时会列出。</li>
+</ol>
+<p>使用C-c C-t 或者 S-LEFT/RIGTH 切换一些状态后，任务会变成这个样子：<br><img src="http://img.blog.csdn.net/20160418201042618" alt="这里写图片描述"></p>
+<p>会自动生成时间戳，提示填写说明。从而留下完整的记录。</p>
+<p>上面的任务状态设置只适用于当前文档。如果希望设定所有.org文档的默认任务状态，需要在.emacs配置文件中定义。 上面的任务状态在配置文件中的等效设置为：</p>
+<figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> org-todo-keywords</span><br><span class="line">    '((<span class="name"><span class="builtin-name">sequence</span></span> <span class="string">"REPORT(r)"</span> <span class="string">"BUG(b)"</span> <span class="string">"KNOWNCAUSE(k)"</span> <span class="string">"|"</span> <span class="string">"FIXED(f)"</span>)</span><br><span class="line">      (<span class="name"><span class="builtin-name">sequence</span></span> <span class="string">"TODO(T!)"</span> <span class="string">"|"</span> <span class="string">"DONE(D@)"</span> <span class="string">"CANCELED(C@/!)"</span>)</span><br><span class="line">     ))</span><br></pre></td></tr></table></figure>
+<p>除了状态序列外，还可以定义type，来标记任务的分类。可以参考这里 。</p>
+<h1 id="三、设置任务优先级"><a href="#三、设置任务优先级" class="headerlink" title="三、设置任务优先级"></a>三、设置任务优先级</h1><p>在Org-mode中，还针对任务设定了A，B，C三种优先级，在安排日程的时候可以按照优先级进行排序。为任务设定优先级是通过 快捷键 S-UP/DOWN。</p>
+<h1 id="四、跟踪子任务完成情况"><a href="#四、跟踪子任务完成情况" class="headerlink" title="四、跟踪子任务完成情况"></a>四、跟踪子任务完成情况</h1><p>对于有多个子任务的上级任务，很常见的一个需求是随时跟踪子任务的完成情况。 Org-mode支持在上级任务上增加标记，当子任务的状态发生改变时自动更新上级任务的完成情况。 支持百分比和分数两种形式，类似[66%] 或者 [2/3]。</p>
+<p>可以在上级任务标题中的任意位置插入[%] 或者 [/], 当子任务的状态发生变化时，会自动更新该位置的值。 比如：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>Organize Party [%]</span><br><span class="line"><span class="bullet">** </span>Call people [/]</span><br><span class="line"><span class="bullet">*** </span>Peter</span><br><span class="line"><span class="bullet">*** </span>Sarah</span><br><span class="line"><span class="bullet">** </span>Buy food</span><br><span class="line"><span class="bullet">** </span>Talk to neighbor</span><br></pre></td></tr></table></figure>
+<p>注意：</p>
+<p>当改变子任务状态时，只更新上一级任务的完成情况，不可级联。</p>
+<p>即使所有的子任务都完成，也只是标记上一级任务的完成情况为100%，而不能自动更新上级任务的完成状态。如果需要自动设定为完成，可以在.emacs中增加如下配置：</p>
+<figure class="highlight scheme"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">defun</span> org-summary-todo (<span class="name">n-done</span> n-not-done)</span><br><span class="line">    <span class="string">"Switch entry to DONE when all subentries are done, to TODO otherwise."</span></span><br><span class="line">    (<span class="name"><span class="builtin-name">let</span></span> (<span class="name">org-log-done</span> org-log-states)   <span class="comment">; turn off logging</span></span><br><span class="line">      (<span class="name">org-todo</span> (<span class="name"><span class="builtin-name">if</span></span> (<span class="name"><span class="builtin-name">=</span></span> n-not-done <span class="number">0</span>) <span class="string">"DONE"</span> <span class="string">"TODO"</span>))))</span><br><span class="line">  </span><br><span class="line">  (<span class="name">add-hook</span> <span class="symbol">'org-after-todo-statistics-hook</span> <span class="symbol">'org-summary-todo</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="五、用复选框标记非标题类型的子任务"><a href="#五、用复选框标记非标题类型的子任务" class="headerlink" title="五、用复选框标记非标题类型的子任务"></a>五、用复选框标记非标题类型的子任务</h1><p>前面的任务和子任务都是标题形式。Org-mode还支持非标题形式的子任务。对于以”[ ]“开头的列表， 会被当作复选框。这样就形成了局部的子任务， 适用于将一个任务划分成几个简单的步骤。 下面是一个例子：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">*** 一个任务 <span class="selector-attr">[0/2]</span></span><br><span class="line">该任务包含几个步骤：</span><br><span class="line"><span class="selector-tag">-</span> <span class="selector-attr">[-]</span> 步骤1 <span class="selector-attr">[1/2]</span></span><br><span class="line">  <span class="selector-tag">-</span> <span class="selector-attr">[X]</span> 步骤1<span class="selector-class">.1</span></span><br><span class="line">  <span class="selector-tag">-</span> <span class="selector-attr">[ ]</span> 步骤1<span class="selector-class">.2</span></span><br><span class="line"><span class="selector-tag">-</span> <span class="selector-attr">[-]</span> 步骤2 <span class="selector-attr">[1/2]</span></span><br><span class="line">  <span class="selector-tag">-</span> <span class="selector-attr">[X]</span> 步骤2<span class="selector-class">.1</span></span><br><span class="line">  <span class="selector-tag">-</span> <span class="selector-attr">[ ]</span> 步骤2<span class="selector-class">.2</span></span><br></pre></td></tr></table></figure>
+<p>与子任务类似，步骤的状态变化会改变上级步骤/任务的完成情况。 下面是复选框相关的命令：</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-c C-c</td>
+<td>改变复选框状态</td>
+</tr>
+<tr>
+<td>M-S-RET</td>
+<td>增加一个子项</td>
+</tr>
+</tbody>
+</table>
+<h1 id="六、查询任务"><a href="#六、查询任务" class="headerlink" title="六、查询任务"></a>六、查询任务</h1><p>在Org-mode的编辑功能 中介绍过大纲的检索功能：</p>
+<p>前面 <code>C-c /</code>只列出包含搜索结果的大纲，并高亮，支持多种搜索方式。</p>
+<p>该功能可以按照多种方式检索，其中针对任务有两种方式： todo 和 TODO key words。 分别实现高亮所有TODO和具有特定关键字的TODO。</p>
+<h1 id="七、任务的时间计划"><a href="#七、任务的时间计划" class="headerlink" title="七、任务的时间计划"></a>七、任务的时间计划</h1><p>Org-mode中的任务还可以设置计划时间（SCHEDULED）和截止时间（DEADLINE），方便任务的管理和排程。</p>
+<h2 id="1、时间戳"><a href="#1、时间戳" class="headerlink" title="1、时间戳"></a>1、时间戳</h2><p>在Org-mode中，将带有日期和时间信息的特定格式的字符串称为时间戳。时间戳使用”&lt; &gt;“进行标记，比如：</p>
+<p><2005-10-01 tue=""></2005-10-01></p>
+<p><2003-09-16 tue="" 09:39=""></2003-09-16></p>
+<2003-09-16 tue="" 12:00-12:30="">
+
+<p>时间戳分为两种，上面的例子中的时间戳都标记了一个”时间点“，另外一种时间戳标记重复出现的多个时间点。 使用时间点+ 间隔（ 天（d）、周（w）、月（m）或者年（y））来表示。比如：</p>
+ <2007-05-16 wed="" 12:30="" +1w="">
+
+<p>表示从2007-05-16 12:30开始，每周重复一次。</p>
+<p>时间戳可以放在标题或正文的任何部分。</p>
+<p>输入时间戳时，可以手工输入符合格式的标记，也可以使用快捷键 <code>C-c .</code> 来创建。</p>
+<p>如果要快速输入日期无需选择，可以直接用C-cC-c &gt; 看日历。</p>
+<p>如果仅仅想输入一个日期/时间，与任务没有任何关系，可以用C-c !。</p>
+<p><code>S-left|S-right</code> 以天为单位调整时间戳时间 <code>S-up|S-down</code> 调整光标所在时间单位；如果光标在时间戳之外，调整时间戳类型（是否在日程表中 S-LEFT/标处理的时间戳改变一天。 <code>RIGHT  S-UP/</code> 改变时间戳中光标下的项。光标可以处在年、月、日、时或者分之上。当时间戳包含一个时间段时，如 “15:30-16:30”，修改第一个时间，会自动同时修改第 DOWN 二个时间，以保持时间段长度不变。想修改时间段长度，可以修改第二个时间。 </p>
+<h3 id="时间-日期段"><a href="#时间-日期段" class="headerlink" title="时间/日期段"></a>时间/日期段</h3><p>两个时间戳用‘–’连接起来就定义了一个时间段：</p>
+<p><code>&lt;2004-08-23 Mon&gt;--&lt;2004-08-26 Thu&gt;</code></p>
+<p>连续使用<code>C-c .</code> 可以创建时间段。</p>
+<p><code>C-c C-y</code> 计算时间段的间隔。</p>
+<h1 id="2、计划时间和截止时间"><a href="#2、计划时间和截止时间" class="headerlink" title="2、计划时间和截止时间"></a>2、计划时间和截止时间</h1><p>Org-mode可以为任务设定一个计划时间(SCHEDULED), 输入 <code>C-c C-s</code>，就可以设定光标所在位置所属的任务的计划时间。 而 <code>C-c C-d</code>是输入截止时间（DEADLINE）。</p>
+<h1 id="八、全局任务文件清单"><a href="#八、全局任务文件清单" class="headerlink" title="八、全局任务文件清单"></a>八、全局任务文件清单</h1><p>前面的内容都是关于单个.org文件的任务管理。Org-mode还支持将多个.org文件组合起来进行管理。这带来很多好处：</p>
+<p>你可以按照不同的用途将任务放在不同的文件中进行组织，比如项目，个人事务，家庭等等。</p>
+<p>要让Org-mode知道需要把哪些文件视为全局任务的组成部分，需要设定一个清单，可以在.emacs中这样设置：<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> org-agenda-files (<span class="name"><span class="builtin-name">list</span></span> <span class="string">"~/.todos/work.org"</span></span><br><span class="line">                             <span class="string">"~/.todos/projects.org"</span></span><br><span class="line">                             <span class="string">"~/.todos/home.org"</span></span><br><span class="line">                             <span class="string">"~/Documents/todo/"</span></span><br><span class="line">                           ))</span><br></pre></td></tr></table></figure></p>
+<p>清单中可以加入文件或目录。如果是目录，该目录下的所有.org文件都会被加入清单。</p>
+<p>除了预定义的清单文件，还可以在编辑任务文件(.org)时随时使用<code>C-c [</code> 将文件加入清单，或<code>C-c ]</code> 将文件移出清单。</p>
+<p>可以随时通过C-c ‘/, 循环打开所有的清单文件。</p>
+<h1 id="九、全局-TODO-列表"><a href="#九、全局-TODO-列表" class="headerlink" title="九、全局 TODO 列表"></a>九、全局 TODO 列表</h1><p>全局TODO列表列出所有全局任务文件中的未完成任务。通过快捷键 C-c a t 进入全局 TODO 列表。</p>
+<p>在全局TODO列表中，用 <code>t</code> 键改变任务状态，按 <code>RET</code> 跳到该条目所在的源文件。</p>
+<p>如果提示<code>C-c a</code>快捷键未定义，是因为Org-mode的快捷键没有启用，需要在.emacs中增加配置：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">global</span>-<span class="keyword">set</span>-<span class="keyword">key</span> <span class="string">"\C-cl"</span> <span class="comment">'org-store-link)</span></span><br><span class="line">(<span class="keyword">global</span>-<span class="keyword">set</span>-<span class="keyword">key</span> <span class="string">"\C-cc"</span> <span class="comment">'org-capture)</span></span><br><span class="line">(<span class="keyword">global</span>-<span class="keyword">set</span>-<span class="keyword">key</span> <span class="string">"\C-ca"</span> <span class="comment">'org-agenda)</span></span><br><span class="line">(<span class="keyword">global</span>-<span class="keyword">set</span>-<span class="keyword">key</span> <span class="string">"\C-cb"</span> <span class="comment">'org-iswitchb)</span></span><br></pre></td></tr></table></figure>
+<h1 id="十、日程表"><a href="#十、日程表" class="headerlink" title="十、日程表"></a>十、日程表</h1><p>有时候可能需要根据未完成任务显示日程安排，通过 C-c a a 可以进入日程表视图。 日程表根据任务的计划时间列出每天的任务。</p>
+<p>在日程表视图中按 “l”(小写字母L) 显示日志。这样就会显示你所有已经完成的任务和它们完成的时间。</p>
+</2007-05-16></2003-09-16>
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/19/7、创建ROS msg和srv/" data-toggle="tooltip" data-placement="top" title="7、创建ROS msg和srv">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/17/使用emacs进行时间管理(1)——org-mode基本操作/" data-toggle="tooltip" data-placement="top" title="使用emacs进行时间管理(1)——org-mode基本操作">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#emacs" title="emacs">emacs</a>
+                        
+                          <a class="tag" href="/tags/#spacemacs" title="spacemacs">spacemacs</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2016/04/18/使用emacs进行时间管理(2)——基本任务管理[转]/";
+    var disqus_url = "https://pzque.github.io/2016/04/18/使用emacs进行时间管理(2)——基本任务管理[转]/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

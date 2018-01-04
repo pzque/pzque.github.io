@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          IDF实验室-谁是卧底 - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2015/05/05/IDF实验室-谁是卧底/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                    <h1>IDF实验室-谁是卧底</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2015-05-05
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="一、原题"><a href="#一、原题" class="headerlink" title="一、原题"></a><strong>一、原题</strong></h1><p><a href="http://ctf.idf.cn/index.php?g=game&amp;m=article&amp;a=index&amp;id=49" target="_blank" rel="noopener">[原题链接]</a><br>武林中某知名杀手在一次任务中失败，然后逃窜到了人群中，当时那个社会并没有我们现在这么发达，满地都是文盲，而这些文盲甚至连一句完整的英文都说不出来，所以其实只要用心去发现，就会很容易发现这个稍微有些文化的杀手是谁哦~答案wctf{杀手的英文名}</p>
+<p>人群→ <a href="http://pan.baidu.com/s/1bnq6nmR" target="_blank" rel="noopener">http://pan.baidu.com/s/1bnq6nmR</a></p>
+<p>密码: 988u</p>
+<hr>
+
+<h1 id="二、writeup"><a href="#二、writeup" class="headerlink" title="二、writeup"></a><strong>二、writeup</strong></h1><h2 id="1、初步分析"><a href="#1、初步分析" class="headerlink" title="1、初步分析"></a><strong>1、初步分析</strong></h2><p>下载文件，得到<code>whoiswoldy.txt</code>，<code>5.6MB</code>大小，用<code>wc</code>命令统计一下：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wc whoiswoldy.txt</span><br><span class="line">输出为：</span><br><span class="line"><span class="number">0</span>       <span class="number">1</span> <span class="number">5586640</span> whoiswoldy.txt</span><br></pre></td></tr></table></figure>
+<p>0行，1个词，55586640个字符，也就说文件里只有一个大字符串，字符数是千万级。<br>和小伙伴商量解体思路，观察到文件名有<code>woldy</code>这个词，首先找一下它吧。<br><code>vim</code>打开之，<code>/woldy</code>之，找是找到了，无奈文件太大，这个词出现过几十次，而且上下文里没有一个完整的单词，全是乱序字母。搜<code>flag</code>结果一样。<br>继续观察文件，发现文件里零零落落地分散着许多单词，但周围全是无序字母，不成句子。然后小伙伴做了常用词的词频统计：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">not:   <span class="number">497</span></span><br><span class="line">kill:  <span class="number">184</span></span><br><span class="line">iam:   <span class="number">292</span></span><br><span class="line">whois: <span class="number">1</span></span><br><span class="line">you:   <span class="number">415</span></span><br><span class="line">name:  <span class="number">68</span></span><br><span class="line">my:    <span class="number">7510</span></span><br><span class="line">woldy: <span class="number">50</span></span><br><span class="line">we:    <span class="number">9841</span></span><br><span class="line">are:   <span class="number">1855</span></span><br></pre></td></tr></table></figure>
+<p>结合题目——<code>而这些文盲甚至连一句完整的英文都说不出来</code><br>懂了：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">这是一个由英文单词和随机字母拼合而成的文件</span><br><span class="line">文件中应该存在完整的英文句子，<span class="built_in">flag</span>就在那儿</span><br></pre></td></tr></table></figure>
+<p>接下来需要在文件中寻找整句的英文。</p>
+<h2 id="2、编写程序"><a href="#2、编写程序" class="headerlink" title="2、编写程序"></a><strong>2、编写程序</strong></h2><p>用肉眼在<code>5000多万</code>字符里找一句话无疑是大海捞针，需要编程解决，接下来要考虑编程的思路了。<br>一个直接的想法是：</p>
+<blockquote>
+<p>句子由单词组成，只要能够找到文件里所有的单词，其中<strong>单词密度最大</strong>的地方就是完整英文句子所在的地方。</p>
+</blockquote>
+<p>于是问题分为两步：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>）统计汇总文件中所有单词的位置（单词首字母在字符串中的位置）</span><br><span class="line"><span class="number">2</span>）找到单词分布最为密集的位置</span><br></pre></td></tr></table></figure>
+<p>首先第一步，需要找一个<code>txt</code>格式的字典文件，英文常用3000词应该足够，每行一个单词，文件名为<code>words.txt</code>，然后跑程序记录每个单词出现过的位置就可以了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义寻找字串位置的函数</span></span><br><span class="line"><span class="comment"># subString:子串</span></span><br><span class="line"><span class="comment"># fullString:完整字符串</span></span><br><span class="line"><span class="comment"># indexs:字串出现的所有位置</span></span><br><span class="line"><span class="comment"># 即接受子串和完整字符串，返回子串在完整字符串里出现的所有位置</span></span><br><span class="line"><span class="comment"># 例如findSubStr('hi','hiworldhiworld')得到[0,7]</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">findSubStr</span><span class="params">(subString,fullString)</span>:</span></span><br><span class="line">    indexs = []</span><br><span class="line">    fullLength = len(fullString)</span><br><span class="line">    subLength = len(subString)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(fullLength-subLength):</span><br><span class="line">        <span class="keyword">if</span> fullString[i:i+subLength] == subString:</span><br><span class="line">            indexs.append(i)</span><br><span class="line">    <span class="keyword">return</span> indexs</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 读取题目文件内的字符串</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'whoiswoldy.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read()</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 逐行读取字典words.txt内的单词，寻找其在s内的所有位置</span></span><br><span class="line"><span class="comment"># places为单词出现过的所有位置</span></span><br><span class="line">places = []</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'words.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f: </span><br><span class="line">    <span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">        line = f.readline()</span><br><span class="line">        line=line.strip(<span class="string">'\n'</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        places += findSubStr(line,s)</span><br><span class="line"><span class="comment"># 用pickle库将得到的位置数组places保存到result.txt中</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'result.txt'</span>,<span class="string">'w'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(places,r)</span><br></pre></td></tr></table></figure>
+<p>运行此段程序，即可得到单词的位置统计，是一个<code>list</code>，每一项为一整数，即出现过单词的位置，保存在<code>result.txt</code>中。<br>上一段程序存在性能问题，直接用<code>python</code>运行的时间目测要上小时，不想费时间优化，改用<code>PyPy</code>解释器，2分钟跑完。由此发现对于纯<code>python</code>代码，尤其是循环较多的情况下，<code>PyPy</code>比<code>CPython</code>真的要快上好多倍。<br>然后第二步，统计单词密度。<br>由第一步得到的位置数据，每个位置附近出现单词数的多少即可反映单词的密度。比如假设得到的位置数据是这样的：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">1</span>,<span class="number">8</span>,<span class="number">13</span>,<span class="number">15</span>,<span class="number">20</span>,<span class="number">25</span>,<span class="number">28</span>,<span class="number">100</span>,<span class="number">220</span>,<span class="number">33000.</span>..]</span><br></pre></td></tr></table></figure>
+<p>显然在<code>1～28</code>单词分布密集，极有可能这里就是一句话。<br>一句话的长度大概几十词左右，长一点的会上百，简单的取<code>100</code>这个参数，统计<code>[position,position+100]</code>这一范围内出现了多少个单词。<br>比如对于上一个列表，对于位置<code>&#39;1&#39;</code>，在<code>[1,101]</code>范围内，有<code>1,8,13,15,20,25,28,100</code>共8个位置出现过单词，即1往后100的范围内有8个单词。所以对<code>1</code>这个位置的密度记为<code>8</code>。同理位置<code>8</code>的密度记为<code>7</code>。<br>而对于<code>100</code>这个位置，在<code>[100,201]</code>范围内除了<code>100</code>本身没有其他位置出现过单词。因此对于位置<code>100</code>的密度记为1。<br>需要注意的是进行统计之前首先要对位置数据进行去重复处理。<br>第二步程序：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 读取题目字符串</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'whoiswoldy.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read()</span><br><span class="line"><span class="comment"># 加载前一步得到的位置数据</span></span><br><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'result.txt'</span>,<span class="string">'r'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    b = pickle.load(f)</span><br><span class="line"><span class="comment"># 将位置数据b，一个list转化为集合set，即可实现去重复处理</span></span><br><span class="line"><span class="comment"># 同时查找元素的时间由list的O(n)变为set的O(1)，因为set是hashable的</span></span><br><span class="line">setb = set(b)</span><br><span class="line"></span><br><span class="line"><span class="comment"># den为密度统计，每个元素的形式为(int位置，int密度)</span></span><br><span class="line">den = []</span><br><span class="line"><span class="keyword">for</span> number <span class="keyword">in</span> setb:</span><br><span class="line">    k = <span class="number">1</span> </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(number,number+<span class="number">100</span>):</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> setb:</span><br><span class="line">            k += <span class="number">1</span></span><br><span class="line">    den.append((number,k))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 根据密度进行排序</span></span><br><span class="line">sortedDen = sorted(den,key=<span class="keyword">lambda</span> x:x[<span class="number">1</span>],reverse=<span class="keyword">True</span>)</span><br><span class="line"><span class="comment"># 输出密度排名前10的位置</span></span><br><span class="line"><span class="keyword">print</span> sortedDen[<span class="number">0</span>:<span class="number">10</span>]</span><br><span class="line">index = sortedDen[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"><span class="keyword">print</span> s[index:index+<span class="number">150</span>]</span><br></pre></td></tr></table></figure>
+<p>其中<code>print sortedDen[0:10]</code>的输出为</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line"> (<span class="number">3197571</span>, <span class="number">34</span>), (<span class="number">3197573</span>, <span class="number">33</span>), (<span class="number">3197581</span>, <span class="number">32</span>), </span><br><span class="line"> (<span class="number">3197583</span>, <span class="number">31</span>), (<span class="number">3197586</span>, <span class="number">31</span>), (<span class="number">3197600</span>, <span class="number">31</span>),</span><br><span class="line"> (<span class="number">4738813</span>, <span class="number">31</span>), (<span class="number">4738831</span>, <span class="number">31</span>), (<span class="number">3197603</span>, <span class="number">30</span>),</span><br><span class="line"> (<span class="number">3197618</span>, <span class="number">30</span>)</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+<p>几乎可以肯定<code>319757x～31976xx</code>存在完整句子了。<br><code>index = sortedDen[0][0] = 3197571</code><br><code>print s[index:index+150]</code>将<code>3197571</code>及其往后150个字符打印出来，结果为</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">ananjpywlqclassifyubcjesqtqyjhazbornndomhfchvlc</span><span class="params">(手打分隔线)</span></span>--whatwillyouseeifyouthrowthebutteroutthewindow--(手打分隔线)wzqmtwmyjutipvqetrsshyosypzydevelopponaxoezspdespairkuoqig</span><br></pre></td></tr></table></figure>
+<p>nice，看到了这么一句<br><code>what will you see if you throw the butter out the window</code><br>用眼睛看就知道这是个谜语，搜之，谜底</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">butterfly</span></span><br></pre></td></tr></table></figure>
+<hr>
+
+<h1 id="三、flag"><a href="#三、flag" class="headerlink" title="三、flag"></a><strong>三、flag</strong></h1><figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">wctf</span><span class="template-variable">&#123;butterfly&#125;</span><span class="xml"></span></span><br></pre></td></tr></table></figure>
+<hr>
+
+<h1 id="四、知识点"><a href="#四、知识点" class="headerlink" title="四、知识点"></a><strong>四、知识点</strong></h1><p><code>pypy神器</code></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2015/05/05/IDF实验室-伟人的名字/" data-toggle="tooltip" data-placement="top" title="IDF实验室-伟人的名字">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2015/05/05/IDF实验室-部分简单题目writeup/" data-toggle="tooltip" data-placement="top" title="IDF实验室-部分简单题目writeup">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2015/05/05/IDF实验室-谁是卧底/";
+    var disqus_url = "https://pzque.github.io/2015/05/05/IDF实验室-谁是卧底/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

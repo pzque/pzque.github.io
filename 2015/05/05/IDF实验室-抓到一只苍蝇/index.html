@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          IDF实验室-抓到一只苍蝇 - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2015/05/05/IDF实验室-抓到一只苍蝇/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                    <h1>IDF实验室-抓到一只苍蝇</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2015-05-05
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>感觉这道题对我已经有难度了</p>
+<h1 id="一、原题"><a href="#一、原题" class="headerlink" title="一、原题"></a><strong>一、原题</strong></h1><p>报告首长！发现一只苍蝇。。</p>
+<p>在哪？</p>
+<p>here!</p>
+<p>卧槽？！好大一坨苍蝇。。</p>
+<p>文件地址： <a href="http://pan.baidu.com/s/1bnGWbqJ" target="_blank" rel="noopener">http://pan.baidu.com/s/1bnGWbqJ</a></p>
+<p>提取码：oe6w</p>
+<p>PS：flag写错了，太麻烦也懒得改了，格式还是wctf{…}，大家明白就好，不要在意这些细节。。</p>
+<hr>
+
+<h1 id="二、writeup"><a href="#二、writeup" class="headerlink" title="二、writeup"></a><strong>二、writeup</strong></h1><p>首先下载所给的文件misc_fly.pcapng，是一个抓包软件抓取的数据包，解题流程如下：</p>
+<h2 id="1-用wireshark分析数据包"><a href="#1-用wireshark分析数据包" class="headerlink" title="1.用wireshark分析数据包"></a><strong>1.用wireshark分析数据包</strong></h2><p>打开数据包，发现是一堆TCP的包，先不理会底层的数据，只关心应用层。<br>应用层的协议只有HTTP，过滤出HTTP的包进一步分析：</p>
+<p><img src="http://img.blog.csdn.net/20150530215604842" alt="这里写图片描述"></p>
+<p>请求都发往<a href="http://sz.mail.ftn.qq.com，猜测是qq邮箱的地址。" target="_blank" rel="noopener">http://sz.mail.ftn.qq.com，猜测是qq邮箱的地址。</a><br>同时观察第一个请求</p>
+<p><img src="http://img.blog.csdn.net/20150530220527807" alt="这里写图片描述"></p>
+<p>POST了一段这样的JSON：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"path"</span>:<span class="string">"fly.rar"</span>,</span><br><span class="line">	<span class="string">"appid"</span>:<span class="string">""</span>,</span><br><span class="line">	<span class="string">"size"</span>:<span class="number">525701</span>,</span><br><span class="line">	<span class="string">"md5"</span>:<span class="string">"e023afa4f6579db5becda8fe7861c2d3"</span>,</span><br><span class="line">	<span class="string">"sha"</span>:<span class="string">"ecccba7aea1d482684374b22e2e7abad2ba86749"</span>,</span><br><span class="line">	<span class="string">"sha3"</span>:<span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>目标url为：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:<span class="regexp">//</span>set2.mail.qq.com<span class="regexp">/cgi-bin/u</span>ploadunite?<span class="keyword">func</span>=CreateFile&amp;&amp;inputf=json&amp;outputf=json&amp;&amp;sid=x5O8ZuWvSp9yXFgM</span><br></pre></td></tr></table></figure></p>
+<p>这应该是一个上传文件的操作，文件名为<code>fly.rar</code>，文件大小为<code>525701</code>。<br>进一步分析以验证猜想，过滤出全部的POST数据包：<br><figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http.request.method == <span class="string">"<span class="keyword">POST</span>"</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://img.blog.csdn.net/20150530223111953" alt="这里写图片描述"></p>
+<p>其中倒数第二个包的内容是：</p>
+<p><img src="http://img.blog.csdn.net/20150530222654990" alt="这里写图片描述"></p>
+<p>至此已经可以确定：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">数据包的内容：一封带附件的邮件</span><br><span class="line">发件人：<span class="number">81101652</span>@qq.com</span><br><span class="line">收件人：king@woldy.net</span><br><span class="line">附件：fly.rar</span><br><span class="line">附件大小：<span class="number">525701</span> Bytes</span><br></pre></td></tr></table></figure>
+<p>接下来寻找附件数据在哪里。</p>
+<hr>
+
+<h2 id="2-寻找附件数据"><a href="#2-寻找附件数据" class="headerlink" title="2.寻找附件数据"></a><strong>2.寻找附件数据</strong></h2><p><img src="http://img.blog.csdn.net/20150530223111953" alt="这里写图片描述"><br>第一个请求向服务器POST附件信息，紧接着就应该是上传，结合数据包推断第2～6个，共5个数据包应为附件数据。</p>
+<p>5个数据包中的<code>Media Type域</code>的大小各为</p>
+<blockquote>
+<p>131436<br>131436<br>131436<br>131436<br>1777</p>
+</blockquote>
+<p><img src="http://img.blog.csdn.net/20150530223941372" alt="这里写图片描述"></p>
+<p>合计<code>527521</code>，而前面附件信息里已知附件大小为<code>525701</code>，相差不多，多出来的部分应该是头部的信息之类。</p>
+<hr>
+
+<h2 id="3-还原附件数据"><a href="#3-还原附件数据" class="headerlink" title="3.还原附件数据"></a><strong>3.还原附件数据</strong></h2><p>观察5个包<code>Media Type域</code>的内容，前面很大一部分内容是相同的，那么这一部分是通信时所需的头部的内容，不是附件本身的内容，通过计算将多余的数据去除。</p>
+<blockquote>
+<p>已知：<br>附件被分成5个部分<br>5个子部分合计大小为<code>527521</code><br>附件原大小为<code>525701</code><br>求：<br>每个子部分头部多余的数据</p>
+</blockquote>
+<p>容易求出，头部多余的部分：</p>
+<blockquote>
+<p>$$\frac{527521-525701}{5}=364  Bytes$$</p>
+</blockquote>
+<p>将5个数据包的<code>Media Type域</code>分别导出为二进制文件：<br><img src="http://img.blog.csdn.net/20150530225522772" alt="这里写图片描述"><br>然后使用<code>dd</code>命令分别将其前364个字节去除：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dd <span class="attribute">if</span>=1 <span class="attribute">bs</span>=1 <span class="attribute">skip</span>=364 <span class="attribute">of</span>=1.1</span><br><span class="line">dd <span class="attribute">if</span>=2 <span class="attribute">bs</span>=1 <span class="attribute">skip</span>=364 <span class="attribute">of</span>=2.1</span><br><span class="line">dd <span class="attribute">if</span>=3 <span class="attribute">bs</span>=1 <span class="attribute">skip</span>=364 <span class="attribute">of</span>=3.1</span><br><span class="line">dd <span class="attribute">if</span>=4 <span class="attribute">bs</span>=1 <span class="attribute">skip</span>=364 <span class="attribute">of</span>=4.1</span><br><span class="line">dd <span class="attribute">if</span>=5 <span class="attribute">bs</span>=1 <span class="attribute">skip</span>=364 <span class="attribute">of</span>=5.1</span><br></pre></td></tr></table></figure></p>
+<p>之后合并文件：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">cat</span>  1<span class="selector-class">.1</span>  2<span class="selector-class">.1</span>  3<span class="selector-class">.1</span>  4<span class="selector-class">.1</span>  5<span class="selector-class">.1</span>  &gt;  <span class="selector-tag">fly</span><span class="selector-class">.rar</span></span><br></pre></td></tr></table></figure></p>
+<p>校验md5值：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">md5sum</span> <span class="selector-tag">fly</span><span class="selector-class">.rar</span></span><br></pre></td></tr></table></figure>
+<p>结果：</p>
+<blockquote>
+<p>e023afa4f6579db5becda8fe7861c2d3 </p>
+</blockquote>
+<p>而第一步中得到的数据包中POST数据为：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">	<span class="string">"path"</span>:<span class="string">"fly.rar"</span>,</span><br><span class="line">	<span class="string">"appid"</span>:<span class="string">""</span>,</span><br><span class="line">	<span class="string">"size"</span>:<span class="number">525701</span>,</span><br><span class="line">	<span class="string">"md5"</span>:<span class="string">"e023afa4f6579db5becda8fe7861c2d3"</span>,</span><br><span class="line">	<span class="string">"sha"</span>:<span class="string">"ecccba7aea1d482684374b22e2e7abad2ba86749"</span>,</span><br><span class="line">	<span class="string">"sha3"</span>:<span class="string">""</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>二者一致。同理再校验sha值，同样一致。<br>至此，由网络包还原出了附件数据<code>fly.rar</code>：</p>
+<p><img src="http://img.blog.csdn.net/20150530230134645" alt="这里写图片描述"></p>
+<hr>
+
+<h2 id="4-处理附件数据"><a href="#4-处理附件数据" class="headerlink" title="4.处理附件数据"></a><strong>4.处理附件数据</strong></h2><p>本以为到这里已经大功告成，解压<code>fly.rar</code>即可。<br>结果还有后招……竟然解压失败……<br>分析原因，<br><code>fly.rar</code>文件通过了md5和sha校验，肯定是没问题的，自己的思路到这里断了，怎么想也没结果。<br>无奈搜答案，得出结果——伪加密。<br>即这是一个未加密过的<code>rar</code>文件，但是却将加密位置为了1，具体可参考<br><a href="http://www.cnblogs.com/javawebsoa/archive/2013/05/10/3072132.html" target="_blank" rel="noopener">[rar文件格式描述]</a><br>只需将文件开头处<code>0x74</code>位后面的<code>0x84</code>位置改为<code>0x80</code>即可</p>
+<p><img src="http://img.blog.csdn.net/20150530231637512" alt="这里写图片描述"></p>
+<p>修改后顺利解压，得到<code>flag.txt</code>。</p>
+<hr>
+
+<h2 id="5-处理flag-txt"><a href="#5-处理flag-txt" class="headerlink" title="5.处理flag.txt"></a><strong>5.处理<code>flag.txt</code></strong></h2><p>这回答案该有了吧，打开<code>flag.txt</code>查看，这又是一个二进制文件。<br>无语。<br>继续二进制打开。<br>发现这是个<code>win32</code>的程序，<code>Linux</code>跑不了，转到<code>windows查看</code>。<br>是个满屏幕跑苍蝇的程序……还挺逼真的……<br>还是二进制打开分析。<br>文件内搜<code>PNG</code>、<code>Rar</code>、<code>JFIF</code>，文件尾有一个<code>PNG</code>，提取出来，是个二维码：</p>
+<p><img src="http://img.blog.csdn.net/20150530233344874" alt="这里写图片描述"></p>
+<p>扫之，得到结果<br><code>flag{m1Sc_oxO2_Fly}</code></p>
+<hr>
+
+<h1 id="三、flag"><a href="#三、flag" class="headerlink" title="三、flag"></a><strong>三、flag</strong></h1><p><code>wctf{m1Sc_oxO2_Fly}</code></p>
+<hr>
+
+<h1 id="四、知识点"><a href="#四、知识点" class="headerlink" title="四、知识点"></a><strong>四、知识点</strong></h1><p>这题够绕的……<br>虽然参考了部分答案，但做完感觉很好。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/14/1、创建一个ROS package/" data-toggle="tooltip" data-placement="top" title="1、创建一个ROS package">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2015/05/05/IDF实验室-特殊的日子/" data-toggle="tooltip" data-placement="top" title="IDF实验室-特殊的日子">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2015/05/05/IDF实验室-抓到一只苍蝇/";
+    var disqus_url = "https://pzque.github.io/2015/05/05/IDF实验室-抓到一只苍蝇/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

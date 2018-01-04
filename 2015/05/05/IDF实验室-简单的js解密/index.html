@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          IDF实验室-简单的js解密 - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2015/05/05/IDF实验室-简单的js解密/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                    <h1>IDF实验室-简单的js解密</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2015-05-05
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="原题："><a href="#原题：" class="headerlink" title="原题："></a>原题：</h1><p><a href="http://ctf.idf.cn/game/web/43/index.php" target="_blank" rel="noopener">[简单的js解密]</a><br><img src="http://img.blog.csdn.net/20150530193539242" alt="这里写图片描述"></p>
+<hr>
+
+<h1 id="writeup："><a href="#writeup：" class="headerlink" title="writeup："></a>writeup：</h1><h2 id="直接看代码，页面内有一段script："><a href="#直接看代码，页面内有一段script：" class="headerlink" title="直接看代码，页面内有一段script："></a>直接看代码，页面内有一段script：</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Pseudo md5 hash function</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; string</span></span><br><span class="line"><span class="comment"> * @param &#123;string&#125; method The function method, can be 'ENCRYPT' or 'DECRYPT'</span></span><br><span class="line"><span class="comment"> * @return &#123;string&#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">pseudoHash</span>(<span class="params">string, method</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Default method is encryption</span></span><br><span class="line">  <span class="keyword">if</span> (!(<span class="string">'ENCRYPT'</span> == method || <span class="string">'DECRYPT'</span> == method)) &#123;</span><br><span class="line">    method = <span class="string">'ENCRYPT'</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// Run algorithm with the right method</span></span><br><span class="line">  <span class="keyword">if</span> (<span class="string">'ENCRYPT'</span> == method) &#123;</span><br><span class="line">    <span class="comment">// Variable for output string</span></span><br><span class="line">    <span class="keyword">var</span> output = <span class="string">''</span>;</span><br><span class="line">    <span class="comment">// Algorithm to encrypt</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> x = <span class="number">0</span>, y = string.length, charCode, hexCode; x &lt; y; ++x) &#123;</span><br><span class="line">      charCode = string.charCodeAt(x);</span><br><span class="line">      <span class="keyword">if</span> (<span class="number">128</span> &gt; charCode) &#123;</span><br><span class="line">        charCode += <span class="number">128</span>;</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="number">127</span> &lt; charCode) &#123;</span><br><span class="line">        charCode -= <span class="number">128</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      charCode = <span class="number">255</span> - charCode;</span><br><span class="line">      hexCode = charCode.toString(<span class="number">16</span>);</span><br><span class="line">      <span class="keyword">if</span> (<span class="number">2</span> &gt; hexCode.length) &#123;</span><br><span class="line">        hexCode = <span class="string">'0'</span> + hexCode;</span><br><span class="line">      &#125;</span><br><span class="line">      </span><br><span class="line">      output += hexCode;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// Return output</span></span><br><span class="line">    <span class="keyword">return</span> output;</span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="string">'DECRYPT'</span> == method) &#123;</span><br><span class="line">    <span class="comment">// DECODE MISS</span></span><br><span class="line">    <span class="comment">// Return ASCII value of character</span></span><br><span class="line">    <span class="keyword">return</span> string;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'password'</span>).value = pseudoHash(<span class="string">'4e1e4c4d1b19474c1e1c491d1a484a1d49464f48191a47474a4b494a1d481e46'</span>, <span class="string">'DECRYPT'</span>);</span><br></pre></td></tr></table></figure>
+<p>输入框中的内容是由js插进去的，内容为字符串：</p>
+<blockquote>
+<p>4e1e4c4d1b19474c1e1c491d1a484a1d49464f48191a47474a4b494a1d481e46</p>
+</blockquote>
+<p>pseudoHash()函数实现加解密功能，这里仅仅实现了加密，观察加密算法，逐位地对字符串包含的字符进行了以下操作：</p>
+<blockquote>
+<ol>
+<li>得到字符的unicode码值<strong>charCode</strong></li>
+<li>若<strong>charCode</strong> &lt; 128，<strong>charCode</strong> += 128<br>若<strong>charCode</strong> &gt; 127，<strong>charCode</strong> -= 127</li>
+<li><strong>charCode</strong>  = 255 - <strong>charCode</strong></li>
+<li>将<strong>charCode</strong>转为16进制</li>
+</ol>
+</blockquote>
+<p>最后得到的是将所有的16进制字符拼接起来的结果，由此不难编写解密算法，使用python：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">s = <span class="string">'4b481a4c4c471d4c1c4f474d464b4a1a19194f4b1b1a491b494a464e4a1e1b1a'</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">decode</span><span class="params">(s)</span>:</span></span><br><span class="line">    charcode = []</span><br><span class="line">    i = <span class="number">0</span></span><br><span class="line">    <span class="keyword">while</span> i&lt;len(s):</span><br><span class="line">        charcode.append(int(s[i:i+<span class="number">2</span>],<span class="number">16</span>))</span><br><span class="line">        i = i + <span class="number">2</span>             </span><br><span class="line">    charcode = [<span class="number">255</span>-i <span class="keyword">for</span> i <span class="keyword">in</span> charcode]</span><br><span class="line">    </span><br><span class="line">    chars = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> charcode:</span><br><span class="line">        <span class="keyword">if</span> <span class="number">127</span>&lt;i+<span class="number">128</span>&lt;<span class="number">255</span>:</span><br><span class="line">            chars.append(i+<span class="number">128</span>)</span><br><span class="line">        <span class="keyword">elif</span> <span class="number">0</span>&lt;i<span class="number">-128</span>&lt;<span class="number">128</span>:</span><br><span class="line">            chars.append(i<span class="number">-128</span>)</span><br><span class="line">        <span class="keyword">else</span>: chars.append(i)</span><br><span class="line">    result = [unichr(i) <span class="keyword">for</span> i <span class="keyword">in</span> chars]</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>.join(result)</span><br><span class="line"></span><br><span class="line">t = decode(s)</span><br></pre></td></tr></table></figure>
+<h2 id="运行后得到结果"><a href="#运行后得到结果" class="headerlink" title="运行后得到结果"></a>运行后得到结果</h2><blockquote>
+<p>47e338b3c082945eff04de6d65915ade</p>
+</blockquote>
+<h2 id="直接当作flag提交，错误，继续分析："><a href="#直接当作flag提交，错误，继续分析：" class="headerlink" title="直接当作flag提交，错误，继续分析："></a>直接当作flag提交，错误，继续分析：</h2><p>解密后得到的字符串长32位，全16进制，可尝试再次使用解密算法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">decode(t)</span><br></pre></td></tr></table></figure>
+<p>得到结果</p>
+<blockquote>
+<p>8GÌ¿ýë!{¡î%¡</p>
+</blockquote>
+<p>一堆乱码，应该不对，但还是尝试提交，果然错了。</p>
+<h2 id="另考虑此字符串为32位md5码"><a href="#另考虑此字符串为32位md5码" class="headerlink" title="另考虑此字符串为32位md5码"></a>另考虑此字符串为32位md5码</h2><p>拖入在线网站解密，得到</p>
+<blockquote>
+<p>5083</p>
+</blockquote>
+<p>继续提交，仍然不对。<br>遂变换各种顺序，反复解密加密，都没有结果。</p>
+<h2 id="直接搜答案"><a href="#直接搜答案" class="headerlink" title="直接搜答案"></a>直接搜答案</h2><p>竟然要在做题的页面提交…<br><a href="http://ctf.idf.cn/game/web/43/index.php" target="_blank" rel="noopener">[简单的js解密]</a><br><img src="http://img.blog.csdn.net/20150530193539242" alt="这里写图片描述"><br>提交</p>
+<blockquote>
+<p>47e338b3c082945eff04de6d65915ade</p>
+</blockquote>
+<p>得到答案</p>
+<blockquote>
+<p>wctf{jS_decRypt__Eaaasy}</p>
+</blockquote>
+<h1 id="flag"><a href="#flag" class="headerlink" title="flag:"></a>flag:</h1><blockquote>
+<p>wctf{jS_decRypt__Eaaasy}</p>
+</blockquote>
+<h1 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h1><ol>
+<li>js字符串处理<ul>
+<li><code>string.charCodeAt(x)</code>，x为位置索引，得到string[x]字符的unicode码(0~65535)</li>
+<li><code>int.toString(16)</code>，将整数int转换为16进制字符串</li>
+</ul>
+</li>
+<li>python字符串处理相关</li>
+</ol>
+<ul>
+<li><code>ord(char/unichr)</code>  返回一个字符的码值</li>
+<li><code>chr(num)</code>  返回一个码值代表的ascii字符</li>
+<li><code>unichr(0-65535)</code>   返回一个码值代表的unicode字符</li>
+<li><code>int(&#39;string&#39;, base)</code>  将一个基数为base的字符串转化为一个十进制整数</li>
+</ul>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2015/05/05/IDF实验室-特殊的日子/" data-toggle="tooltip" data-placement="top" title="IDF实验室-特殊的日子">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2015/05/05/IDF实验室-伟人的名字/" data-toggle="tooltip" data-placement="top" title="IDF实验室-伟人的名字">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2015/05/05/IDF实验室-简单的js解密/";
+    var disqus_url = "https://pzque.github.io/2015/05/05/IDF实验室-简单的js解密/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          使用emacs进行时间管理(1)——org-mode基本操作 - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2016/04/17/使用emacs进行时间管理(1)——org-mode基本操作/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#emacs" title="emacs">emacs</a>
+                        
+                          <a class="tag" href="/tags/#spacemacs" title="spacemacs">spacemacs</a>
+                        
+                    </div>
+                    <h1>使用emacs进行时间管理(1)——org-mode基本操作</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2016-04-17
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>本篇文章大部分引用自：<a href="http://www.cnblogs.com/holbrook/archive/2012/04/17/2454619.html" target="_blank" rel="noopener">org-mode: 最好的文档编辑利器，没有之一</a>，</p>
+<p>同时结合自己的实践，整理而成。</p>
+<h1 id="一、org-mode"><a href="#一、org-mode" class="headerlink" title="一、org-mode"></a>一、org-mode</h1><p>org-mode官方定义：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Org is <span class="keyword">a</span> mode <span class="keyword">for</span> keeping notes, maintaining TODO lists, <span class="keyword">and</span> doing project planning <span class="keyword">with</span> <span class="keyword">a</span> fast <span class="keyword">and</span> <span class="keyword">effective</span> plain-<span class="keyword">text</span> <span class="keyword">system</span>.</span><br></pre></td></tr></table></figure></p>
+<p>Org是一个基于快速高效的文本方式来实现做笔记、管理待办事项（TODO list）以及做项目计划的模式。</p>
+<p>使用emacs做时间管理正是利用org-mode对文本的强大操作能力，所以我们首先要学习org-mode的基本概念及操作。</p>
+<h1 id="二、大纲"><a href="#二、大纲" class="headerlink" title="二、大纲"></a>二、大纲</h1><p>org-mode强大的操作能力源于它对大纲的支持。</p>
+<h2 id="1、定义一个标题"><a href="#1、定义一个标题" class="headerlink" title="1、定义一个标题"></a>1、定义一个标题</h2><p>要定义一个大纲，首先要定义标题，定义标题的方式非常简单，使用<code>*</code>即可：</p>
+<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="bullet">* </span>这是一个一级标题</span><br><span class="line"><span class="bullet">** </span>这是一个二级标题</span><br><span class="line"><span class="bullet">*** </span>以此类推</span><br></pre></td></tr></table></figure>
+<p>注意两点：</p>
+<ol>
+<li><code>*</code>要位于行首</li>
+<li><code>*</code>后面要有一个空格</li>
+</ol>
+<h2 id="2、大纲相关的快捷键"><a href="#2、大纲相关的快捷键" class="headerlink" title="2、大纲相关的快捷键"></a>2、大纲相关的快捷键</h2><h3 id="折叠"><a href="#折叠" class="headerlink" title="折叠"></a>折叠</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S-TAB</td>
+<td>循环切换整个文档的大纲状态（三种状态：折叠，打开下一级，打开全部）</td>
+</tr>
+<tr>
+<td>TAB</td>
+<td>循环切换光标所在大纲的状态</td>
+</tr>
+</tbody>
+</table>
+<h3 id="大纲间移动"><a href="#大纲间移动" class="headerlink" title="大纲间移动"></a>大纲间移动</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-c C-n/p</td>
+<td>下/上一标题</td>
+</tr>
+<tr>
+<td>C-c C-f/b</td>
+<td>下/上一标题（仅限同级标题）</td>
+</tr>
+<tr>
+<td>C-c C-u</td>
+<td>跳到上一级标题</td>
+</tr>
+<tr>
+<td>C-c C-j</td>
+<td>切换到大纲浏览状态</td>
+</tr>
+</tbody>
+</table>
+<h3 id="基于大纲的编辑"><a href="#基于大纲的编辑" class="headerlink" title="基于大纲的编辑"></a>基于大纲的编辑</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M-RET</td>
+<td>插入一个同级标题</td>
+</tr>
+<tr>
+<td>M-S-RET</td>
+<td>插入一个同级TODO 标题</td>
+</tr>
+<tr>
+<td>M-LEFT/RIGHT</td>
+<td>将当前标题升/降级</td>
+</tr>
+<tr>
+<td>M-S-LEFT/RIGHT</td>
+<td>将子树升/降级</td>
+</tr>
+<tr>
+<td>M-S-UP/DOWN</td>
+<td>将子树上/下移</td>
+</tr>
+<tr>
+<td>C-c *</td>
+<td>将本行设为标题/正文</td>
+</tr>
+<tr>
+<td>C-c C-w</td>
+<td>将子树或区域移动到另一标题处（跨缓冲区）</td>
+</tr>
+<tr>
+<td>C-x n s/w</td>
+<td>只显示当前子树/返回</td>
+</tr>
+<tr>
+<td>C-c C-x b</td>
+<td>在新缓冲区显示当前分支（类似C-x n s)</td>
+</tr>
+<tr>
+<td>C-c /</td>
+<td>只列出包含搜索结果的大纲，并高亮，支持多种搜索方式</td>
+</tr>
+<tr>
+<td>C-c C-c</td>
+<td>取消高亮</td>
+</tr>
+</tbody>
+</table>
+<p>在spacemacs下，更多的快捷键可以通过<code>SPC ?</code>，即空格加问号查看，非常的方便，基本上不需要我们自己记忆，这也正是spacemacs的优点所在。</p>
+<h2 id="3、大纲的显示方式"><a href="#3、大纲的显示方式" class="headerlink" title="3、大纲的显示方式"></a>3、大纲的显示方式</h2><p><img src="http://img.blog.csdn.net/20160417224453945" alt="默认的大纲"></p>
+<p>默认的大纲显示没有缩进，显得有些乱。可以用<code>SPC : org-indent-mode</code>切换到另一种显示方式：</p>
+<p><img src="http://img.blog.csdn.net/20160417224617353" alt="这里写图片描述"></p>
+<p>如果想让某个文件默认用这种方式打开，可以在文件头部增加：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> +STARTUP: indent</span></span><br></pre></td></tr></table></figure>
+<p>如果希望打开所有org文件都默认用这种方式，可以在.emacs中配置：</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> org-startup-indented <span class="literal">t</span>)</span><br></pre></td></tr></table></figure>
+<h1 id="二、轻量级标记语言"><a href="#二、轻量级标记语言" class="headerlink" title="二、轻量级标记语言"></a>二、轻量级标记语言</h1><p>前面的大纲和超链接都是使用标记来定义的。实际上，Org现在已经成为一种专门的轻量级标记语言，与Markdown、reStructedText、Textile、RDoc、MediaWiki等并列。</p>
+<h2 id="1、字体"><a href="#1、字体" class="headerlink" title="1、字体"></a>1、字体</h2><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">*粗体*</span><br><span class="line">/斜体/</span><br><span class="line">+删除线+</span><br><span class="line"><span class="keyword">_</span>下划线<span class="keyword">_</span></span><br><span class="line">下标： H_2 O</span><br><span class="line">上标： E=mc^<span class="number">2</span></span><br><span class="line">等宽字：  =git=  或者 ～git～</span><br></pre></td></tr></table></figure>
+<h2 id="2、表格"><a href="#2、表格" class="headerlink" title="2、表格"></a>2、表格</h2><p>Org 能够很容易地处理 ASCII 文本表格。任何以‘|’为首个非空字符的行都会被认为是表格的一部分。’|‘也是列分隔符。一个表格是下面的样子：</p>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">|<span class="string"> Name  </span>|<span class="string"> Pone </span>|<span class="string"> Age </span>|</span><br><span class="line">|<span class="string">-------+------+-----</span>|</span><br><span class="line">|<span class="string"> Peter </span>|<span class="string"> 1234 </span>|<span class="string"> 17  </span>|</span><br><span class="line">|<span class="string"> Anna  </span>|<span class="string"> 4321 </span>|<span class="string"> 25  </span>|</span><br></pre></td></tr></table></figure>
+<p>你可能认为要录入这样的表格很繁琐，实际上你只需要输入表头“|Name|Pone|Age”之后，按C-c RET,就可以生成整个表格的结构。类似的快捷键还有很多：</p>
+<h3 id="创建和转换表格"><a href="#创建和转换表格" class="headerlink" title="创建和转换表格"></a>创建和转换表格</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-c 竖线</td>
+<td>创建或转换成表格</td>
+</tr>
+</tbody>
+</table>
+<h3 id="调整和区域移动"><a href="#调整和区域移动" class="headerlink" title="调整和区域移动"></a>调整和区域移动</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-c C-c</td>
+<td>调整表格，不移动光标</td>
+</tr>
+<tr>
+<td>TAB</td>
+<td>移动到下一区域，必要时新建一行</td>
+</tr>
+<tr>
+<td>S-TAB</td>
+<td>移动到上一区域</td>
+</tr>
+<tr>
+<td>RET</td>
+<td>移动到下一行，必要时新建一行</td>
+</tr>
+</tbody>
+</table>
+<h3 id="编辑行和列"><a href="#编辑行和列" class="headerlink" title="编辑行和列"></a>编辑行和列</h3><table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M-LEFT/RIGHT</td>
+<td>移动列</td>
+</tr>
+<tr>
+<td>M-UP/DOWN</td>
+<td>移动行</td>
+</tr>
+<tr>
+<td>M-S-LEFT/RIGHT</td>
+<td>删除/插入列</td>
+</tr>
+<tr>
+<td>M-S-UP/DOWN</td>
+<td>删除/插入行</td>
+</tr>
+<tr>
+<td>C-c -</td>
+<td>添加水平分割线</td>
+</tr>
+<tr>
+<td>C-c RET</td>
+<td>添加水平分割线并跳到下一行</td>
+</tr>
+<tr>
+<td>C-c ^</td>
+<td>根据当前列排序，可以选择排序方式</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3、段落"><a href="#3、段落" class="headerlink" title="3、段落"></a>3、段落</h2><p>对于单个回车换行的文本，认为其属于同一个段落。在导出的时候将会转化为不换行的同一段。如果要新起一个段落，需要留出一个空行。 这点与markdown类似。</p>
+<h2 id="4、列表"><a href="#4、列表" class="headerlink" title="4、列表"></a>4、列表</h2><p>Org 能够识别有序列表、无序列表和描述列表。<br><figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">无序列表项以‘-’、‘+’或者‘*‘开头。</span><br><span class="line">有序列表项以‘<span class="number">1</span>.’或者‘<span class="number">1</span>)’开头。</span><br><span class="line"><span class="symbol">描述列表用‘::</span>’将项和描述分开。</span><br><span class="line">有序列表和无序列表都以缩进表示层级。只要对齐缩进，不管是换行还是分块都认为是处于当前列表项。</span><br></pre></td></tr></table></figure></p>
+<p>同一列表中的项的第一行必须缩进相同程度。当下一行的缩进与列表项的的开头的符号或者数字相同或者更小时，这一项就结束了。当所有的项都关上时，或者后面有两个空行 时，列表就结束了。例如：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">My favorite scenes are (<span class="keyword">in</span> this <span class="keyword">order</span>)</span><br><span class="line"><span class="number">1.</span> The attack <span class="keyword">of</span> the Rohirrim</span><br><span class="line"><span class="number">2.</span> Eowyn<span class="comment">'s fight with the witch king</span></span><br><span class="line">    + this was already my favorite scene <span class="keyword">in</span> the book</span><br><span class="line">    + I really <span class="keyword">like</span> Miranda Otto.</span><br><span class="line">Important actors <span class="keyword">in</span> this film are:</span><br><span class="line">- Elijah Wood :: He plays Frodo</span><br><span class="line">- Sean Austin :: He plays Sam, Frodo<span class="comment">'s friend.</span></span><br></pre></td></tr></table></figure>
+<h3 id="列表操作快捷键"><a href="#列表操作快捷键" class="headerlink" title="列表操作快捷键"></a>列表操作快捷键</h3><p>为了便利，org-mode也支持很多列表操作的快捷键，大部分都与大纲的快捷键类似：</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TAB</td>
+<td>折叠列表项</td>
+</tr>
+<tr>
+<td>M-RET</td>
+<td>插入项</td>
+</tr>
+<tr>
+<td>M-S-RET</td>
+<td>插入带复选框的项</td>
+</tr>
+<tr>
+<td>M-S-UP/DOWN</td>
+<td>移动列表项</td>
+</tr>
+<tr>
+<td>M-LEFT/RIGHT</td>
+<td>升/降级列表项，不包括子项</td>
+</tr>
+<tr>
+<td>M-S-LEFT/RIGTH</td>
+<td>升/降级列表项，包括子项</td>
+</tr>
+<tr>
+<td>C-c C-c</td>
+<td>改变复选框状态</td>
+</tr>
+<tr>
+<td>C-c -</td>
+<td>更换列表标记（循环切换）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5、分隔线"><a href="#5、分隔线" class="headerlink" title="5、分隔线"></a>5、分隔线</h2><p>五条短线或以上显示为分隔线。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">------</span></span><br></pre></td></tr></table></figure>
+<h1 id="五-、标签"><a href="#五-、标签" class="headerlink" title="五 、标签"></a>五 、标签</h1><h2 id="1、tag的作用"><a href="#1、tag的作用" class="headerlink" title="1、tag的作用"></a>1、tag的作用</h2><p>对于信息的管理，有分类(category)和标签(tag)两种方式。这两种方式各有特点：</p>
+<p>通常分类是固定的，很少变化，而tag随时可以增加。 分类通常表现为树状结构，比较清晰，但是树状结构过于简单，不能表达复杂的信息。比如，如果有多个分类树，处理起来就会比较麻烦。</p>
+<p>所以，这两种方式通常结合起来使用。比如blog系统中，通常既支持文章的分类（树），又支持为每篇文章作tag标记。</p>
+<p>org-mode作为最好的文档编辑利器 ，在支持文内大纲（也是树状结构）的同时，还方便的支持tag功能。tag可以在多篇文档中共用。</p>
+<h2 id="2、标记tag"><a href="#2、标记tag" class="headerlink" title="2、标记tag"></a>2、标记tag</h2><p>在Org-mode中，可以对标题增加tag标记。标记的格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">标题                    :标记1标记2:标记3:</span><br></pre></td></tr></table></figure></p>
+<p>而且Org-mode的标签自动按照大纲树的结构继承。即子标题自动继承父标题的标签。比如：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* Meeting with the French<span class="built_in"> group </span>    :work:</span><br><span class="line">** Summary by Frank                 :boss:notes:</span><br><span class="line">*** TODO Prepare slides <span class="keyword">for</span> him     :action:</span><br></pre></td></tr></table></figure></p>
+<p>则最后一行标题具有 work, boss, notes, action 四个标签。</p>
+<p>如果希望文档中的所有标题都具有某些标签，只需要定义文档元数据：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># +<span class="selector-tag">FILETAGS</span>: <span class="selector-pseudo">:Peter</span><span class="selector-pseudo">:Boss</span><span class="selector-pseudo">:Secret</span>:</span><br></pre></td></tr></table></figure></p>
+<p>如果手工输入标签，在标题后设置标签，键入:后，M-Tab自动提供标签的补齐。</p>
+<p>更方便的做法是在正文部分用C-c C-q 或直接在标题上用C-c C-c创建标签，这种方式可以列出所有预定义的标签以便选取。</p>
+<h2 id="3、预定义tag"><a href="#3、预定义tag" class="headerlink" title="3、预定义tag"></a>3、预定义tag</h2><p>上面提到，除了可以输入标签外，还可以从预定义的标签中进行选择。预定义的方式有两种：</p>
+<p> 在当前文件头部定义:</p>
+<p>这种方式预定义的标签只能在当前文件中使用。使用# +TAGS元数据进行标记，如：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> +TAGS: &#123; 桌面(d) 服务器(s) &#125;  编辑器(e) 浏览器(f) 多媒体(m) 压缩(z)</span></span><br></pre></td></tr></table></figure>
+<p> 每项之间必须用空格分隔，可以在括号中定义一个快捷键；花括号里的为标签组，只能选择一个</p>
+<p>  对标签定义进行修改后，要在标签定义的位置按 C-c C-c 刷新才能生效。<br>   在配置文件中定义 上面的标签定义只能在当前文件生效，如果要在所有的.org 文件中生效，需要在 Emacs 配置文件 .emacs 中进行定义：<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">(<span class="name">setq</span> org-tag-alist '(</span><br><span class="line"></span><br><span class="line">                    (<span class="symbol">:startgroup</span> . <span class="literal">nil</span>)</span><br><span class="line">                         (<span class="string">"桌面"</span> . ?d) (<span class="string">"服务器"</span> . ?s)</span><br><span class="line">                    (<span class="symbol">:endgroup</span> . <span class="literal">nil</span>)</span><br><span class="line">                    (<span class="string">"编辑器"</span> . ?e)</span><br><span class="line">                    (<span class="string">"浏览器"</span> . ?f) </span><br><span class="line">                    (<span class="string">"多媒体"</span> . ?m)</span><br><span class="line">                    ))</span><br></pre></td></tr></table></figure></p>
+<p>默认情况下，org会动态维护一个Tag列表，即当前输入的标签若不在列表中，则自动加入列表以供下次补齐使用。</p>
+<p>为了使这几种情况（默认列表、文件预设tags，全局预设tags）同时生效，需要在文件中增加一个空的TAGS定义：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> +TAGS:</span></span><br></pre></td></tr></table></figure>
+<h2 id="4、-按tag搜索"><a href="#4、-按tag搜索" class="headerlink" title="4、 按tag搜索"></a>4、 按tag搜索</h2><p>使用标签可以更好的管理内容。org-mode提供了以下功能：</p>
+<table>
+<thead>
+<tr>
+<th>快捷键</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>C-c \</td>
+<td>按tag搜索标题</td>
+</tr>
+<tr>
+<td>C-c / m</td>
+<td>搜索并按树状结构显示</td>
+</tr>
+<tr>
+<td>C-c a m</td>
+<td>按标签搜索多个文件（需要将文件加入全局agenda)</td>
+</tr>
+</tbody>
+</table>
+<p>可以使用逻辑表达式限制条件，更准确灵活的搜索：<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+     和      a+<span class="keyword">b </span>    同时有这两个标签</span><br><span class="line">-     排除    a-<span class="keyword">b </span>    有 a 但没有 <span class="keyword">b</span></span><br><span class="line"><span class="keyword">| </span>    或      a<span class="title">|b     有 a 或者有 b</span></span><br><span class="line"><span class="title">&amp;     和      a&amp;b     同时有 a 和 b，可以用“+”替代</span></span><br></pre></td></tr></table></figure></p>
+<p>在查询视图中 C-c C-c 退出。</p>
+<p>我们做GTD，只需掌握以上内容即可。对于快捷键，不用强行记忆，边用边记才更有效。需要经常使用的一个技巧就是使用<code>SPC ?</code>查看当前模式下的快捷键。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2016/04/18/使用emacs进行时间管理(2)——基本任务管理[转]/" data-toggle="tooltip" data-placement="top" title="使用emacs进行时间管理(2)——基本任务管理[转]">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2016/04/14/6、rqt_console和roslaunch/" data-toggle="tooltip" data-placement="top" title="6、rqt_console和roslaunch">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#emacs" title="emacs">emacs</a>
+                        
+                          <a class="tag" href="/tags/#spacemacs" title="spacemacs">spacemacs</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2016/04/17/使用emacs进行时间管理(1)——org-mode基本操作/";
+    var disqus_url = "https://pzque.github.io/2016/04/17/使用emacs进行时间管理(1)——org-mode基本操作/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

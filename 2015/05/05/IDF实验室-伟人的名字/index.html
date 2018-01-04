@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+
+    <title>
+        
+          IDF实验室-伟人的名字 - pzque的博客 | pzque&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="https://pzque.github.io/2015/05/05/IDF实验室-伟人的名字/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">pzque&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archives/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/img/home-bg.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                    <h1>IDF实验室-伟人的名字</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by  on
+                        2015-05-05
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="一、原题"><a href="#一、原题" class="headerlink" title="一、原题"></a>一、原题</h1><p><a href="http://ctf.idf.cn/index.php?g=game&amp;m=article&amp;a=index&amp;id=51" target="_blank" rel="noopener">[原题链接]</a><br>从前有个很厉害的人物演讲了一堆很厉害的东西，可是我读书少，认识人不多，你知道这个人叫啥不。。</p>
+<p>答案格式wctf{名字}  </p>
+<p>友情提示1、外国人，只要名字就可以了，就别要姓了，首字母大写。 </p>
+<p>友情提示2、说过我读书少，外国人的名字和姓我是分不清的，反正答案就是大家最常叫的那个。。</p>
+<p>以下就是这个人讲话的节选：</p>
+<blockquote>
+<p>EB BMQF KYJRD, IM ICHZZZ YWELXABD, ICCH PVLQ EB PGJS, UEZW PAGE RDS IGJOW QQQNHQO ZU BOTOSNS RD CFU YCFUQA. VGJQP RDWD AKIYWPU HDQ TZXLZSO, AONK CSYHPWHTRL CQ YISCLAWBD FWG ECAB VSIAZQCZ ER CWGH PSDWGICYB PC LRO YDRECYDJ ZZBYHHJ. PVP ENOGHQ CQ WKIYJ WAPUGYOYV SVZ YJGHHPAR WFA NDJH ER OSCYGYS VSNFZXLZ EKC UWRZA. </p>
+<p>YRU HSH PFFPNAH VSIAZQQ ID YCOTQ - YRR OD Y QLOJ HZ ZAOC YNAD, PVZXED LUKO HH JSPG; BZW WG D YOWO PC EYPHWH, HSRSCV HKXOEWJAR ZC OCH - MXR O FYHZ WM PPDP HSH XICGCJ ZI W WRLC EZGHWRKR GEUSCUWH, MPDP WY YJR BCWF RSP, “PAXZLAEBR GJ SRNA, SYPWPQR WY RNWMXJWHTRL” - Y GEUSCUWH WULLLOH WFA NRKICY CJSXLCO ZI IOY: PMCDLJM, NKJPURU, GGOSLVC, LQB KLU EHDHJB. </p>
+<p>NDL KP DKFRH WULLLOH WFAGP CJSXLCO L ENOYG WBO EHCMDJ OWOGWBNH, BZURD LQB GZXRD, HYOH DLZ HHQP, WFWH FYJ LVQQFP Y AZUC TCXGPTFO HWQH BCC YHZ PYJYTQB? HLJH JRS XZLL WY RDOE FEGERPEQ HDBCCW? </p>
+<p>EB WFA WRLC SLQPCCB KT WFA HRPHR, MJZJ Y TPZ CSYHPWHTRLO SDTA MHCJ RUYJHPG PVP PKZP MB OHDABOLLC QUCARZP EB LRO SRSN ZI IOILKQA GYJUPU. W GM BZW OVLQI TCRK HSLQ FPVNKBDLZEZTWW - L SSWFMIS LR. T BK YRR PPOGAJP RDOE YJM RD ID UKIWG ALNKYJUP NHONHQ KTWF OYB KHSHP DPRNHS RP OYB KHSHP UPQCNOELMJ. WFA PQCNUJ, PVP DWWEK, HSH ZSGRRECY UDWNK SS EPEBR RK EKGO PQBAOGRSN HLJH WLEDH RSN NRSJHCB WBO YHZ ZFK DHPRS LR – YJR WFA ROMS QUMI EKYP QLPA NDL HCXJU WLEDH WFA HRPHR. </p>
+<p>DLZ DR, AJ DAZWRU OXHPEQLQQ: LVI BZW SVLW UCFU YCFQRNM FYJ OR BCC WKI - WGV UDOE WKI FYJ OR BCC WKIC AKIYWPU. </p>
+<p>XB BSWOMS NLRENPQQ CQ RDS ZMNZO: WGV LKH ZFWH DKAFTFY KTOJ RZ DKF BMQ, ESP HKYP EREAHSHP KP AWB GM TZU PVP DNSPGMI ZI IOY. </p>
+<p>DEBLOJU, ZFAHSHP MZX WFP AEHTCCJG RD OXHPEQL MN NLRENPQQ CQ RDS ZMNZO, WGV MB FV PVP QWAP FEUS QPOYGYNRD MB DWPABRWF OYG OONUGBWNH SVTFF KP YOY RD MZX. KTWF O JMKR FMJGNLCJQP MQF RLHM VSNS UCSOCG, KTWF VTVRKFJ RDS IGJOW HQRRH KT RSN OHCZG, JAH XQ UZ DKFEK PC OCWR WFA WDLZ HH HCGH, ODNGJU KGO MOCOGTQE OYG DWD FAZA, XIE IJCHLLC EKYP SHPA ZQ AOCWF UZG’O HRPG XXQP EUSHM EC CFU KKY.</p>
+<hr>
+
+</blockquote>
+<h1 id="二、writeup"><a href="#二、writeup" class="headerlink" title="二、writeup"></a>二、writeup</h1><h2 id="1、凯撒密码"><a href="#1、凯撒密码" class="headerlink" title="1、凯撒密码"></a>1、凯撒密码</h2><p>分析题目，原文是英文，密文也全都是英文字母，很明显的古典密码。<br>这里有一个介绍古典密码的链接：<a href="http://baike.baidu.com/view/2296594.htm" target="_blank" rel="noopener">[古典密码]</a><br>先考虑最简单的<a href="http://baike.baidu.com/view/270827.htm" target="_blank" rel="noopener">[凯撒密码]</a>，即简单的对全部字母进行移位，如把全部字母后移两位，那么对于原文：</p>
+<blockquote>
+<p>abcdef</p>
+</blockquote>
+<p>对应的密文将是：</p>
+<blockquote>
+<p>cdefgh</p>
+</blockquote>
+<p>这种简单的加密方式十分容易破解，因为英文中每个字母出现的频率是相对固定的，只要对于足够长的密文，统计其中字母出现的频度，与标准频度表进行比对，就可以轻易地发现原文字母与密文字母的对应关系。<br>标准频率表如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">stdFreq = &#123;</span><br><span class="line"><span class="string">'A'</span>:<span class="number">8.2</span> ,<span class="string">'N'</span>:<span class="number">6.7</span>,</span><br><span class="line"><span class="string">'B'</span>:<span class="number">1.5</span>, <span class="string">'O'</span>:<span class="number">7.5</span>,</span><br><span class="line"><span class="string">'C'</span>:<span class="number">2.8</span>, <span class="string">'P'</span>:<span class="number">1.9</span>,</span><br><span class="line"><span class="string">'D'</span>:<span class="number">4.3</span>, <span class="string">'Q'</span>:<span class="number">0.1</span>,</span><br><span class="line"><span class="string">'E'</span>:<span class="number">12.7</span>, <span class="string">'R'</span>:<span class="number">6.0</span>,</span><br><span class="line"><span class="string">'F'</span>:<span class="number">2.2</span>, <span class="string">'S'</span>:<span class="number">6.3</span>,</span><br><span class="line"><span class="string">'G'</span>:<span class="number">2.0</span>, <span class="string">'T'</span>:<span class="number">9.1</span>,</span><br><span class="line"><span class="string">'H'</span>:<span class="number">6.1</span>, <span class="string">'U'</span>:<span class="number">2.8</span>,</span><br><span class="line"><span class="string">'I'</span>:<span class="number">7.0</span>, <span class="string">'V'</span>:<span class="number">1.0</span>,</span><br><span class="line"><span class="string">'J'</span>:<span class="number">0.2</span>, <span class="string">'W'</span>:<span class="number">2.4</span>,</span><br><span class="line"><span class="string">'K'</span>:<span class="number">0.8</span> ,<span class="string">'X'</span>:<span class="number">0.2</span>,</span><br><span class="line"><span class="string">'L'</span>:<span class="number">4.0</span> ,<span class="string">'Y'</span>:<span class="number">2.0</span>,</span><br><span class="line"><span class="string">'M'</span>:<span class="number">2.4</span> ,<span class="string">'Z'</span>:<span class="number">0.1</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>做字频统计尝试破解，字母频度分布较为均匀，没有结果，猜测使用了<code>凯撒密码</code>的进阶版，<a href="http://baike.baidu.com/view/270838.htm" target="_blank" rel="noopener">[维吉尼亚密码]</a>，即采用某密钥，循环对字母进行移位。</p>
+<h2 id="2、维吉尼亚密码"><a href="#2、维吉尼亚密码" class="headerlink" title="2、维吉尼亚密码"></a>2、维吉尼亚密码</h2><p>于是进一步采用了经典的维吉尼亚密码的解法，首先通过重复序列的间隔推断出密码长度，进而将密文分组进行频度分析，得出密钥。具体方法百科里有介绍：<a href="http://baike.baidu.com/view/270838.htm" target="_blank" rel="noopener">[维吉尼亚密码]</a><br>在这一步的工作中写了大段的代码进行分析，包括下面使用的词频统计的代码都是在这一步中写的，可以说这一步是得到正确答案的基础，可事实上在这一步并没有得出结果，原因是自己走了一个弯路：</p>
+<blockquote>
+<p>在解密之前去掉了密文的所有标点、空格和换行符</p>
+</blockquote>
+<p>因为自己一直沿着经典思路解题，同时做了不必要的处理，导致耽搁了较长时间，后来转过这个弯，决定采用自己的思路进行分析，答案就显而易见了。</p>
+<h2 id="3、粗糙解法"><a href="#3、粗糙解法" class="headerlink" title="3、粗糙解法"></a>3、粗糙解法</h2><p>对于本题，单词间隔和标点符号都给出的情况下，字频分析已经不是十分必要了，更有效的方法是词频分析。<br>词频分析要注意的主要是两个方面：</p>
+<blockquote>
+<p>1、在维吉尼亚加密中，由于采用一定长度的密钥循环加密，所以一个单词会被加密为不同的形式，而只有那些出现频率极高的单词才会重复地出现，而英语中出现频率最高的一个词是’the’<br>2、英文中有比较特殊的一个单词——‘a’，它只有短短的一个字母，另外的单字母单词还有’I’，但其出现频率显然没有’a’高</p>
+</blockquote>
+<p>于是在统计中，我们重点查看三字母单词和单字母单词的出现的状况。<br>词频统计python程序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="string">"""</span></span><br><span class="line"><span class="string">EB BMQF KYJRD......</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="comment"># 利用非字母字符拆分单词</span></span><br><span class="line">pattern = re.compile(<span class="string">r'[^A-Za-z]+'</span>)</span><br><span class="line">words = re.split(pattern,article)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 统计单词出现的次数</span></span><br><span class="line">wc = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> w <span class="keyword">in</span> words:</span><br><span class="line">    wc.setdefault(w,<span class="number">0</span>)</span><br><span class="line">    wc[w] += <span class="number">1</span></span><br><span class="line">    </span><br><span class="line"><span class="comment"># 根据出现的次数进行排序</span></span><br><span class="line">sortedWc= sorted(wc.items(), key=<span class="keyword">lambda</span> e:e[<span class="number">1</span>],reverse=<span class="keyword">True</span>)</span><br><span class="line"><span class="keyword">print</span> sortedWc</span><br></pre></td></tr></table></figure>
+<p>输出为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(<span class="string">'WFA'</span>, <span class="number">8</span>), (<span class="string">'PVP'</span>, <span class="number">5</span>), (<span class="string">'CQ'</span>, <span class="number">4</span>), (<span class="string">'RD'</span>, <span class="number">4</span>), (<span class="string">'ZI'</span>, <span class="number">4</span>), (<span class="string">'EB'</span>, <span class="number">4</span>), (<span class="string">'RDS'</span>, <span class="number">4</span>), (<span class="string">'Y'</span>, <span class="number">4</span>), (<span class="string">'WY'</span>, <span class="number">3</span>), (<span class="string">'HSH'</span>, <span class="number">3</span>), (<span class="string">'BCC'</span>, <span class="number">3</span>), (<span class="string">'PC'</span>, <span class="number">3</span>), (<span class="string">'O'</span>, <span class="number">3</span>), (<span class="string">'MB'</span>, <span class="number">3</span>), (<span class="string">'WGV'</span>, <span class="number">3</span>), (<span class="string">'BZW'</span>, <span class="number">3</span>), (<span class="string">'KTWF'</span>, <span class="number">3</span>), (<span class="string">'KP'</span>, <span class="number">3</span>), (<span class="string">'FYJ'</span>, <span class="number">3</span>), (<span class="string">''</span>, <span class="number">2</span>), (<span class="string">'WLEDH'</span>, <span class="number">2</span>), (<span class="string">'EKYP'</span>, <span class="number">2</span>), (<span class="string">'HLJH'</span>, <span class="number">2</span>), (<span class="string">'RDOE'</span>, <span class="number">2</span>), (<span class="string">'L'</span>, <span class="number">2</span>), (<span class="string">'GM'</span>, <span class="number">2</span>), (<span class="string">'MZX'</span>, <span class="number">2</span>), (<span class="string">'IGJOW'</span>, <span class="number">2</span>), (<span class="string">'CJSXLCO'</span>, <span class="number">2</span>), (<span class="string">'OR'</span>, <span class="number">2</span>), (<span class="string">'OYG'</span>, <span class="number">2</span>), (<span class="string">'HH'</span>, <span class="number">2</span>), (<span class="string">'KHSHP'</span>, <span class="number">2</span>), (<span class="string">'LQB'</span>, <span class="number">2</span>), (<span class="string">'W'</span>, <span class="number">2</span>), (<span class="string">'WULLLOH'</span>, <span class="number">2</span>), (<span class="string">'LRO'</span>, <span class="number">2</span>), (<span class="string">'YHZ'</span>, <span class="number">2</span>), (<span class="string">'DLZ'</span>, <span class="number">2</span>), (<span class="string">'ER'</span>, <span class="number">2</span>), (<span class="string">'WKI'</span>, <span class="number">2</span>), (<span class="string">'NDL'</span>, <span class="number">2</span>), (<span class="string">'AKIYWPU'</span>, <span class="number">2</span>), (<span class="string">'GEUSCUWH'</span>, <span class="number">2</span>), (<span class="string">'YRR'</span>, <span class="number">2</span>), (<span class="string">'WRLC'</span>, <span class="number">2</span>), (<span class="string">'ZMNZO'</span>, <span class="number">2</span>), (<span class="string">'YJR'</span>, <span class="number">2</span>), (<span class="string">'KT'</span>, <span class="number">2</span>), (<span class="string">'HRPHR'</span>, <span class="number">2</span>), (<span class="string">'NLRENPQQ'</span>, <span class="number">2</span>), (<span class="string">'WBO'</span>, <span class="number">2</span>), (<span class="string">'IOY'</span>, <span class="number">2</span>), (<span class="string">'OYB'</span>, <span class="number">2</span>), (<span class="string">'LR'</span>, <span class="number">2</span>), (<span class="string">'ID'</span>, <span class="number">2</span>), (<span class="string">'RSN'</span>, <span class="number">2</span>), (<span class="string">'CFU'</span>, <span class="number">2</span>), (<span class="string">'WG'</span>, <span class="number">1</span>), (<span class="string">'UZG'</span>, <span class="number">1</span>), (<span class="string">'IJCHLLC'</span>, <span class="number">1</span>), (<span class="string">'RUYJHPG'</span>, <span class="number">1</span>), (<span class="string">'WM'</span>, <span class="number">1</span>), (<span class="string">'FWG'</span>, <span class="number">1</span>), (<span class="string">'BK'</span>, <span class="number">1</span>), (<span class="string">'ZFK'</span>, <span class="number">1</span>), (<span class="string">'SS'</span>, <span class="number">1</span>), (<span class="string">'YRU'</span>, <span class="number">1</span>), (<span class="string">'QLOJ'</span>, <span class="number">1</span>), (<span class="string">'MJZJ'</span>, <span class="number">1</span>), (<span class="string">'YOWO'</span>, <span class="number">1</span>), (<span class="string">'YISCLAWBD'</span>, <span class="number">1</span>), (<span class="string">'RP'</span>, <span class="number">1</span>), (<span class="string">'YDRECYDJ'</span>, <span class="number">1</span>), (<span class="string">'AONK'</span>, <span class="number">1</span>), (<span class="string">'HRPG'</span>, <span class="number">1</span>), (<span class="string">'SDTA'</span>, <span class="number">1</span>), (<span class="string">'DWD'</span>, <span class="number">1</span>), (<span class="string">'KYJRD'</span>, <span class="number">1</span>), (<span class="string">'WDLZ'</span>, <span class="number">1</span>), (<span class="string">'HKYP'</span>, <span class="number">1</span>), (<span class="string">'SRSN'</span>, <span class="number">1</span>), (<span class="string">'TPZ'</span>, <span class="number">1</span>), (<span class="string">'ENOYG'</span>, <span class="number">1</span>), (<span class="string">'DPRNHS'</span>, <span class="number">1</span>), (<span class="string">'RDWD'</span>, <span class="number">1</span>), (<span class="string">'WAPUGYOYV'</span>, <span class="number">1</span>), (<span class="string">'D'</span>, <span class="number">1</span>), (<span class="string">'LVQQFP'</span>, <span class="number">1</span>), (<span class="string">'DNSPGMI'</span>, <span class="number">1</span>), (<span class="string">'ZZBYHHJ'</span>, <span class="number">1</span>), (<span class="string">'HCGH'</span>, <span class="number">1</span>), (<span class="string">'BMQF'</span>, <span class="number">1</span>), (<span class="string">'QWAP'</span>, <span class="number">1</span>), (<span class="string">'SVZ'</span>, <span class="number">1</span>), (<span class="string">'T'</span>, <span class="number">1</span>), (<span class="string">'JAH'</span>, <span class="number">1</span>), (<span class="string">'GJ'</span>, <span class="number">1</span>), (<span class="string">'UEZW'</span>, <span class="number">1</span>), (<span class="string">'DKF'</span>, <span class="number">1</span>), (<span class="string">'PQBAOGRSN'</span>, <span class="number">1</span>), (<span class="string">'YJGHHPAR'</span>, <span class="number">1</span>), (<span class="string">'GZXRD'</span>, <span class="number">1</span>), (<span class="string">'YNAD'</span>, <span class="number">1</span>), (<span class="string">'OD'</span>, <span class="number">1</span>), (<span class="string">'QUMI'</span>, <span class="number">1</span>), (<span class="string">'CSYHPWHTRLO'</span>, <span class="number">1</span>), (<span class="string">'YCFQRNM'</span>, <span class="number">1</span>), (<span class="string">'OVLQI'</span>, <span class="number">1</span>), (<span class="string">'HZ'</span>, <span class="number">1</span>), (<span class="string">'OCH'</span>, <span class="number">1</span>), (<span class="string">'WFWH'</span>, <span class="number">1</span>), (<span class="string">'HDQ'</span>, <span class="number">1</span>), (<span class="string">'HSRSCV'</span>, <span class="number">1</span>), (<span class="string">'LKH'</span>, <span class="number">1</span>), (<span class="string">'DKFRH'</span>, <span class="number">1</span>), (<span class="string">'YJM'</span>, <span class="number">1</span>), (<span class="string">'XICGCJ'</span>, <span class="number">1</span>), (<span class="string">'ICCH'</span>, <span class="number">1</span>), (<span class="string">'PKZP'</span>, <span class="number">1</span>), (<span class="string">'ESP'</span>, <span class="number">1</span>), (<span class="string">'PGJS'</span>, <span class="number">1</span>), (<span class="string">'CWGH'</span>, <span class="number">1</span>), (<span class="string">'OXHPEQLQQ'</span>, <span class="number">1</span>), (<span class="string">'AZUC'</span>, <span class="number">1</span>), (<span class="string">'MOCOGTQE'</span>, <span class="number">1</span>), (<span class="string">'GGOSLVC'</span>, <span class="number">1</span>), (<span class="string">'UCFU'</span>, <span class="number">1</span>), (<span class="string">'FMJGNLCJQP'</span>, <span class="number">1</span>), (<span class="string">'VSIAZQCZ'</span>, <span class="number">1</span>), (<span class="string">'BMQ'</span>, <span class="number">1</span>), (<span class="string">'UCSOCG'</span>, <span class="number">1</span>), (<span class="string">'MPDP'</span>, <span class="number">1</span>), (<span class="string">'MQF'</span>, <span class="number">1</span>), (<span class="string">'UKIWG'</span>, <span class="number">1</span>), (<span class="string">'RZ'</span>, <span class="number">1</span>), (<span class="string">'PAXZLAEBR'</span>, <span class="number">1</span>), (<span class="string">'JMKR'</span>, <span class="number">1</span>), (<span class="string">'VTVRKFJ'</span>, <span class="number">1</span>), (<span class="string">'AJ'</span>, <span class="number">1</span>), (<span class="string">'EREAHSHP'</span>, <span class="number">1</span>), (<span class="string">'ALNKYJUP'</span>, <span class="number">1</span>), (<span class="string">'EPEBR'</span>, <span class="number">1</span>), (<span class="string">'XXQP'</span>, <span class="number">1</span>), (<span class="string">'ZC'</span>, <span class="number">1</span>), (<span class="string">'PQCNUJ'</span>, <span class="number">1</span>), (<span class="string">'IOILKQA'</span>, <span class="number">1</span>), (<span class="string">'EC'</span>, <span class="number">1</span>), (<span class="string">'PMCDLJM'</span>, <span class="number">1</span>), (<span class="string">'ZU'</span>, <span class="number">1</span>), (<span class="string">'XIE'</span>, <span class="number">1</span>), (<span class="string">'ZQ'</span>, <span class="number">1</span>), (<span class="string">'WKIYJ'</span>, <span class="number">1</span>), (<span class="string">'HCXJU'</span>, <span class="number">1</span>), (<span class="string">'KKY'</span>, <span class="number">1</span>), (<span class="string">'DKAFTFY'</span>, <span class="number">1</span>), (<span class="string">'ECAB'</span>, <span class="number">1</span>), (<span class="string">'YCOTQ'</span>, <span class="number">1</span>), (<span class="string">'MXR'</span>, <span class="number">1</span>), (<span class="string">'PVZXED'</span>, <span class="number">1</span>), (<span class="string">'NRSJHCB'</span>, <span class="number">1</span>), (<span class="string">'OONUGBWNH'</span>, <span class="number">1</span>), (<span class="string">'HWQH'</span>, <span class="number">1</span>), (<span class="string">'YWELXABD'</span>, <span class="number">1</span>), (<span class="string">'LUKO'</span>, <span class="number">1</span>), (<span class="string">'PYJYTQB'</span>, <span class="number">1</span>), (<span class="string">'FV'</span>, <span class="number">1</span>), (<span class="string">'WFAGP'</span>, <span class="number">1</span>), (<span class="string">'ZSGRRECY'</span>, <span class="number">1</span>), (<span class="string">'BCWF'</span>, <span class="number">1</span>), (<span class="string">'EKC'</span>, <span class="number">1</span>), (<span class="string">'SYPWPQR'</span>, <span class="number">1</span>), (<span class="string">'NHONHQ'</span>, <span class="number">1</span>), (<span class="string">'WKIC'</span>, <span class="number">1</span>), (<span class="string">'QQQNHQO'</span>, <span class="number">1</span>), (<span class="string">'NKJPURU'</span>, <span class="number">1</span>), (<span class="string">'TZU'</span>, <span class="number">1</span>), (<span class="string">'FPVNKBDLZEZTWW'</span>, <span class="number">1</span>), (<span class="string">'ROMS'</span>, <span class="number">1</span>), (<span class="string">'JSPG'</span>, <span class="number">1</span>), (<span class="string">'TZXLZSO'</span>, <span class="number">1</span>), (<span class="string">'PSDWGICYB'</span>, <span class="number">1</span>), (<span class="string">'BZURD'</span>, <span class="number">1</span>), (<span class="string">'ENOGHQ'</span>, <span class="number">1</span>), (<span class="string">'EHCMDJ'</span>, <span class="number">1</span>), (<span class="string">'GYJUPU'</span>, <span class="number">1</span>), (<span class="string">'UDWNK'</span>, <span class="number">1</span>), (<span class="string">'AEHTCCJG'</span>, <span class="number">1</span>), (<span class="string">'KTOJ'</span>, <span class="number">1</span>), (<span class="string">'QLPA'</span>, <span class="number">1</span>), (<span class="string">'XB'</span>, <span class="number">1</span>), (<span class="string">'UPQCNOELMJ'</span>, <span class="number">1</span>), (<span class="string">'SHPA'</span>, <span class="number">1</span>), (<span class="string">'AWB'</span>, <span class="number">1</span>), (<span class="string">'VGJQP'</span>, <span class="number">1</span>), (<span class="string">'SVLW'</span>, <span class="number">1</span>), (<span class="string">'HDBCCW'</span>, <span class="number">1</span>), (<span class="string">'OHCZG'</span>, <span class="number">1</span>), (<span class="string">'XQ'</span>, <span class="number">1</span>), (<span class="string">'VSNFZXLZ'</span>, <span class="number">1</span>), (<span class="string">'VSNS'</span>, <span class="number">1</span>), (<span class="string">'UDOE'</span>, <span class="number">1</span>), (<span class="string">'FYHZ'</span>, <span class="number">1</span>), (<span class="string">'XZLL'</span>, <span class="number">1</span>), (<span class="string">'UWRZA'</span>, <span class="number">1</span>), (<span class="string">'DWPABRWF'</span>, <span class="number">1</span>), (<span class="string">'UZ'</span>, <span class="number">1</span>), (<span class="string">'CSYHPWHTRL'</span>, <span class="number">1</span>), (<span class="string">'PVLQ'</span>, <span class="number">1</span>), (<span class="string">'HYOH'</span>, <span class="number">1</span>), (<span class="string">'HKXOEWJAR'</span>, <span class="number">1</span>), (<span class="string">'JRS'</span>, <span class="number">1</span>), (<span class="string">'EHDHJB'</span>, <span class="number">1</span>), (<span class="string">'NRKICY'</span>, <span class="number">1</span>), (<span class="string">'DKFEK'</span>, <span class="number">1</span>), (<span class="string">'RK'</span>, <span class="number">1</span>), (<span class="string">'PAGE'</span>, <span class="number">1</span>), (<span class="string">'QPOYGYNRD'</span>, <span class="number">1</span>), (<span class="string">'TCRK'</span>, <span class="number">1</span>), (<span class="string">'MN'</span>, <span class="number">1</span>), (<span class="string">'DHPRS'</span>, <span class="number">1</span>), (<span class="string">'OWOGWBNH'</span>, <span class="number">1</span>), (<span class="string">'SLQPCCB'</span>, <span class="number">1</span>), (<span class="string">'FEGERPEQ'</span>, <span class="number">1</span>), (<span class="string">'NDJH'</span>, <span class="number">1</span>), (<span class="string">'HSLQ'</span>, <span class="number">1</span>), (<span class="string">'HQRRH'</span>, <span class="number">1</span>), (<span class="string">'OXHPEQL'</span>, <span class="number">1</span>), (<span class="string">'OCWR'</span>, <span class="number">1</span>), (<span class="string">'DR'</span>, <span class="number">1</span>), (<span class="string">'WFP'</span>, <span class="number">1</span>), (<span class="string">'DAZWRU'</span>, <span class="number">1</span>), (<span class="string">'ZFWH'</span>, <span class="number">1</span>), (<span class="string">'MHCJ'</span>, <span class="number">1</span>), (<span class="string">'BSWOMS'</span>, <span class="number">1</span>), (<span class="string">'BOTOSNS'</span>, <span class="number">1</span>), (<span class="string">'VSIAZQQ'</span>, <span class="number">1</span>), (<span class="string">'YCFUQA'</span>, <span class="number">1</span>), (<span class="string">'DEBLOJU'</span>, <span class="number">1</span>), (<span class="string">'EUSHM'</span>, <span class="number">1</span>), (<span class="string">'HHQP'</span>, <span class="number">1</span>), (<span class="string">'PPDP'</span>, <span class="number">1</span>), (<span class="string">'RNWMXJWHTRL'</span>, <span class="number">1</span>), (<span class="string">'TCXGPTFO'</span>, <span class="number">1</span>), (<span class="string">'PFFPNAH'</span>, <span class="number">1</span>), (<span class="string">'ZFAHSHP'</span>, <span class="number">1</span>), (<span class="string">'SSWFMIS'</span>, <span class="number">1</span>), (<span class="string">'EYPHWH'</span>, <span class="number">1</span>), (<span class="string">'DWWEK'</span>, <span class="number">1</span>), (<span class="string">'EZGHWRKR'</span>, <span class="number">1</span>), (<span class="string">'KLU'</span>, <span class="number">1</span>), (<span class="string">'PPOGAJP'</span>, <span class="number">1</span>), (<span class="string">'IM'</span>, <span class="number">1</span>), (<span class="string">'YOY'</span>, <span class="number">1</span>), (<span class="string">'LVI'</span>, <span class="number">1</span>), (<span class="string">'ICHZZZ'</span>, <span class="number">1</span>), (<span class="string">'ZAOC'</span>, <span class="number">1</span>), (<span class="string">'RLHM'</span>, <span class="number">1</span>), (<span class="string">'AOCWF'</span>, <span class="number">1</span>), (<span class="string">'OHDABOLLC'</span>, <span class="number">1</span>), (<span class="string">'SRNA'</span>, <span class="number">1</span>), (<span class="string">'OSCYGYS'</span>, <span class="number">1</span>), (<span class="string">'FEUS'</span>, <span class="number">1</span>), (<span class="string">'FAZA'</span>, <span class="number">1</span>), (<span class="string">'SVTFF'</span>, <span class="number">1</span>), (<span class="string">'QUCARZP'</span>, <span class="number">1</span>), (<span class="string">'RSP'</span>, <span class="number">1</span>), (<span class="string">'EKGO'</span>, <span class="number">1</span>), (<span class="string">'KGO'</span>, <span class="number">1</span>), (<span class="string">'ODNGJU'</span>, <span class="number">1</span>)]</span><br></pre></td></tr></table></figure>
+<p>我们主要关注两个词<code>the</code>和<code>a</code>，一个为三字母，一个为单字母，将其中三字母词和单字母词的统计情况打印出来：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">print [<span class="selector-tag">i</span> <span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> sortedWc <span class="keyword">if</span> len(<span class="selector-tag">i</span>[<span class="number">0</span>])==<span class="number">3</span>]</span><br><span class="line">print [<span class="selector-tag">i</span> <span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> sortedWc <span class="keyword">if</span> len(<span class="selector-tag">i</span>[<span class="number">0</span>])==<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(<span class="string">'WFA'</span>, <span class="number">8</span>), (<span class="string">'PVP'</span>, <span class="number">5</span>), (<span class="string">'RDS'</span>, <span class="number">4</span>), (<span class="string">'HSH'</span>, <span class="number">3</span>), (<span class="string">'BCC'</span>, <span class="number">3</span>), (<span class="string">'WGV'</span>, <span class="number">3</span>), (<span class="string">'BZW'</span>, <span class="number">3</span>), (<span class="string">'FYJ'</span>, <span class="number">3</span>), (<span class="string">'MZX'</span>, <span class="number">2</span>), (<span class="string">'OYG'</span>, <span class="number">2</span>), (<span class="string">'LQB'</span>, <span class="number">2</span>), (<span class="string">'LRO'</span>, <span class="number">2</span>), (<span class="string">'YHZ'</span>, <span class="number">2</span>), (<span class="string">'DLZ'</span>, <span class="number">2</span>), (<span class="string">'WKI'</span>, <span class="number">2</span>), (<span class="string">'NDL'</span>, <span class="number">2</span>), (<span class="string">'YRR'</span>, <span class="number">2</span>), (<span class="string">'YJR'</span>, <span class="number">2</span>), (<span class="string">'WBO'</span>, <span class="number">2</span>), (<span class="string">'IOY'</span>, <span class="number">2</span>), (<span class="string">'OYB'</span>, <span class="number">2</span>), (<span class="string">'RSN'</span>, <span class="number">2</span>), (<span class="string">'CFU'</span>, <span class="number">2</span>), (<span class="string">'UZG'</span>, <span class="number">1</span>), (<span class="string">'FWG'</span>, <span class="number">1</span>), (<span class="string">'ZFK'</span>, <span class="number">1</span>), (<span class="string">'YRU'</span>, <span class="number">1</span>), (<span class="string">'DWD'</span>, <span class="number">1</span>), (<span class="string">'TPZ'</span>, <span class="number">1</span>), (<span class="string">'SVZ'</span>, <span class="number">1</span>), (<span class="string">'JAH'</span>, <span class="number">1</span>), (<span class="string">'DKF'</span>, <span class="number">1</span>), (<span class="string">'OCH'</span>, <span class="number">1</span>), (<span class="string">'HDQ'</span>, <span class="number">1</span>), (<span class="string">'LKH'</span>, <span class="number">1</span>), (<span class="string">'YJM'</span>, <span class="number">1</span>), (<span class="string">'ESP'</span>, <span class="number">1</span>), (<span class="string">'BMQ'</span>, <span class="number">1</span>), (<span class="string">'MQF'</span>, <span class="number">1</span>), (<span class="string">'XIE'</span>, <span class="number">1</span>), (<span class="string">'KKY'</span>, <span class="number">1</span>), (<span class="string">'MXR'</span>, <span class="number">1</span>), (<span class="string">'EKC'</span>, <span class="number">1</span>), (<span class="string">'TZU'</span>, <span class="number">1</span>), (<span class="string">'AWB'</span>, <span class="number">1</span>), (<span class="string">'JRS'</span>, <span class="number">1</span>), (<span class="string">'WFP'</span>, <span class="number">1</span>), (<span class="string">'KLU'</span>, <span class="number">1</span>), (<span class="string">'YOY'</span>, <span class="number">1</span>), (<span class="string">'LVI'</span>, <span class="number">1</span>), (<span class="string">'RSP'</span>, <span class="number">1</span>), (<span class="string">'KGO'</span>, <span class="number">1</span>)]</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(<span class="string">'Y'</span>, <span class="number">4</span>), (<span class="string">'O'</span>, <span class="number">3</span>), (<span class="string">'L'</span>, <span class="number">2</span>), (<span class="string">'W'</span>, <span class="number">2</span>), (<span class="string">'D'</span>, <span class="number">1</span>), (<span class="string">'T'</span>, <span class="number">1</span>)]</span><br></pre></td></tr></table></figure>
+<p>假设排名靠前的<code>&#39;wfa&#39;</code>、<code>&#39;pvp&#39;</code>、<code>&#39;rds&#39;</code>都是<code>&#39;the&#39;</code>的密文，计算其偏移，分别为：</p>
+<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wfa: <span class="string">[3, 24, 22]</span></span><br><span class="line">pvp: <span class="string">[22, 14, 11]</span></span><br><span class="line">rds: <span class="string">[24, 22, 14]</span></span><br></pre></td></tr></table></figure>
+<p>perfect，重合的地方相当多。<br>假设成立的话，即这几个词都是<code>the</code>的密文的话，那么密钥中包含这5个偏移：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offsets = [<span class="number">3</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">24</span>]</span><br></pre></td></tr></table></figure>
+<p>不妨再大胆假设，<code>&#39;hsh&#39;</code>也是<code>&#39;the&#39;</code>的密文，计算其偏移：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+<p>这尼玛……完美，这三个偏移都在假设密钥存在的偏移<code>offsets</code>的范围内，两个假设相互印证。<br>再观察单字母的情况：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(<span class="string">'Y'</span>, <span class="number">4</span>), (<span class="string">'O'</span>, <span class="number">3</span>), (<span class="string">'L'</span>, <span class="number">2</span>), (<span class="string">'W'</span>, <span class="number">2</span>), (<span class="string">'D'</span>, <span class="number">1</span>), (<span class="string">'T'</span>, <span class="number">1</span>)]</span><br></pre></td></tr></table></figure>
+<p>上面是单字母单词和其出现的次数，假设其都是<code>&#39;a&#39;</code>或<code>&#39;i&#39;</code>的密文，计算其偏移<br>相对于<code>&#39;a&#39;</code>：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">24</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">22</span>, <span class="number">3</span>, <span class="number">19</span>]</span><br></pre></td></tr></table></figure>
+<p>除了19，全部位于<code>offsets</code>内，结果非常好。<br>考虑最后一个词<code>&#39;t&#39;</code>相对于<code>&#39;a&#39;</code>的偏移19不在<code>offsets</code>内，那么估计它就是<code>i</code>的密文了，计算其偏移：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span></span><br></pre></td></tr></table></figure>
+<p>棒，<code>11</code>刚好在<code>offsets</code>之内。<br>那么到这里我们假设，密钥为5位，分别为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offsets = [<span class="number">3</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">24</span>]</span><br></pre></td></tr></table></figure>
+<p>将这几个数字表示成对应的字母：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">dlowy</span></span><br></pre></td></tr></table></figure>
+<p>稍微变换下顺序：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offsets = [<span class="number">22</span>, <span class="number">24</span>, <span class="number">3</span>, <span class="number">11</span>, <span class="number">14</span>]</span><br></pre></td></tr></table></figure>
+<p>这就成了：</p>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">woldy</span></span><br></pre></td></tr></table></figure>
+<p>出题人的名字。。。答案还用说吗。。。？<br>用这个密钥解密已经可以得出原文。<br>以上的步骤是在我用后文所述的方法得出答案之后再回头看才得出的，但其中每一步的推测都不够严谨，对原始数据要求较高。<br>事实上以上步骤能得到结果纯粹因为题目所给的这段话中<code>&#39;the&#39;</code>出现的频率过于高了，按数学建模模的思路就是模型对于<code>&#39;the&#39;</code>出现的频率过于敏感，一旦原始数据中<code>&#39;the&#39;</code>出现的频率较低，则模型将不能得出结果。<br>对密钥的假设也不够严谨，实际上密钥是有可能多于5位的，而且<code>offsets</code>中的5个数字也不一定都在密钥中。<br>更通用的做法如下所述。</p>
+<h2 id="4、通用解法"><a href="#4、通用解法" class="headerlink" title="4、通用解法"></a>4、通用解法</h2><p>为了保证能够得到结果，首先需要的是在假设集<code>offsets</code>中包含尽可能多的数字，即保证<code>offsets</code>中能够涵盖实际的密钥。<br>在这里我们与前面一样假设假设排名靠前的<code>&#39;wfa&#39;</code>、<code>&#39;pvp&#39;</code>、<code>&#39;rds&#39;</code>都是<code>&#39;the&#39;</code>的密文，计算其偏移，分别为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wfa: [<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>]</span><br><span class="line">pvp: [<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>]</span><br><span class="line">rds: [<span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>]</span><br></pre></td></tr></table></figure>
+<p>同时，对于所给密文中出现过的单字母单词<code>&#39;Y&#39;,&#39;O&#39;,&#39;L&#39;,&#39;W&#39;,&#39;D&#39;,&#39;T&#39;</code>，其可能为<code>&#39;a&#39;</code>或<code>&#39;i&#39;</code>，分别计算偏移:</p>
+<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">对于<span class="string">'a'</span>:</span><br><span class="line">[<span class="meta">24, 14, 11, 22, 3, 19</span>]</span><br><span class="line">对于<span class="string">'i'</span>：</span><br><span class="line">[<span class="meta">16, 6, 3, 14, 21, 11</span>]</span><br></pre></td></tr></table></figure>
+<p>取以上各结果取并集，则假设集</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offsets = [<span class="number">3</span>, <span class="number">6</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">19</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">24</span>]</span><br></pre></td></tr></table></figure>
+<p>包含9种偏移。<br>根据假设，字母偏移的位数只可能在<code>offsets</code>之内，即只能是<code>[3, 6, 11, 14, 16, 19, 21, 22, 24]</code>其中之一。对于每个词，以<code>&#39;wfa&#39;</code>为例，每个字母对应的原文都有9种情况，对应<code>offsets</code>内不同的偏移值，如<code>&#39;w&#39;</code>，可能是原文字母往后偏移<code>3</code>位或者<code>6</code>位或者<code>11</code>位或者……，共有9种可能；<code>&#39;f&#39;</code>和<code>&#39;a&#39;</code>同样有9种可能，则<code>&#39;wfa&#39;</code>对应的原文单词有 $9\times9\times9$ 种不同的可能，将这些组合与其对应的密钥序列例举出来，观察哪些是完整的单词，哪些是乱码，即可对密钥序列做进一步的分析。而判断某种字母组合是否是一个单词，则可由程序通过在字典文件里的查找做到。<br>下面这段程序可判断四字母密文可能对应的原文：<br>先定义全局变量：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 构造好一个字典num和一个列表let完成字符和数字的转换关系</span></span><br><span class="line"><span class="comment"># 其中num = &#123;'a': 0, 'c': 2, 'b': 1, 'e': 4, 'd': 3, 'g': 6, 'f': 5, 'i': 8, 'h': 7, 'k': 10, 'j': 9, 'm': 12, 'l': 11, 'o': 14, 'n': 13, 'q': 16, 'p': 15, 's': 18, 'r': 17, 'u': 20, 't': 19, 'w': 22, 'v': 21, 'y': 24, 'x': 23, 'z': 25&#125;</span></span><br><span class="line"><span class="comment"># let = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']</span></span><br><span class="line"><span class="comment"># 使用let[n]即可得到位置n处的字母，如let[0]得到'a',let[25]或者let[-1]得到'z'</span></span><br><span class="line"><span class="comment"># 使用num[letter]即可得到字母的位置，如num['a']得到0,num['z']得到25</span></span><br><span class="line">num = &#123;&#125;</span><br><span class="line">j = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">97</span>,<span class="number">97</span>+<span class="number">26</span>):</span><br><span class="line">    num[chr(i)] = j</span><br><span class="line">    j += <span class="number">1</span></span><br><span class="line"></span><br><span class="line">let = []</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">26</span>):</span><br><span class="line">    let.append(chr(ord(<span class="string">'a'</span>)+i))</span><br><span class="line">    </span><br><span class="line"><span class="comment"># 打开事先准备好的英文常用3000词字典文件words.txt</span></span><br><span class="line"><span class="comment"># 此文件中每行保存一个单词，共3000行</span></span><br><span class="line"><span class="keyword">with</span> open(<span class="string">'words.txt'</span>) <span class="keyword">as</span> f:</span><br><span class="line">    s = f.read()</span><br><span class="line">    <span class="comment"># 以换行符为标志分割出单词，保存在一个集合(set)中</span></span><br><span class="line">    <span class="comment"># 将单词保存在集合中可以以o(1)的时间复杂度实现查找操作</span></span><br><span class="line">    words = set(s.split(<span class="string">'\n'</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 假设偏移集</span></span><br><span class="line">offsets = [<span class="number">3</span>, <span class="number">6</span>, <span class="number">11</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">19</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">24</span>]</span><br></pre></td></tr></table></figure></p>
+<p>具体的穷举寻找原单词的函数：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> itertools</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">searchRealWord</span><span class="params">(secretWord)</span>:</span></span><br><span class="line">    <span class="keyword">global</span> offsets,num,let</span><br><span class="line">    length = len(secretWord)</span><br><span class="line">    possibleLetters = []</span><br><span class="line">    realWord = []</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(length):</span><br><span class="line">        possibleLetters.append([])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> offsets:</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(length):</span><br><span class="line">            possibleLetters[j].append( (let[num[secretWord[j]]-i] ,i) )</span><br><span class="line"></span><br><span class="line">    possibleWords = itertools.product(*possibleLetters)</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> possibleWords:</span><br><span class="line">        word = <span class="string">''</span>.join([ i[<span class="number">0</span>] <span class="keyword">for</span> i <span class="keyword">in</span> item ])</span><br><span class="line">        <span class="keyword">if</span> word <span class="keyword">in</span> words:</span><br><span class="line">            realWord.append((word, [i[<span class="number">1</span>] <span class="keyword">for</span> i <span class="keyword">in</span> item]))</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">return</span> realWord</span><br></pre></td></tr></table></figure>
+<p>上面的函数，接受一个任意长的密文单词，通过穷举查字典，列出其所有可能的原文单词。<br>这段程序用了各种python黑科技，而换用其他语言不知道要写多少行，在这里不得不感叹python真的太厉害了。但是这段程序的可读性还是有问题，好在功能实现良好，懒得写注释了。<br>利用前一步得到的结果，所有六字母单词和出现次数如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data = [(<span class="string">'DPRNHS'</span>, <span class="number">1</span>), (<span class="string">'LVQQFP'</span>, <span class="number">1</span>), (<span class="string">'HSRSCV'</span>, <span class="number">1</span>), </span><br><span class="line">(<span class="string">'XICGCJ'</span>, <span class="number">1</span>), (<span class="string">'UCSOCG'</span>, <span class="number">1</span>), (<span class="string">'PQCNUJ'</span>, <span class="number">1</span>),</span><br><span class="line">(<span class="string">'PVZXED'</span>, <span class="number">1</span>), (<span class="string">'NHONHQ'</span>, <span class="number">1</span>), (<span class="string">'ENOGHQ'</span>, <span class="number">1</span>), </span><br><span class="line">(<span class="string">'EHDHJB'</span>, <span class="number">1</span>), (<span class="string">'NRKICY'</span>, <span class="number">1</span>), (<span class="string">'DAZWRU'</span>, <span class="number">1</span>),</span><br><span class="line">(<span class="string">'ICHZZZ'</span>, <span class="number">1</span>), (<span class="string">'ODNGJU'</span>, <span class="number">1</span>)]</span><br></pre></td></tr></table></figure></p>
+<p>依次解密：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> <span class="selector-tag">i</span> <span class="keyword">in</span> data:</span><br><span class="line">    print searchRealWord(<span class="selector-tag">i</span>[<span class="number">0</span>].lower())</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">[('people', **[<span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>]**), ('future', [<span class="number">24</span>, <span class="number">21</span>, <span class="number">24</span>, <span class="number">19</span>, <span class="number">16</span>, <span class="number">14</span>])]</span><br><span class="line">[('assure', [<span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>]), ('assume', [<span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">19</span>, <span class="number">11</span>])]</span><br><span class="line">[('though', **[<span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>]**)]</span><br><span class="line">[('burden', **[<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>]**), ('burned', [<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">19</span>, <span class="number">24</span>, <span class="number">6</span>]), ('buried', [<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">24</span>, <span class="number">24</span>, <span class="number">6</span>])]</span><br><span class="line">[('remark', [<span class="number">3</span>, <span class="number">24</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">22</span>]), ('reward', **[<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]**)]</span><br><span class="line">[('marked', [<span class="number">3</span>, <span class="number">16</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">6</span>]), ('market', [<span class="number">3</span>, <span class="number">16</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">16</span>]), ('energy', **[<span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>]**)]</span><br><span class="line">[('though', **[<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>]**)]</span><br><span class="line">[('season', [<span class="number">21</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">21</span>, <span class="number">19</span>, <span class="number">3</span>]), ('reason', [<span class="number">22</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">21</span>, <span class="number">19</span>, <span class="number">3</span>]), ('return', [<span class="number">22</span>, <span class="number">3</span>, <span class="number">21</span>, <span class="number">19</span>, <span class="number">16</span>, <span class="number">3</span>]), ('prison', [<span class="number">24</span>, <span class="number">16</span>, <span class="number">6</span>, <span class="number">21</span>, <span class="number">19</span>, <span class="number">3</span>])]</span><br><span class="line">[]</span><br><span class="line">[]</span><br><span class="line">[('danger', **[<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]**)]</span><br><span class="line">[('effort', **[<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]**)]</span><br><span class="line">[('beheld', [<span class="number">3</span>, <span class="number">3</span>, <span class="number">22</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">24</span>]), ('behold', [<span class="number">3</span>, <span class="number">3</span>, <span class="number">22</span>, <span class="number">19</span>, <span class="number">24</span>, <span class="number">24</span>]), ('lonely', [<span class="number">19</span>, <span class="number">19</span>, <span class="number">16</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">3</span>]), ('itself', **[<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>]**), ('gently', [<span class="number">24</span>, <span class="number">3</span>, <span class="number">16</span>, <span class="number">14</span>, <span class="number">24</span>, <span class="number">3</span>])]</span><br><span class="line">[('common', **[<span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>]**), ('closed', [<span class="number">11</span>, <span class="number">6</span>, <span class="number">22</span>, <span class="number">16</span>, <span class="number">24</span>, <span class="number">21</span>])]</span><br><span class="line">[('active', [<span class="number">3</span>, <span class="number">24</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">16</span>]), ('settle', [<span class="number">11</span>, <span class="number">22</span>, <span class="number">6</span>, <span class="number">3</span>, <span class="number">6</span>, <span class="number">16</span>]), ('fellow', **[<span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>]**), ('feeble', [<span class="number">24</span>, <span class="number">22</span>, <span class="number">21</span>, <span class="number">21</span>, <span class="number">6</span>, <span class="number">16</span>])]</span><br><span class="line">[('yellow', [<span class="number">3</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>]), ('fellow', **[<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>]**)]</span><br><span class="line">[('source', [<span class="number">6</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">22</span>]), ('course', **[<span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>]**), ('church', [<span class="number">22</span>, <span class="number">21</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">14</span>, <span class="number">19</span>])]</span><br><span class="line">[('battle', **[<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]**), ('little', [<span class="number">19</span>, <span class="number">16</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>])]</span><br><span class="line">[('forgot', [<span class="number">3</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">19</span>, <span class="number">11</span>, <span class="number">6</span>]), ('forget', [<span class="number">3</span>, <span class="number">14</span>, <span class="number">16</span>, <span class="number">19</span>, <span class="number">21</span>, <span class="number">6</span>]), ('follow', [<span class="number">3</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]), ('feeble', [<span class="number">3</span>, <span class="number">24</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">14</span>, <span class="number">21</span>]), ('fellow', **[<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]**), ('showed', [<span class="number">16</span>, <span class="number">21</span>, <span class="number">19</span>, <span class="number">3</span>, <span class="number">21</span>, <span class="number">22</span>]), ('settle', [<span class="number">16</span>, <span class="number">24</span>, <span class="number">14</span>, <span class="number">6</span>, <span class="number">14</span>, <span class="number">21</span>]), ('needed', [<span class="number">21</span>, <span class="number">24</span>, <span class="number">3</span>, <span class="number">22</span>, <span class="number">21</span>, <span class="number">22</span>])]</span><br><span class="line">[('inside', [<span class="number">6</span>, <span class="number">16</span>, <span class="number">21</span>, <span class="number">24</span>, <span class="number">6</span>, <span class="number">16</span>]), ('asking', **[<span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>]**), ('taking', [<span class="number">21</span>, <span class="number">3</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>]), ('sprang', [<span class="number">22</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">6</span>, <span class="number">22</span>, <span class="number">14</span>]), ('spring', [<span class="number">22</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>])]</span><br></pre></td></tr></table></figure></p>
+<p>注意手动添加的<code>**</code>之间的部分，答案显而易见了。<br>更精密的办法是对所有长度的单词进行类似的统计，找出重复最多的序列，这里用不到了。<br>密钥是：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span></span><br></pre></td></tr></table></figure>
+<p>将<code>offsets</code>的值改为上述序列</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">offsets = [<span class="number">11</span>, <span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>]</span><br></pre></td></tr></table></figure>
+<p>首尾循环，初始点待定。<br>对第一句话<code>EB BMQF KYJRD</code>的单词依次进行解码,输出为：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[('by', [<span class="number">3</span>, <span class="number">3</span>]), ('if', [<span class="number">22</span>, <span class="number">22</span>]), ('in', [<span class="number">22</span>, <span class="number">14</span>])]</span><br><span class="line">[('your', [<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>]), ('four', [<span class="number">22</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>])]</span><br><span class="line">[('wants', [<span class="number">14</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">24</span>, <span class="number">11</span>])]</span><br><span class="line">[('my', [<span class="number">22</span>, <span class="number">14</span>])]</span><br><span class="line">[('fellow', [<span class="number">3</span>, <span class="number">24</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>]), ('follow', [<span class="number">3</span>, <span class="number">14</span>, <span class="number">22</span>, <span class="number">14</span>, <span class="number">11</span>, <span class="number">3</span>])]</span><br><span class="line">[]</span><br></pre></td></tr></table></figure>
+<p>前两个符合要求的输出是<code>in your</code>，偏移值分别为<code>22,14</code>和<code>3,24,22,14</code>对照<code>11, 3, 24, 22, 14</code>，猜测遇到空格标点等，密钥一样会往前跳。继续分析其他句子，猜测得到证明。<br>于是有，密钥<code>从22开始</code>，以<code>[22, 14, 11, 3, 24]</code>的顺序循环，遇标点或空格则密钥继续往前跳。<br>解密</p>
+<figure class="highlight ceylon"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">article = <span class="string">"""EB BMQF KYJRD, IM ICHZZZ YWELXABD, ICCH PVLQ EB PGJS, UEZW PAGE RDS IGJOW QQQNHQO ZU BOTOSNS RD CFU YCFUQA. VGJQP RDWD AKIYWPU HDQ TZXLZSO, AONK CSYHPWHTRL CQ YISCLAWBD FWG ECAB VSIAZQCZ ER CWGH PSDWGICYB PC LRO YDRECYDJ ZZBYHHJ. PVP ENOGHQ CQ WKIYJ WAPUGYOYV SVZ YJGHHPAR WFA NDJH ER OSCYGYS VSNFZXLZ EKC UWRZA.</span></span><br><span class="line"><span class="string">    YRU HSH PFFPNAH VSIAZQQ ID YCOTQ - YRR OD Y QLOJ HZ ZAOC YNAD, PVZXED LUKO HH JSPG; BZW WG D YOWO PC EYPHWH, HSRSCV HKXOEWJAR ZC OCH - MXR O FYHZ WM PPDP HSH XICGCJ ZI W WRLC EZGHWRKR GEUSCUWH, MPDP WY YJR BCWF RSP, "PAXZLAEBR GJ SRNA, SYPWPQR WY RNWMXJWHTRL" - Y GEUSCUWH WULLLOH WFA NRKICY CJSXLCO ZI IOY: PMCDLJM, NKJPURU, GGOSLVC, LQB KLU EHDHJB.</span></span><br><span class="line"><span class="string">    NDL KP DKFRH WULLLOH WFAGP CJSXLCO L ENOYG WBO EHCMDJ OWOGWBNH, BZURD LQB GZXRD, HYOH DLZ HHQP, WFWH FYJ LVQQFP Y AZUC TCXGPTFO HWQH BCC YHZ PYJYTQB? HLJH JRS XZLL WY RDOE FEGERPEQ HDBCCW?</span></span><br><span class="line"><span class="string">    EB WFA WRLC SLQPCCB KT WFA HRPHR, MJZJ Y TPZ CSYHPWHTRLO SDTA MHCJ RUYJHPG PVP PKZP MB OHDABOLLC QUCARZP EB LRO SRSN ZI IOILKQA GYJUPU. W GM BZW OVLQI TCRK HSLQ FPVNKBDLZEZTWW - L SSWFMIS LR. T BK YRR PPOGAJP RDOE YJM RD ID UKIWG ALNKYJUP NHONHQ KTWF OYB KHSHP DPRNHS RP OYB KHSHP UPQCNOELMJ. WFA PQCNUJ, PVP DWWEK, HSH ZSGRRECY UDWNK SS EPEBR RK EKGO PQBAOGRSN HLJH WLEDH RSN NRSJHCB WBO YHZ ZFK DHPRS LR -- YJR WFA ROMS QUMI EKYP QLPA NDL HCXJU WLEDH WFA HRPHR.</span></span><br><span class="line"><span class="string">    DLZ DR, AJ DAZWRU OXHPEQLQQ: LVI BZW SVLW UCFU YCFQRNM FYJ OR BCC WKI - WGV UDOE WKI FYJ OR BCC WKIC AKIYWPU.</span></span><br><span class="line"><span class="string">    XB BSWOMS NLRENPQQ CQ RDS ZMNZO: WGV LKH ZFWH DKAFTFY KTOJ RZ DKF BMQ, ESP HKYP EREAHSHP KP AWB GM TZU PVP DNSPGMI ZI IOY.</span></span><br><span class="line"><span class="string">    DEBLOJU, ZFAHSHP MZX WFP AEHTCCJG RD OXHPEQL MN NLRENPQQ CQ RDS ZMNZO, WGV MB FV PVP QWAP FEUS QPOYGYNRD MB DWPABRWF OYG OONUGBWNH SVTFF KP YOY RD MZX. KTWF O JMKR FMJGNLCJQP MQF RLHM VSNS UCSOCG, KTWF VTVRKFJ RDS IGJOW HQRRH KT RSN OHCZG, JAH XQ UZ DKFEK PC OCWR WFA WDLZ HH HCGH, ODNGJU KGO MOCOGTQE OYG DWD FAZA, XIE IJCHLLC EKYP SHPA ZQ AOCWF UZG'O HRPG XXQP EUSHM EC CFU KKY.</span></span><br><span class="line"><span class="string">"""</span></span><br><span class="line">article = article.lower()</span><br><span class="line"></span><br><span class="line">i = <span class="number">0</span></span><br><span class="line">result = []</span><br><span class="line"><span class="keyword">while</span> i&lt;len(article):</span><br><span class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(<span class="number">5</span>):</span><br><span class="line">        <span class="keyword">if</span> i+j&gt;len(article):</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">if</span> article[i+j].isalpha():</span><br><span class="line">            result.append(<span class="keyword">let</span>[num.get(article[i+j],<span class="string">' '</span>)-[<span class="number">22</span>,<span class="number">14</span>,<span class="number">11</span>,<span class="number">3</span>,<span class="number">24</span>][j]])</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            result.append(article[i+j])</span><br><span class="line">    i += <span class="number">5</span></span><br><span class="line">print <span class="string">''</span>.join(result)</span><br></pre></td></tr></table></figure>
+<p>注意每段开头要有四个空格，每段结束没有空格，这些格式是手动加的，上面的代码中就是这种格式。<br>输出：</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">in</span> your hands, my fellow citizens, more than <span class="keyword">in</span> mine, will rest <span class="keyword">the</span> final success <span class="keyword">or</span> failure <span class="keyword">of</span> our course. since this country was founded, <span class="keyword">each</span> generation <span class="keyword">of</span> americans has been summoned <span class="built_in">to</span> give testimony <span class="built_in">to</span> its national loyalty. <span class="keyword">the</span> graves <span class="keyword">of</span> young americans who answered <span class="keyword">the</span> call <span class="built_in">to</span> service surround <span class="keyword">the</span> globe.</span><br><span class="line">    now <span class="keyword">the</span> trumpet summons us again - <span class="keyword">not</span> <span class="keyword">as</span> <span class="keyword">a</span> call <span class="built_in">to</span> bear arms, though arms we need; <span class="keyword">not</span> <span class="keyword">as</span> <span class="keyword">a</span> call <span class="built_in">to</span> battle, though embattled we are - but <span class="keyword">a</span> call <span class="built_in">to</span> bear <span class="keyword">the</span> burden <span class="keyword">of</span> <span class="keyword">a</span> <span class="keyword">long</span> twilight struggle, year <span class="keyword">in</span> <span class="keyword">and</span> year out, <span class="string">"rejoicing in hope, patient in tribulation"</span> - <span class="keyword">a</span> struggle against <span class="keyword">the</span> common enemies <span class="keyword">of</span> man: tyranny, poverty, disease, <span class="keyword">and</span> war itself.</span><br><span class="line">    can we forge against these enemies <span class="keyword">a</span> grand <span class="keyword">and</span> <span class="built_in">global</span> alliance, north <span class="keyword">and</span> south, east <span class="keyword">and</span> west, that can assure <span class="keyword">a</span> more fruitful life <span class="keyword">for</span> all mankind? will you join <span class="keyword">in</span> that historic effort?</span><br><span class="line">    <span class="keyword">in</span> <span class="keyword">the</span> <span class="keyword">long</span> history <span class="keyword">of</span> <span class="keyword">the</span> world, only <span class="keyword">a</span> few generations have been granted <span class="keyword">the</span> role <span class="keyword">of</span> defending freedom <span class="keyword">in</span> its hour <span class="keyword">of</span> maximum danger. i <span class="built_in">do</span> <span class="keyword">not</span> shank <span class="built_in">from</span> this responsibility - i welcome <span class="keyword">it</span>. i <span class="built_in">do</span> <span class="keyword">not</span> believe that <span class="keyword">any</span> <span class="keyword">of</span> us would exchange places <span class="keyword">with</span> <span class="keyword">any</span> other people <span class="keyword">or</span> <span class="keyword">any</span> other generation. <span class="keyword">the</span> energy, <span class="keyword">the</span> faith, <span class="keyword">the</span> devotion which we bring <span class="built_in">to</span> this endeavour will light our country <span class="keyword">and</span> all who serve <span class="keyword">it</span> <span class="comment">-- and the glow from that fire can truly light the world.</span></span><br><span class="line">    <span class="keyword">and</span> so, my fellow americans: ask <span class="keyword">not</span> what your country can <span class="built_in">do</span> <span class="keyword">for</span> you - ask what you can <span class="built_in">do</span> <span class="keyword">for</span> your country.</span><br><span class="line">    my fellow citizens <span class="keyword">of</span> <span class="keyword">the</span> world: ask <span class="keyword">not</span> what america will <span class="built_in">do</span> <span class="keyword">for</span> you, but what together we can <span class="built_in">do</span> <span class="keyword">for</span> <span class="keyword">the</span> freedom <span class="keyword">of</span> man.</span><br><span class="line">    <span class="keyword">finally</span>, whether you are citizens <span class="keyword">of</span> america <span class="keyword">or</span> citizens <span class="keyword">of</span> <span class="keyword">the</span> world, ask <span class="keyword">of</span> us <span class="keyword">the</span> same high standards <span class="keyword">of</span> strength <span class="keyword">and</span> sacrifice which we ask <span class="keyword">of</span> you. <span class="keyword">with</span> <span class="keyword">a</span> good conscience our only sure reward, <span class="keyword">with</span> history <span class="keyword">the</span> final judge <span class="keyword">of</span> our deeds, let us go forth <span class="built_in">to</span> lead <span class="keyword">the</span> land we love, asking his blessing <span class="keyword">and</span> his help, but knowing that here <span class="keyword">on</span> <span class="title">earth</span> <span class="title">god</span><span class="string">'s work must truly be our own.</span></span><br></pre></td></tr></table></figure>
+<p>搜之，这是美国总统<code>John F. Kennedy</code>的就职演说</p>
+<hr>
+
+<h1 id="三、flag"><a href="#三、flag" class="headerlink" title="三、flag"></a>三、flag</h1><p>wctf{Kennedy}</p>
+<hr>
+
+<h1 id="四、总结"><a href="#四、总结" class="headerlink" title="四、总结"></a>四、总结</h1><p>密码破解，极有意思。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2015/05/05/IDF实验室-简单的js解密/" data-toggle="tooltip" data-placement="top" title="IDF实验室-简单的js解密">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2015/05/05/IDF实验室-谁是卧底/" data-toggle="tooltip" data-placement="top" title="IDF实验室-谁是卧底">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+        
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#IDF实验室" title="IDF实验室">IDF实验室</a>
+                        
+                          <a class="tag" href="/tags/#ctf" title="ctf">ctf</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+                <hr>
+                <h5>FRIENDS</h5>
+                <ul class="list-inline">
+
+                    
+                        <li><a href="http://blog.kaijun.rocks" target="_blank">Kaijun&#39;s Blog</a></li>
+                    
+                        <li><a href="http://huangxuan.me" target="_blank">Hux Blog</a></li>
+                    
+                        <li><a href="#" target="_blank">Foo</a></li>
+                    
+                        <li><a href="#" target="_blank">Bar</a></li>
+                    
+                        <li><a href="#" target="_blank">Example Friends</a></li>
+                    
+                        <li><a href="#" target="_blank">It helps SEO</a></li>
+                    
+                </ul>
+                
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "hexo-theme-huxblog";
+    var disqus_identifier = "https://pzque.github.io/2015/05/05/IDF实验室-伟人的名字/";
+    var disqus_url = "https://pzque.github.io/2015/05/05/IDF实验室-伟人的名字/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                    <li>
+                        <a target="_blank" href="https://twitter.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/六月">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/PC_x64">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="https://www.facebook.com/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/pzque">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://www.linkedin.com/in/None">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; pzque&#39;s Blog 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-49627206-1';
+    var _gaDomain = 'pzque.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+<script>
+    // dynamic User by Hux
+    var _baId = '4cc1f2d8f3067386cc5cdb626a202900';
+
+    // Originial
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?" + _baId;
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+
+
+<!-- Side Catalog -->
+
+
+
+
+
+<!-- Image to hack wechat -->
+<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
