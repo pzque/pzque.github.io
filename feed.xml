@@ -1,0 +1,581 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>pzque&#39;s Blog</title>
+  <icon>https://www.gravatar.com/avatar/7f3b9a3d7fbd6b7b8b8db69eccf2acc4</icon>
+  <subtitle>On the way.</subtitle>
+  <link href="/feed.xml" rel="self"/>
+  
+  <link href="https://pzque.github.io/"/>
+  <updated>2018-01-04T15:42:55.067Z</updated>
+  <id>https://pzque.github.io/</id>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Scala-C++交叉编译</title>
+    <link href="https://pzque.github.io/2018/01/04/Scala-C++%E4%BA%A4%E5%8F%89%E7%BC%96%E8%AF%91/"/>
+    <id>https://pzque.github.io/2018/01/04/Scala-C++交叉编译/</id>
+    <published>2018-01-03T16:00:00.000Z</published>
+    <updated>2018-01-04T15:42:55.067Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;前些天有个项目有scala-c++交叉编译的需求，于是简单做了个demo把构建流程打通，并且尽量自动化。&lt;/p&gt;
+&lt;p&gt;现在项目好像是黄了，还是整理一下发出来吧。&lt;/p&gt;
+&lt;p&gt;项目地址： &lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+      <category term="scala" scheme="https://pzque.github.io/tags/scala/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Spark job执行流程</title>
+    <link href="https://pzque.github.io/2017/12/20/Sparkj%20job%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B/"/>
+    <id>https://pzque.github.io/2017/12/20/Sparkj job执行流程/</id>
+    <published>2017-12-19T16:00:00.000Z</published>
+    <updated>2018-01-04T10:44:32.433Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;最近讨论spark，发现我对spark的了解仅限于原理层面，对stage划分、job执行的细节理解不够充分。&lt;/p&gt;
+&lt;p&gt;所以就翻开spark2.2.0的源码，梳理一下一个任务从提交到执行的流程。&lt;/p&gt;
+&lt;p&gt;以经典的wordcount代码为例：&lt;/p&gt;
+&lt;figure
+        
+      
+    
+    </summary>
+    
+    
+      <category term="scala" scheme="https://pzque.github.io/tags/scala/"/>
+    
+      <category term="bigdata" scheme="https://pzque.github.io/tags/bigdata/"/>
+    
+      <category term="spark" scheme="https://pzque.github.io/tags/spark/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>scala implicit关键字详解(隐式转换函数、隐式类、隐式参数、隐式值)</title>
+    <link href="https://pzque.github.io/2017/09/19/scala-implicit/"/>
+    <id>https://pzque.github.io/2017/09/19/scala-implicit/</id>
+    <published>2017-09-18T16:00:00.000Z</published>
+    <updated>2018-01-04T10:44:32.429Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;一、Overview&quot;&gt;&lt;a href=&quot;#一、Overview&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="scala" scheme="https://pzque.github.io/tags/scala/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>11、初步使用roswtf</title>
+    <link href="https://pzque.github.io/2016/04/19/11%E3%80%81%E5%88%9D%E6%AD%A5%E4%BD%BF%E7%94%A8roswtf/"/>
+    <id>https://pzque.github.io/2016/04/19/11、初步使用roswtf/</id>
+    <published>2016-04-19T14:33:04.000Z</published>
+    <updated>2018-01-04T10:47:07.975Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在实践本篇文章前，请确保你的机器上没有&lt;code&gt;roscore&lt;/code&gt;在运行。&lt;/p&gt;
+&lt;h1 id=&quot;一、检查安装状态&quot;&gt;&lt;a href=&quot;#一、检查安装状态&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>10、ROS记录和重现数据</title>
+    <link href="https://pzque.github.io/2016/04/19/10%E3%80%81ROS%E8%AE%B0%E5%BD%95%E5%92%8C%E9%87%8D%E7%8E%B0%E6%95%B0%E6%8D%AE/"/>
+    <id>https://pzque.github.io/2016/04/19/10、ROS记录和重现数据/</id>
+    <published>2016-04-19T13:28:17.000Z</published>
+    <updated>2018-01-04T10:46:21.712Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在使用ROS系统的时候，我们可能会遇到这样的需求——重现机器人在的运行状况或者分析机器人的某些运行数据。这时候我们就十分需要对数据进行记录和备份的功能，好在ROS提供了非常方便的这样的功能。&lt;/p&gt;
+&lt;h1 id=&quot;一、记录数据（通过创建bag文件）&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>8、ROS使用C++编写一个简单的Publisher和Subscriber</title>
+    <link href="https://pzque.github.io/2016/04/19/8%E3%80%81ROS%E4%BD%BF%E7%94%A8C++%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Publisher%E5%92%8CSubscriber/"/>
+    <id>https://pzque.github.io/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/</id>
+    <published>2016-04-19T08:54:40.000Z</published>
+    <updated>2018-01-04T10:48:13.450Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、Publisher节点&quot;&gt;&lt;a href=&quot;#一、Publisher节点&quot; class=&quot;headerlink&quot; title=&quot;一、Publisher节点&quot;&gt;&lt;/a&gt;一、Publisher节点&lt;/h1&gt;&lt;p&gt;“节点”
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>9、ROS使用C++编写一个简单的Service和Client</title>
+    <link href="https://pzque.github.io/2016/04/19/9%E3%80%81ROS%E4%BD%BF%E7%94%A8C++%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84Service%E5%92%8CClient/"/>
+    <id>https://pzque.github.io/2016/04/19/9、ROS使用C++编写一个简单的Service和Client/</id>
+    <published>2016-04-19T08:54:40.000Z</published>
+    <updated>2018-01-04T10:48:25.867Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;在开始本篇文章之前，默认我们在前面的几篇文章中已经进行了如下的工作：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;创建了beginner_tutorial包&lt;/li&gt;
+&lt;li&gt;在beginner_tutorial包中创建了AddTwoInts.srv文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果没有
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>7、创建ROS msg和srv</title>
+    <link href="https://pzque.github.io/2016/04/19/7%E3%80%81%E5%88%9B%E5%BB%BAROS%20msg%E5%92%8Csrv/"/>
+    <id>https://pzque.github.io/2016/04/19/7、创建ROS msg和srv/</id>
+    <published>2016-04-19T03:11:18.000Z</published>
+    <updated>2018-01-04T10:48:05.030Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、msg和srv介绍&quot;&gt;&lt;a href=&quot;#一、msg和srv介绍&quot; class=&quot;headerlink&quot; title=&quot;一、msg和srv介绍&quot;&gt;&lt;/a&gt;一、msg和srv介绍&lt;/h1&gt;&lt;p&gt;msg： msg文件使用简单的文本格式声明一个ROS
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用emacs进行时间管理(2)——基本任务管理[转]</title>
+    <link href="https://pzque.github.io/2016/04/18/%E4%BD%BF%E7%94%A8emacs%E8%BF%9B%E8%A1%8C%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86(2)%E2%80%94%E2%80%94%E5%9F%BA%E6%9C%AC%E4%BB%BB%E5%8A%A1%E7%AE%A1%E7%90%86%5B%E8%BD%AC%5D/"/>
+    <id>https://pzque.github.io/2016/04/18/使用emacs进行时间管理(2)——基本任务管理[转]/</id>
+    <published>2016-04-18T12:50:12.000Z</published>
+    <updated>2018-01-04T10:44:32.381Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;原文链接：&lt;a href=&quot;http://www.cnblogs.com/holbrook/archive/2012/04/14/2447754.html&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="emacs" scheme="https://pzque.github.io/categories/emacs/"/>
+    
+    
+      <category term="emacs" scheme="https://pzque.github.io/tags/emacs/"/>
+    
+      <category term="spacemacs" scheme="https://pzque.github.io/tags/spacemacs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>使用emacs进行时间管理(1)——org-mode基本操作</title>
+    <link href="https://pzque.github.io/2016/04/17/%E4%BD%BF%E7%94%A8emacs%E8%BF%9B%E8%A1%8C%E6%97%B6%E9%97%B4%E7%AE%A1%E7%90%86(1)%E2%80%94%E2%80%94org-mode%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C/"/>
+    <id>https://pzque.github.io/2016/04/17/使用emacs进行时间管理(1)——org-mode基本操作/</id>
+    <published>2016-04-17T15:43:38.000Z</published>
+    <updated>2018-01-04T10:49:52.195Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;本篇文章大部分引用自：&lt;a href=&quot;http://www.cnblogs.com/holbrook/archive/2012/04/17/2454619.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;org-mode:
+        
+      
+    
+    </summary>
+    
+      <category term="emacs" scheme="https://pzque.github.io/categories/emacs/"/>
+    
+    
+      <category term="emacs" scheme="https://pzque.github.io/tags/emacs/"/>
+    
+      <category term="spacemacs" scheme="https://pzque.github.io/tags/spacemacs/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>6、rqt_console和roslaunch</title>
+    <link href="https://pzque.github.io/2016/04/14/6%E3%80%81rqt_console%E5%92%8Croslaunch/"/>
+    <id>https://pzque.github.io/2016/04/14/6、rqt_console和roslaunch/</id>
+    <published>2016-04-14T13:09:16.000Z</published>
+    <updated>2018-01-04T10:47:55.277Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、准备&quot;&gt;&lt;a href=&quot;#一、准备&quot; class=&quot;headerlink&quot; title=&quot;一、准备&quot;&gt;&lt;/a&gt;一、准备&lt;/h1&gt;&lt;p&gt;确保你已经安装了rqt和turtlesim包，没有的话，使用以下命令安装：&lt;br&gt;&lt;figure
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>5、理解ros服务</title>
+    <link href="https://pzque.github.io/2016/04/14/5%E3%80%81%E7%90%86%E8%A7%A3ros%E6%9C%8D%E5%8A%A1/"/>
+    <id>https://pzque.github.io/2016/04/14/5、理解ros服务/</id>
+    <published>2016-04-14T13:09:15.000Z</published>
+    <updated>2018-01-04T10:47:39.828Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、ros服务&quot;&gt;&lt;a href=&quot;#一、ros服务&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>4、理解ros话题</title>
+    <link href="https://pzque.github.io/2016/04/14/4%E3%80%81%E7%90%86%E8%A7%A3ros%E8%AF%9D%E9%A2%98/"/>
+    <id>https://pzque.github.io/2016/04/14/4、理解ros话题/</id>
+    <published>2016-04-14T07:12:09.000Z</published>
+    <updated>2018-01-04T10:47:34.712Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、准备工作&quot;&gt;&lt;a href=&quot;#一、准备工作&quot; class=&quot;headerlink&quot; title=&quot;一、准备工作&quot;&gt;&lt;/a&gt;一、准备工作&lt;/h1&gt;&lt;h2 id=&quot;1-roscore&quot;&gt;&lt;a href=&quot;#1-roscore&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>3、理解ros节点</title>
+    <link href="https://pzque.github.io/2016/04/14/3%E3%80%81%E7%90%86%E8%A7%A3ros%E8%8A%82%E7%82%B9/"/>
+    <id>https://pzque.github.io/2016/04/14/3、理解ros节点/</id>
+    <published>2016-04-14T07:12:08.000Z</published>
+    <updated>2018-01-04T10:47:26.284Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、总体框架&quot;&gt;&lt;a href=&quot;#一、总体框架&quot; class=&quot;headerlink&quot; title=&quot;一、总体框架&quot;&gt;&lt;/a&gt;一、总体框架&lt;/h1&gt;&lt;p&gt;参见&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2、ROS使用工作空间</title>
+    <link href="https://pzque.github.io/2016/04/14/2%E3%80%81ROS%E4%BD%BF%E7%94%A8%E5%B7%A5%E4%BD%9C%E7%A9%BA%E9%97%B4/"/>
+    <id>https://pzque.github.io/2016/04/14/2、ROS使用工作空间/</id>
+    <published>2016-04-14T07:12:07.000Z</published>
+    <updated>2018-01-04T10:47:20.011Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、引言&quot;&gt;&lt;a href=&quot;#一、引言&quot; class=&quot;headerlink&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>1、创建一个ROS package</title>
+    <link href="https://pzque.github.io/2016/04/14/1%E3%80%81%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAROS%20package/"/>
+    <id>https://pzque.github.io/2016/04/14/1、创建一个ROS package/</id>
+    <published>2016-04-14T07:12:06.000Z</published>
+    <updated>2018-01-04T10:47:15.059Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;英文链接&lt;a href=&quot;http://wiki.ros.org/ROS/Tutorials/CreatingPackage&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;CreatingPackage&lt;/a&gt;&lt;/p&gt;
+&lt;h1
+        
+      
+    
+    </summary>
+    
+      <category term="ros" scheme="https://pzque.github.io/categories/ros/"/>
+    
+    
+      <category term="ros" scheme="https://pzque.github.io/tags/ros/"/>
+    
+      <category term="c++" scheme="https://pzque.github.io/tags/c/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDF实验室-伟人的名字</title>
+    <link href="https://pzque.github.io/2015/05/05/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E4%BC%9F%E4%BA%BA%E7%9A%84%E5%90%8D%E5%AD%97/"/>
+    <id>https://pzque.github.io/2015/05/05/IDF实验室-伟人的名字/</id>
+    <published>2015-05-05T15:30:00.000Z</published>
+    <updated>2018-01-04T10:49:28.862Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、原题&quot;&gt;&lt;a href=&quot;#一、原题&quot; class=&quot;headerlink&quot; title=&quot;一、原题&quot;&gt;&lt;/a&gt;一、原题&lt;/h1&gt;&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="信息安全" scheme="https://pzque.github.io/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="IDF实验室" scheme="https://pzque.github.io/tags/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+      <category term="ctf" scheme="https://pzque.github.io/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDF实验室-部分简单题目writeup</title>
+    <link href="https://pzque.github.io/2015/05/05/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E9%83%A8%E5%88%86%E7%AE%80%E5%8D%95%E9%A2%98%E7%9B%AEwriteup/"/>
+    <id>https://pzque.github.io/2015/05/05/IDF实验室-部分简单题目writeup/</id>
+    <published>2015-05-05T15:30:00.000Z</published>
+    <updated>2018-01-04T10:48:36.235Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h2 id=&quot;1-被改错的密码&quot;&gt;&lt;a href=&quot;#1-被改错的密码&quot; class=&quot;headerlink&quot; title=&quot;1. 被改错的密码&quot;&gt;&lt;/a&gt;1.
+        
+      
+    
+    </summary>
+    
+      <category term="信息安全" scheme="https://pzque.github.io/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="IDF实验室" scheme="https://pzque.github.io/tags/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+      <category term="ctf" scheme="https://pzque.github.io/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDF实验室-谁是卧底</title>
+    <link href="https://pzque.github.io/2015/05/05/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E8%B0%81%E6%98%AF%E5%8D%A7%E5%BA%95/"/>
+    <id>https://pzque.github.io/2015/05/05/IDF实验室-谁是卧底/</id>
+    <published>2015-05-05T15:30:00.000Z</published>
+    <updated>2018-01-04T10:49:21.170Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;一、原题&quot;&gt;&lt;a href=&quot;#一、原题&quot; class=&quot;headerlink&quot; title=&quot;一、原题&quot;&gt;&lt;/a&gt;&lt;strong&gt;一、原题&lt;/strong&gt;&lt;/h1&gt;&lt;p&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+      <category term="信息安全" scheme="https://pzque.github.io/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="IDF实验室" scheme="https://pzque.github.io/tags/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+      <category term="ctf" scheme="https://pzque.github.io/tags/ctf/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>IDF实验室-简单的js解密</title>
+    <link href="https://pzque.github.io/2015/05/05/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4-%E7%AE%80%E5%8D%95%E7%9A%84js%E8%A7%A3%E5%AF%86/"/>
+    <id>https://pzque.github.io/2015/05/05/IDF实验室-简单的js解密/</id>
+    <published>2015-05-05T15:30:00.000Z</published>
+    <updated>2018-01-04T10:48:50.824Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;原题：&quot;&gt;&lt;a href=&quot;#原题：&quot; class=&quot;headerlink&quot; title=&quot;原题：&quot;&gt;&lt;/a&gt;原题：&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;http://ctf.idf.cn/game/web/43/index.php&quot; target=&quot;_blank&quot;
+        
+      
+    
+    </summary>
+    
+      <category term="信息安全" scheme="https://pzque.github.io/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/"/>
+    
+    
+      <category term="IDF实验室" scheme="https://pzque.github.io/tags/IDF%E5%AE%9E%E9%AA%8C%E5%AE%A4/"/>
+    
+      <category term="ctf" scheme="https://pzque.github.io/tags/ctf/"/>
+    
+  </entry>
+  
+</feed>

@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
@@ -308,6 +308,31 @@ cmake / clion内置cmake......
 
 <div class="post-preview">
 
+    <a href="/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/">
+        <h2 class="post-title">
+            8、ROS使用C++编写一个简单的Publisher和Subscriber
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、Publisher节点“节点” 是一个连接着ROS框架的可执行文件，这里我们用C++写一个publisher节点 (命名为”talker”) ，不断地发布一条信息。
+首先进入包目录的src文件夹：
+12roscd beginner_tutorialscd src
+然后创建一个名为&#39;talker.cpp&#39;的文件，内容为：
+12345678910111213141516171......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by pzque on
+        2016-04-19
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/04/19/9、ROS使用C++编写一个简单的Service和Client/">
         <h2 class="post-title">
             9、ROS使用C++编写一个简单的Service和Client
@@ -323,31 +348,6 @@ cmake / clion内置cmake......
 
 如果没有满足以上条件的话，请重新阅读本系列的第7、8篇文章。
 一、Service节点在包内的src下创建add_two_ints_server.cpp，粘贴以下内容：123456789101112......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pzque on
-        2016-04-19
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/04/19/8、ROS使用C++编写一个简单的Publisher和Subscriber/">
-        <h2 class="post-title">
-            8、ROS使用C++编写一个简单的Publisher和Subscriber
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            一、Publisher节点“节点” 是一个连接着ROS框架的可执行文件，这里我们用C++写一个publisher节点 (命名为”talker”) ，不断地发布一条信息。
-首先进入包目录的src文件夹：
-12roscd beginner_tutorialscd src
-然后创建一个名为&#39;talker.cpp&#39;的文件，内容为：
-12345678910111213141516171......
         </div>
     </a>
     <p class="post-meta">
@@ -480,15 +480,17 @@ msg文件和srv文件分别存储在包的msg目录和srv目录下。
                             
                         
                             
+                        
+                            
+                            <a href="/tags/#scala" title="scala" rel="3">scala</a>
+                            
+                        
+                            
                             <a href="/tags/#emacs" title="emacs" rel="2">emacs</a>
                             
                         
                             
                             <a href="/tags/#spacemacs" title="spacemacs" rel="2">spacemacs</a>
-                            
-                        
-                            
-                            <a href="/tags/#scala" title="scala" rel="3">scala</a>
                             
                         
                             
@@ -772,7 +774,7 @@ msg文件和srv文件分别存储在包的msg目录和srv目录下。
 <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true}});
 </script>
 
 <script type="text/x-mathjax-config">
@@ -784,7 +786,7 @@ msg文件和srv文件分别存储在包的msg目录和srv目录下。
   });
 </script>
 
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+<script type="text/javascript" src="https://cdn.bootcss.com/mathjax/2.7.2/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
