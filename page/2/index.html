@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -327,21 +327,23 @@ catkin_ws的目录结构如下：123├── build├── devel└── src
 
 <div class="post-preview">
 
-    <a href="/2015/05/05/IDF实验室-伟人的名字/">
+    <a href="/2015/05/05/IDF实验室-图片里的英语/">
         <h2 class="post-title">
-            IDF实验室-伟人的名字
+            IDF实验室-图片里的英语
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            一、原题[原题链接]从前有个很厉害的人物演讲了一堆很厉害的东西，可是我读书少，认识人不多，你知道这个人叫啥不。。
-答案格式wctf{名字}  
-友情提示1、外国人，只要名字就可以了，就别要姓了，首字母大写。 
-友情提示2、说过我读书少，外国人的名字和姓我是分不清的，反正答案就是大家最常叫的那个。。
-以下就是这个人讲话的节选：
-
-EB BMQF KYJRD, IM ICHZZZ YWELXAB......
+            原题：一恒河沙中有三千世界，一张图里也可以有很多东西。
+不多说了，答案是这个图片包含的那句英文的所有单词的首字母。
+首字母中的首字母要大写，答案格式是wctf{一坨首字母}
+加油吧少年！看好你哦~
+writeup：又是图片题，话不多说
+1.图片查看器打开亮度饱和度曝光各种调，无果。
+2.二进制打开用vim打开：
+1vim -b problem.png
+在vim调整为16进制显示：1:%!xx......
         </div>
     </a>
     <p class="post-meta">
@@ -375,20 +377,21 @@ EB BMQF KYJRD, IM ICHZZZ YWELXAB......
 
 <div class="post-preview">
 
-    <a href="/2015/05/05/IDF实验室-谁是卧底/">
+    <a href="/2015/05/05/IDF实验室-特殊的日子/">
         <h2 class="post-title">
-            IDF实验室-谁是卧底
+            IDF实验室-特殊的日子
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            一、原题[原题链接]武林中某知名杀手在一次任务中失败，然后逃窜到了人群中，当时那个社会并没有我们现在这么发达，满地都是文盲，而这些文盲甚至连一句完整的英文都说不出来，所以其实只要用心去发现，就会很容易发现这个稍微有些文化的杀手是谁哦~答案wctf{杀手的英文名}
-人群→ http://pan.baidu.com/s/1bnq6nmR
-密码: 988u
+            一、原题[原题链接]每个人的一生中都会或多或少有那么几个对自己很重要的日子，比如对于我来说，这一天就很重要。
+答案格式wctf{日期}  //友情提示，此题需要暴力破解，但只是爆破这段密文，不是爆破这个网站。。 = =！
+就是这一天↓
+4D1FAE0B
 
 
-二、writeup1、初步分析下载文......
+二、writeup没有思路，看提示，crc32。CRC（循环冗余校验法）的百科：[CRC]以前看过，具体的细节忘了，对照资料回忆了一下，......
         </div>
     </a>
     <p class="post-meta">
@@ -478,9 +481,11 @@ writeup：直接看代码，页面内有一段script：1234567891011121314151617
                             
                         
                             
+                            <a href="/tags/#scala" title="scala" rel="3">scala</a>
+                            
                         
                             
-                            <a href="/tags/#scala" title="scala" rel="3">scala</a>
+                        
                             
                         
                             
@@ -489,10 +494,6 @@ writeup：直接看代码，页面内有一段script：1234567891011121314151617
                         
                             
                             <a href="/tags/#spacemacs" title="spacemacs" rel="2">spacemacs</a>
-                            
-                        
-                            
-                        
                             
                         
                     </div>
