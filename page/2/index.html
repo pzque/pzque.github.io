@@ -17,7 +17,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://pzque.com/page/2/">
+    <link rel="canonical" href="http://www.pzque.com/page/2/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -353,27 +353,6 @@ catkin_ws的目录结构如下：123├── build├── devel└── src
 
 <div class="post-preview">
 
-    <a href="/2015/05/05/IDF实验室-部分简单题目writeup/">
-        <h2 class="post-title">
-            IDF实验室-部分简单题目writeup
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            1. 被改错的密码原题：从前有一个熊孩子入侵了一个网站的数据库，找到了管理员密码，手一抖在数据库中修改了一下，现在的密码变成了cca9cc444e64c8116a30la00559c042b4，那个熊孩子其实就是我！肿么办求解！在线等，挺急的。。PS：答案格式wctf{管理员原密码}writeup：观察所给字符串 “cca9cc444e64c8116a30la00559c042b4”，33位......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by pzque on
-        2015-05-05
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
     <a href="/2015/05/05/IDF实验室-简单的js解密/">
         <h2 class="post-title">
             IDF实验室-简单的js解密
@@ -398,21 +377,42 @@ writeup：直接看代码，页面内有一段script：1234567891011121314151617
 
 <div class="post-preview">
 
-    <a href="/2015/05/05/IDF实验室-特殊的日子/">
+    <a href="/2015/05/05/IDF实验室-部分简单题目writeup/">
         <h2 class="post-title">
-            IDF实验室-特殊的日子
+            IDF实验室-部分简单题目writeup
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            一、原题[原题链接]每个人的一生中都会或多或少有那么几个对自己很重要的日子，比如对于我来说，这一天就很重要。
-答案格式wctf{日期}  //友情提示，此题需要暴力破解，但只是爆破这段密文，不是爆破这个网站。。 = =！
-就是这一天↓
-4D1FAE0B
+            1. 被改错的密码原题：从前有一个熊孩子入侵了一个网站的数据库，找到了管理员密码，手一抖在数据库中修改了一下，现在的密码变成了cca9cc444e64c8116a30la00559c042b4，那个熊孩子其实就是我！肿么办求解！在线等，挺急的。。PS：答案格式wctf{管理员原密码}writeup：观察所给字符串 “cca9cc444e64c8116a30la00559c042b4”，33位......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by pzque on
+        2015-05-05
+    </p>
 
+</div>
+<hr>
 
-二、writeup没有思路，看提示，crc32。CRC（循环冗余校验法）的百科：[CRC]以前看过，具体的细节忘了，对照资料回忆了一下，......
+<div class="post-preview">
+
+    <a href="/2015/05/05/IDF实验室-伟人的名字/">
+        <h2 class="post-title">
+            IDF实验室-伟人的名字
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一、原题[原题链接]从前有个很厉害的人物演讲了一堆很厉害的东西，可是我读书少，认识人不多，你知道这个人叫啥不。。
+答案格式wctf{名字}  
+友情提示1、外国人，只要名字就可以了，就别要姓了，首字母大写。 
+友情提示2、说过我读书少，外国人的名字和姓我是分不清的，反正答案就是大家最常叫的那个。。
+以下就是这个人讲话的节选：
+
+EB BMQF KYJRD, IM ICHZZZ YWELXAB......
         </div>
     </a>
     <p class="post-meta">
@@ -703,7 +703,7 @@ writeup：直接看代码，页面内有一段script：1234567891011121314151617
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://pzque.com/js/jquery.tagcloud.js",function(){
+        async("http://www.pzque.com/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -767,7 +767,7 @@ writeup：直接看代码，页面内有一段script：1234567891011121314151617
 
 
 <!-- Image to hack wechat -->
-<img src="http://pzque.com/img/icon_wechat.png" width="0" height="0" />
+<img src="http://www.pzque.com/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true}});
