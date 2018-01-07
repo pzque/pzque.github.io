@@ -49,7 +49,21 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script></script>
+    <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+    	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+    	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -90,14 +104,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -488,9 +502,9 @@
                  <li >
                     05-05
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2015/05/05/IDF实验室-简单的js解密/" style="color: #0085a1">
+                    <a href="/2015/05/05/IDF实验室-伟人的名字/" style="color: #0085a1">
                         <span>
-                            IDF实验室-简单的js解密
+                            IDF实验室-伟人的名字
                         </span>
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
@@ -518,9 +532,9 @@
                  <li >
                     05-05
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2015/05/05/IDF实验室-伟人的名字/" style="color: #0085a1">
+                    <a href="/2015/05/05/IDF实验室-特殊的日子/" style="color: #0085a1">
                         <span>
-                            IDF实验室-伟人的名字
+                            IDF实验室-特殊的日子
                         </span>
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
@@ -533,9 +547,9 @@
                  <li >
                     05-05
                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    <a href="/2015/05/05/IDF实验室-特殊的日子/" style="color: #0085a1">
+                    <a href="/2015/05/05/IDF实验室-简单的js解密/" style="color: #0085a1">
                         <span>
-                            IDF实验室-特殊的日子
+                            IDF实验室-简单的js解密
                         </span>
                     </a>
                     <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->

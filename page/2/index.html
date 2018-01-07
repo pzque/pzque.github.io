@@ -49,7 +49,21 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    <script></script>
+    <script>
+    (function(){
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+    	bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        }
+        else {
+    	bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+    </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -90,14 +104,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -382,21 +396,25 @@ writeup：又是图片题，话不多说
 
 <div class="post-preview">
 
-    <a href="/2015/05/05/IDF实验室-伟人的名字/">
+    <a href="/2015/05/05/IDF实验室-抓到一只苍蝇/">
         <h2 class="post-title">
-            IDF实验室-伟人的名字
+            IDF实验室-抓到一只苍蝇
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            一、原题[原题链接]从前有个很厉害的人物演讲了一堆很厉害的东西，可是我读书少，认识人不多，你知道这个人叫啥不。。
-答案格式wctf{名字}  
-友情提示1、外国人，只要名字就可以了，就别要姓了，首字母大写。 
-友情提示2、说过我读书少，外国人的名字和姓我是分不清的，反正答案就是大家最常叫的那个。。
-以下就是这个人讲话的节选：
+            感觉这道题对我已经有难度了
+一、原题报告首长！发现一只苍蝇。。
+在哪？
+here!
+卧槽？！好大一坨苍蝇。。
+文件地址： http://pan.baidu.com/s/1bnGWbqJ
+提取码：oe6w
+PS：flag写错了，太麻烦也懒得改了，格式还是wctf{…}，大家明白就好，不要在意这些细节。。
 
-EB BMQF KYJRD, IM ICHZZZ YWELXAB......
+
+二、writeup首先下载所给的文件misc_fly.pcapng，是一个抓包软件抓取......
         </div>
     </a>
     <p class="post-meta">
