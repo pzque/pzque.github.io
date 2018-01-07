@@ -17,7 +17,7 @@
         
     </title>
 
-    <link rel="canonical" href="https://pzque.github.io/2016/04/14/4、理解ros话题/">
+    <link rel="canonical" href="http://pzque.com/2016/04/14/4、理解ros话题/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -90,14 +90,14 @@
 
                         
                         <li>
-                            <a href="/archives/">Archives</a>
+                            <a href="/about/">About</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/about/">About</a>
+                            <a href="/archives/">Archives</a>
                         </li>
                         
                     
@@ -149,7 +149,7 @@
     <!-- Main Content -->
     
 <!-- Image to hack wechat -->
-<!-- <img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="http://pzque.com/img/icon_wechat.png" width="0" height="0"> -->
 <!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
 
 <!-- Post Header -->
@@ -218,7 +218,7 @@
 <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">rostopic -h</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">rostopic <span class="keyword">is</span> <span class="keyword">a</span> <span class="keyword">command</span>-<span class="built_in">line</span> tool <span class="keyword">for</span> printing information about ROS Topics.</span><br><span class="line"></span><br><span class="line">Command<span class="variable">s:</span></span><br><span class="line">	rostopic <span class="keyword">bw</span>	<span class="keyword">display</span> bandwidth used by topic</span><br><span class="line">	rostopic <span class="keyword">echo</span>	<span class="keyword">print</span> <span class="keyword">messages</span> <span class="keyword">to</span> screen</span><br><span class="line">	rostopic <span class="keyword">find</span>	<span class="keyword">find</span> topics by <span class="built_in">type</span></span><br><span class="line">	rostopic hz	<span class="keyword">display</span> publishing rate of topic    </span><br><span class="line">	rostopic info	<span class="keyword">print</span> information about active topic</span><br><span class="line">	rostopic <span class="keyword">list</span>	<span class="keyword">list</span> active topics</span><br><span class="line">	rostopic pub	publish data <span class="keyword">to</span> topic</span><br><span class="line">	rostopic <span class="built_in">type</span>	<span class="keyword">print</span> topic <span class="built_in">type</span></span><br><span class="line"></span><br><span class="line">Type rostopic <span class="symbol">&lt;command&gt;</span> -h <span class="keyword">for</span> more detailed usage, <span class="keyword">e</span>.g. <span class="string">'rostopic echo -h'</span></span><br></pre></td></tr></table></figure>
 <h2 id="3-使用rostopic-echo"><a href="#3-使用rostopic-echo" class="headerlink" title="3.使用rostopic echo"></a>3.使用rostopic echo</h2><p>用法：</p>
-<figure class="highlight accesslog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rostopic echo <span class="string">[topic]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rostopic <span class="built_in">echo</span> [topic]</span><br></pre></td></tr></table></figure>
 <p>让我们查看以下turtle_teleop_key发布击键信息的话题：</p>
 <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rostopic <span class="keyword">echo</span> <span class="string">/turtle1/cmd_vel</span></span><br></pre></td></tr></table></figure>
 <p>在移动小海龟之前，不会看到任何输出。</p>
@@ -346,8 +346,8 @@
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = "pzque-blog";
-    var disqus_identifier = "https://pzque.github.io/2016/04/14/4、理解ros话题/";
-    var disqus_url = "https://pzque.github.io/2016/04/14/4、理解ros话题/";
+    var disqus_identifier = "http://pzque.com/2016/04/14/4、理解ros话题/";
+    var disqus_url = "http://pzque.com/2016/04/14/4、理解ros话题/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -516,7 +516,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("https://pzque.github.io/js/jquery.tagcloud.js",function(){
+        async("http://pzque.com/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -580,7 +580,7 @@
 
 
 <!-- Image to hack wechat -->
-<img src="https://pzque.github.io/img/icon_wechat.png" width="0" height="0" />
+<img src="http://pzque.com/img/icon_wechat.png" width="0" height="0" />
 <!-- Migrate from head to bottom, no longer block render and still work --><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true}});
